@@ -20,7 +20,7 @@ define("php", ".php");
 
 function __autoload($name) {
 	
-	$names = explode(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, $name);
+	$names = explode(DIRECTORY_SEPARATOR, $name);
 	$length = count($names);
 	
 	$name = BASE . $names[$length - 1] . php;
