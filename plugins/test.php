@@ -17,7 +17,7 @@ class test implements IObserver, IPlugin {
 	}
 	function Plugin() {}
 	
-	function Callback($on, $id) {
+	function Callback($on, $id, $msg) {
 		
 		ob_start();
 		
