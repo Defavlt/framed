@@ -187,7 +187,7 @@ EOT;
 							case MESSAGE_RETURN_TYPE::NOT_PUBLIC:
 								break;
 							case MESSAGE_RETURN_TYPE::STOP_CHAIN:
-								break 3; //Stop the chain and return to calleé
+								break 2; //Stop the chain and return to calleé
 
 							default:
 								continue;
