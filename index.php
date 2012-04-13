@@ -25,6 +25,8 @@ function __autoload($name) {
 	
 	$name = str_replace("\\\\", DIRECTORY_SEPARATOR, $name);
 	
+	error_log(is_file(BASE . $name . php, 0));
+	
 	if (is_file($name)) {
 		require_once BASE . $name . php;
 	}
