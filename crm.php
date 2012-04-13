@@ -265,20 +265,20 @@ EOT;
 	 * @param string $name 
 	 * @param array $args 0: MESSAGE_ARG_TYPE::ON, 1: MESSAGE_ARG_TYPE::ID
 	 */
-	function __call($name, $args) {
+	function __callStatic($name, $args) {
 		
 		$func = array();
 		
-		if (method_exists($this, $name)) {
+		if (method_exists('crm', $name)) {
 			
-			$func[] = $this;
+			$func[] = 'crm';
 			$func[] = $name;
 			
 			call_user_func($func);
 		}
 		else {
 			
-			$this->SendMessage($name, $args[MESSAGE_ARG_TYPE::ON], $args[MESSAGE_ARG_TYPE::ID]);
+			\crm::getCurrent()->SendMessage($name, $args[MESSAGE_ARG_TYPE::ON], $args[MESSAGE_ARG_TYPE::ID]);
 		}
 	}
 	

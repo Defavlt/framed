@@ -18,13 +18,13 @@ class logger implements IPlugin, IObserver {
 		\crm::getCurrent()->Register($this, \MESSAGES::LOG);
 	}
 	function Plugin() {
-		$handle = fopen(\CONFIGURATION::$LOGDIR . \CONFIGURATION::$STDOUT, 'w');
+		$handle = fopen(BASE . \CONFIGURATION::$LOGDIR . DIRECTORY_SEPARATOR . \CONFIGURATION::$STDOUT, 'w');
 		
 		if ($handle) {
 			$this->logfile = $handle;
 		}
 		else {
-			\crm::getCurrent()->SendMessage(\MESSAGES::ERROR, logger::FAILED_OPEN_DIR . \CONFIGURATION::$LOGDIR, null);
+			\crm::error(logger::FAILED_OPEN_DIR . \CONFIGURATION::$LOGDIR, null);
 		}
 	}
 	

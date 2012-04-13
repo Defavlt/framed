@@ -14,6 +14,7 @@ class test implements IObserver, IPlugin {
 	function Initialize() {
 		
 		\crm::getCurrent()->Register($this, "test");
+		\crm::log("Loaded plugin test", null);
 	}
 	function Plugin() {}
 	
