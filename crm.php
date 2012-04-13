@@ -100,7 +100,7 @@ class crm implements IPlugin, IObservable {
 			foreach (CONFIGURATION::$PLUGINS as $plugin) {
 				try {
 				
-					$class = CONFIGURATION::$PLUGIN_DIR . '\\' . str_replace(php, null, $plugin);
+					$class = CONFIGURATION::$PLUGIN_DIR . stripslashes('\\') . str_replace(php, null, $plugin);
 					
 					error_log($class, 0);
 					$instance = new $class();
