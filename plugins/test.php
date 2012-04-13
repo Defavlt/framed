@@ -11,19 +11,16 @@ use interfaces\IPlugin;
  *        
  */
 class test implements IObserver, IPlugin {
-	private $visibility;
-	
+
 	function gVisibility() {
 		
-		return $this->visibility;
+		return PLUGIN_VISIBILITY::PU;
 	}
 	
 	function Initialize() {
 		
 		\crm::gInstance()->Register($this, "test");
 		\crm::log("Loaded plugin test", null);
-		
-		$this->visibility = PLUGIN_VISIBILITY::PU;
 	}
 	function Plugin() {}
 	
