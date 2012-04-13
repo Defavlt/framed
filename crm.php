@@ -109,8 +109,6 @@ class crm implements IPlugin, IObservable {
 			foreach (CONFIGURATION::$PLUGINS as $plugin) {
 				try {
 					
-					ob_start();
-					
 					$single_slash = <<<'EOT'
 \
 EOT;
