@@ -3,7 +3,6 @@
 use interfaces\IPlugin;
 use interfaces\IObservable;
 use interfaces\IObserver;
-use plugins;
 
 /**
  *
@@ -20,6 +19,10 @@ class crm implements IPlugin, IObservable {
 	private $get;
 	private $post;  
 	
+	/**
+	 * Gets the current instance object of crm.
+	 * @return crm
+	 */
 	public static function getCurrent() {
 		
 		return crm::$current;
