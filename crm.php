@@ -135,7 +135,7 @@ EOT;
 				}
 			}
 			
-			$this->log("Plugins finished loading", null);
+			$this::log("Plugins finished loading", null);
 		}
 	}
 
