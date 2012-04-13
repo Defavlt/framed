@@ -209,8 +209,17 @@ EOT;
 		
 		if ($client instanceof IObserver) {
 			
-			$this->observerlist[$msg][] = $client;
-			return true;
+			if (isset($this->observerlist[$msg]) && is_array($this->observerlist[$msg])) {
+				
+				$this->observerlist[$msg][] = $client;
+				return true;
+			}
+			else {
+				
+				$this->observerlist[$msg] = array();
+				$this->observerlist[$msg][] = $client;
+				return true;
+			}
 		}
 		else {
 			return false;
