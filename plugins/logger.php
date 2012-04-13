@@ -18,7 +18,7 @@ class logger implements IPlugin, IObserver {
 		\crm::getCurrent()->Register($this, \MESSAGES::LOG);
 	}
 	function Plugin() {
-		$handle = fopen(BASE . \CONFIGURATION::$LOGDIR . DIRECTORY_SEPARATOR . \CONFIGURATION::$STDOUT, 'w');
+		$handle = fopen(BASE . \CONFIGURATION::$LOGDIR . DIRECTORY_SEPARATOR . \CONFIGURATION::$STDOUT, 'w') or die("Can't open logfile");
 		
 		if ($handle !== false) {
 			error_log("BEFORE LOGFILE FIX", 0);
