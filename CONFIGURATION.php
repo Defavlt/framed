@@ -6,20 +6,20 @@
  */
 final class CONFIGURATION {
 	
-	const EXTRA_CONF = "extra_conf_files";
+	const EXTRA_CONF = "extra_conf";
 	
 	/**
 	 * The directory containing all the plugins for use.
 	 * @var string
 	 */
-	static $PLUGIN_DIR = "app_plugin_dir";
+	static $PLUGIN_DIR = "plugin_dir";
 	
 	/**
 	 * The application directory.
 	 * CHANGE WITH CAUTION
 	 * @var string
 	 */
-	static $BASE_DIR = "app_base_dir";
+	static $BASE_DIR = "base_dir";
 	
 	/**
 	 * The available actions the application can do.
@@ -33,10 +33,10 @@ final class CONFIGURATION {
 	 */
 	static $PLUGINS = "plugins";
 
-	static $METHOD = "default_do_method";
-	static $OBJECT = "object_ident_url";
-	static $ACTION = "action_ident_url";
-	static $IDENTI = "identi_ident_url";
+	static $METHOD = "method";
+	static $OBJECT = "object";
+	static $ACTION = "action";
+	static $IDENTI = "identi";
 	
 	/**
 	 * The fallback message type to use 

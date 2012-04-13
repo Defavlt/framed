@@ -46,7 +46,7 @@ class crm implements IPlugin, IObservable {
 		*/
 
 		foreach ($this->config as $key => $setting) {
-			CONFIGURATION::$$key = $setting;
+			CONFIGURATION::${strtoupper($key)} = $setting;
 		}
 		
 		foreach ($this->config[CONFIGURATION::EXTRA_CONF] as $value) {
