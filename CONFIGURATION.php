@@ -6,7 +6,7 @@
  */
 final class CONFIGURATION {
 	
-	const EXTRA_CONF = "extra_conf";
+	static $EXTRA_CONF = "extra_conf";
 	
 	/**
 	 * The directory containing all the plugins for use.
