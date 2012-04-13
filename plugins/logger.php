@@ -20,7 +20,7 @@ class logger implements IPlugin, IObserver {
 	function Plugin() {
 		$handle = fopen(BASE . \CONFIGURATION::$LOGDIR . DIRECTORY_SEPARATOR . \CONFIGURATION::$STDOUT, 'w');
 		
-		if ($handle) {
+		if ($handle !== false) {
 			error_log("BEFORE LOGFILE FIX", 0);
 			$this->logfile = $handle;
 		}
