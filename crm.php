@@ -196,7 +196,8 @@ EOT;
 					foreach ($objects as $instance) {
 
 						if ($instance->visibility == PLUGIN_VISIBILITY::PU) {
-
+							
+							print_r($this->observerlist);
 							/**
 						 	* The return type of the message handler.
 						 	* @var MESSAGE_RETURN_TYPE
