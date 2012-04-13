@@ -96,6 +96,7 @@ class crm implements IPlugin, IObservable {
 		$action = $this->get[CONFIGURATION::$ACTION];
 		$identi = $this->get[CONFIGURATION::$IDENTI];
 		
+		print_r($this->observerlist);
 		$this->SendMessage($action, $object, $identi);
 	}
 	
@@ -187,7 +188,7 @@ EOT;
 	 */
 	function SendMessage($message, $object, $id) {
 		
-		print_r($this->observerlist);
+		print_r($message);
 
 		if (array_key_exists($message, $this->observerlist)) {
 			
