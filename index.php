@@ -20,9 +20,14 @@ define("php", ".php");
 
 function __autoload($name) {
 	
+	$names = explode(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, $name);
+	$length = count($names);
+	
+	$name = BASE . $names[$length - 1] . php;
+	
 	if (is_file($name)) {
 		
-		require BASE . $name .php;
+		require $name;
 	}
 }
 
