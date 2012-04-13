@@ -26,7 +26,7 @@ class logger implements IPlugin, IObserver {
 		}
 		else {
 			error_log("BEFORE ERROR LOG", 0);
-			\crm::error(logger::FAILED_OPEN_DIR . \CONFIGURATION::$LOGDIR . DIRECTORY_SEPARATOR . \CONFIGURATION::$STDOUT, null);
+			\crm::error(logger::FAILED_OPEN_DIR . BASE . \CONFIGURATION::$LOGDIR . DIRECTORY_SEPARATOR . \CONFIGURATION::$STDOUT, null);
 		}
 	}
 	
