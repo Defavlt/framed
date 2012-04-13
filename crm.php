@@ -51,8 +51,8 @@ class crm implements IPlugin, IObservable {
 
 		foreach ($this->config as $key => $setting) {
 			
-			print_r($key);echo "\t";
-			print_r($setting);echo "\n";
+			echo "\t";
+			echo "\n";
 			if (property_exists('CONFIGURATION', strtoupper($key))) {
 
 				CONFIGURATION::${strtoupper($key)} = $setting;
@@ -107,7 +107,7 @@ class crm implements IPlugin, IObservable {
 	 */
 	private function LoadPlugins() {
 		
-		var_dump(CONFIGURATION::$PLUGINS);
+		
 		if (isset(CONFIGURATION::$PLUGINS) && is_array(CONFIGURATION::$PLUGINS)) {
 		
 			foreach (CONFIGURATION::$PLUGINS as $plugin) {
@@ -174,7 +174,7 @@ EOT;
 		error_log("BEFORE CHECK", 0);
 		error_log($message, 0);
 		error_log($object, 0);
-		var_dump($this->observerlist);
+		
 		if (array_key_exists($message, $this->observerlist)) {
 			error_log("BEFORE LOOP", 0);
 			foreach ($this->observerlist as $msg => $objects) {
@@ -274,7 +274,6 @@ EOT;
 		$this->SetVariables();
 		$this->ParseVariables();
 		
-		print_r($this);
 	}
 
 	/**
