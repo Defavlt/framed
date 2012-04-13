@@ -265,7 +265,7 @@ EOT;
 	 * @param string $name 
 	 * @param array $args 0: MESSAGE_ARG_TYPE::ON, 1: MESSAGE_ARG_TYPE::ID
 	 */
-	function __callStatic($name, $args) {
+	public static function __callStatic($name, $args) {
 		
 		$func = array();
 		
