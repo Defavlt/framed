@@ -94,81 +94,22 @@ class crm implements IPlugin, IObservable {
 	 */
 	private function LoadPlugins($dir = null) {
 		
-		$dir_handle = NULL;
-		$open_dir = NULL;
-		
-		if ($dir == null) {
+		try {
+			$class = str_replace(php, null, $dir);
+			$instance = new $class();
 			
-			$dir = $this->config[CONFIGURATION::$PLUGINS];
-		}
-		
-		else {
-			
-			$dir_handle = opendir($dir);
-			$open_dir = readdir($dir_handle);
-		}
-
-		if (!is_array($dir)) {
-			
-			try {
+			if ($this->RegisterPlugin($instance, $dir)) {
 				
-				if (is_dir(BASE . $dir)) {
-					
-					$this->LoadPlugins($dir);
-				}
-				
-				else {
-					
-					$class = str_replace(php, null, $dir);
-					$instance = new $class();
-					
-					if ($this->RegisterPlugin ( $instance, $dir )) {
-						
-						$instance->Plugin();
-					}
-					else {
-						
-						unset($instance);
-					}
-				}
-				
-			} catch (Exception $e) {
-				
-				continue;
+				$instance->Plugin();
 			}
-		}
-		
-		else {
-
-			foreach ($dir as $value) {
-	
-				try {
-					
-					if (is_dir(BASE . $value)) {
-	
-						$this->LoadPlugins($value);
-					}
-					else {
-					
-						$class = str_replace(php, null, $value);
-						$instance = new $class();
-						
-						if ($this->RegisterPlugin ( $instance, $value )) {
-							
-							$instance->Plugin();
-						}
-						else {
-							
-							unset($instance);
-						}
-					}
-	
-				} catch (Exception $e) {
-					
-					continue;
-					
-				};
+			
+			else {
+				
+				unset($instance);
 			}
+			
+		} catch (Exception $e) {
+			continue;
 		}
 	}
 
