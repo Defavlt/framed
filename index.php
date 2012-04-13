@@ -31,6 +31,6 @@ function __autoload($name) {
 	}
 }
 
-crm::Start();
+\crm::Start();
 
 ?>
