@@ -2,7 +2,6 @@
 namespace plugins;
 
 use settings\PLUGIN_VISIBILITY;
-
 use interfaces\IObserver;
 use interfaces\IPlugin;
 

@@ -14,10 +14,8 @@ class logger implements IPlugin, IObserver {
 	const FAILED_OPEN_DIR = "Failed to open log directory: ";
 	private $logfile;
 	
-	private $visibility;
-	
 	function gVisibility() {
-		return $this->visibility;
+		return PLUGIN_VISIBILITY::PR;
 	}
 	
 	function Initialize() {
