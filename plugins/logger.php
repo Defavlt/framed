@@ -1,6 +1,8 @@
 <?php
 namespace plugins;
 
+use settings\PLUGIN_VISIBILITY;
+
 use interfaces\IObserver;
 use interfaces\IPlugin;
 
@@ -13,9 +15,17 @@ class logger implements IPlugin, IObserver {
 	const FAILED_OPEN_DIR = "Failed to open log directory: ";
 	private $logfile;
 	
+	private $visibility;
+	
+	function gVisibility() {
+		return $this->visibility;
+	}
+	
 	function Initialize() {
-		\crm::getCurrent()->Register($this, \MESSAGES::ERROR);
-		\crm::getCurrent()->Register($this, \MESSAGES::LOG);
+		\crm::gInstance()->Register($this, \MESSAGES::ERROR);
+		\crm::gInstance()->Register($this, \MESSAGES::LOG);
+		
+		$this->visibility = PLUGIN_VISIBILITY::PR;
 	}
 	function Plugin() {
 		$handle = fopen(BASE . \CONFIGURATION::$LOGDIR . DIRECTORY_SEPARATOR . \CONFIGURATION::$STDOUT, 'w') or die("Can't open logfile");

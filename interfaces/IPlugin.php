@@ -2,11 +2,17 @@
 namespace interfaces;
 
 /**
- *
+ * Makes it possible to add external functionality to the system.
  * @author marcus
  *        
  */
 interface IPlugin {
+	
+	/**
+	 * The visibility of this (can it be invoked by the user, from the webbrowser?).
+	 * @return PLUGIN_VISIBILITY
+	 */
+	function gVisibility();
 	
 	/**
 	 * This is invoked when all the existing plugins and the main application has been loaded.

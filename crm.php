@@ -3,6 +3,7 @@
 use interfaces\IPlugin;
 use interfaces\IObservable;
 use interfaces\IObserver;
+use settings\PLUGIN_VISIBILITY;
 
 /**
  *
@@ -14,16 +15,15 @@ class crm implements IPlugin, IObservable {
 	
 	private $observerlist;
 	private $pluginlist;
-	//private $confreader;
 	private $config;
 	private $get;
-	private $post;  
+	private $post;
 	
 	/**
 	 * Gets the current instance object of crm.
 	 * @return crm
 	 */
-	public static function getCurrent() {
+	public static function gInstance() {
 		
 		return crm::$current;
 	} 
@@ -38,6 +38,18 @@ class crm implements IPlugin, IObservable {
 		return htmlspecialchars(strip_tags($value));
 	}
 	
+	public function gGet($key) {
+		
+		return $this->$get[$key];
+	}
+	public function gConfig($key) {
+		
+		return $this->config[$key];
+	}
+
+	/**
+	 * Set the appropriate (and available) settings in CONFIGURATION.
+	 */
 	public function ConfigureSettings() {
 		
 		/*
@@ -80,7 +92,7 @@ class crm implements IPlugin, IObservable {
 		$action = $this->get[CONFIGURATION::$ACTION];
 		$identi = $this->get[CONFIGURATION::$IDENTI];
 		
-		$this->SendMessage($action, $object, $identi);
+		$this->SendMessage($action, $object, $identi, $scope = PLUGIN_VISIBILITY::PU);
 	}
 	
 	/*
@@ -169,7 +181,7 @@ EOT;
 	/**
 	 * @see interfaces.IObservable::SendMessage()
 	 */
-	function SendMessage($message, $object, $id) {
+	function SendMessage($message, $object, $id, $scope = null) {
 
 		if (array_key_exists($message, $this->observerlist)) {
 			
@@ -179,20 +191,26 @@ EOT;
 					
 					foreach ($objects as $instance) {
 
-						/**
-						 * The return type of the message handler.
-						 * @var MESSAGE_RETURN_TYPE
-						 */
-						$return = $instance->Callback($object, $id, $msg);
-						
-						switch ($return) {
-							case MESSAGE_RETURN_TYPE::NOT_PUBLIC:
-								break;
-							case MESSAGE_RETURN_TYPE::STOP_CHAIN:
-								break 2; //Stop the chain and return to calleé
-
-							default:
-								continue;
+						if (isset($scope) && $instance->visibility == PLUGIN_VISIBILITY::PU) {
+							/**
+						 	* The return type of the message handler.
+						 	* @var MESSAGE_RETURN_TYPE
+						 	*/
+							$return = $instance->Callback($object, $id, $msg);
+							
+							switch ($return) {
+								case MESSAGE_RETURN_TYPE::NOT_PUBLIC:
+									break;
+								case MESSAGE_RETURN_TYPE::STOP_CHAIN:
+									break 2; //Stop the chain and return to calleé
+	
+								default:
+									continue;
+							}
+						}
+						else {
+							
+							$this->SendMessage(MESSAGES::ERROR_404, $msg, null);
 						}
 					}
 				}
@@ -290,7 +308,7 @@ EOT;
 		}
 		else {
 			
-			\crm::getCurrent()->SendMessage($name, $args[MESSAGE_ARG_TYPE::ON], $args[MESSAGE_ARG_TYPE::ID]);
+			\crm::gInstance()->SendMessage($name, $args[MESSAGE_ARG_TYPE::ON], $args[MESSAGE_ARG_TYPE::ID]);
 		}
 	}
 	
