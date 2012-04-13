@@ -53,11 +53,12 @@ class crm implements IPlugin, IObservable {
 			
 			print_r($key);echo "\t";
 			print_r($setting);echo "\n";
-			if (property_exists(CONFIGURATION, strtoupper($key))) {
+			if (property_exists('CONFIGURATION', strtoupper($key))) {
+
 				CONFIGURATION::${strtoupper($key)} = $setting;
 			}
 			else {
-				continue;
+				error_log('Failed to initalize configuration property: ' . $key, 0);
 			}
 		}
 		
