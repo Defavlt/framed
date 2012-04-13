@@ -49,7 +49,6 @@ class crm implements IPlugin, IObservable {
 		CONFIGURATION::$FALLBACK = $this->config[CONFIGURATION::$FALLBACK];
 		*/
 
-		print_r($this->config);
 		foreach ($this->config as $key => $setting) {
 			
 			if (property_exists(CONFIGURATION, $key)) {
@@ -268,10 +267,11 @@ EOT;
 	function Initialize() {
 		$this->ConfigureSettings();
 		$this->LoadPlugins();
-		var_dump($this->pluginlist);
 		$this->InitializePlugins();
 		$this->SetVariables();
 		$this->ParseVariables();
+		
+		print_r($this);
 	}
 
 	/**
