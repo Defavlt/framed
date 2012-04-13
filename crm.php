@@ -1,8 +1,8 @@
 <?php
 
+use interfaces\IPlugin;
 use interfaces\IObservable;
 use interfaces\IObserver;
-use interfaces\IPlugin;
 
 /**
  *
