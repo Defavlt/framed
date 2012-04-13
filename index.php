@@ -30,7 +30,7 @@ function __autoload($name) {
 	}
 	else {
 		
-		error_log(base . $name . php, 0);
+		error_log(BASE . $name . php, 0);
 	}
 }
 
