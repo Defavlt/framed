@@ -50,7 +50,13 @@ class crm implements IPlugin, IObservable {
 		*/
 
 		foreach ($this->config as $key => $setting) {
-			CONFIGURATION::${strtoupper($key)} = $setting;
+			
+			if (property_exists(CONFIGURATION, $key)) {
+				CONFIGURATION::${strtoupper($key)} = $setting;
+			}
+			else {
+				continue;
+			}
 		}
 		
 		if (!isset(CONFIGURATION::$EXTRA_CONF) && is_array(CONFIGURATION::$EXTRA_CONF)) {
