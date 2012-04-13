@@ -21,9 +21,11 @@ class logger implements IPlugin, IObserver {
 		$handle = fopen(BASE . \CONFIGURATION::$LOGDIR . DIRECTORY_SEPARATOR . \CONFIGURATION::$STDOUT, 'w');
 		
 		if ($handle) {
+			error_log("BEFORE LOGFILE FIX", 0);
 			$this->logfile = $handle;
 		}
 		else {
+			error_log("BEFORE ERROR LOG", 0);
 			\crm::${\MESSAGES::ERROR}(logger::FAILED_OPEN_DIR . \CONFIGURATION::$LOGDIR, null);
 		}
 	}

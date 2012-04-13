@@ -129,7 +129,6 @@ EOT;
 					}
 				
 				} catch (Exception $e) {
-					error_log($e, 0);
 					continue;
 				}
 			}
