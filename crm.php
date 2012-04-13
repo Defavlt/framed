@@ -205,7 +205,6 @@ EOT;
 							
 							switch ($return) {
 								case MESSAGE_RETURN_TYPE::NOT_PUBLIC:
-									$this->SendMessage(MESSAGES::ERROR_404, $object, $id);
 									break;
 								case MESSAGE_RETURN_TYPE::STOP_CHAIN:
 									break 2; //Stop the chain and return to calleé
