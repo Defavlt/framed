@@ -171,6 +171,7 @@ EOT;
 		
 		error_log("BEFORE CHECK", 0);
 		error_log($message, 0);
+		error_log($object, 0);
 		if (array_key_exists($message, $this->observerlist)) {
 			error_log("BEFORE LOOP", 0);
 			foreach ($this->observerlist as $msg => $objects) {
