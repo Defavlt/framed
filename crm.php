@@ -46,7 +46,11 @@ class crm implements IPlugin, IObservable {
 		
 		return $this->config[$key];
 	}
-
+	public function gVisibility() {
+		return PLUGIN_VISIBILITY::PR;
+	}
+	
+	
 	/**
 	 * Set the appropriate (and available) settings in CONFIGURATION.
 	 */
