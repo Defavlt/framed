@@ -18,17 +18,16 @@ define("BASE", __DIR__ . DIRECTORY_SEPARATOR);
  */
 define("php", ".php");
 
+spl_autoload_extensions(php);
+
 function __autoload($name) {
 	
-	$names = explode(DIRECTORY_SEPARATOR, $name);
-	$length = count($names);
-	
-	$name = BASE . $names[$length - 1] . php;
-	
 	if (is_file($name)) {
-		
-		file_put_contents("php://stderr", $name);
+
 		require $name;
+	}
+	else {
+		file_put_contents("php://stderr", $name);
 	}
 }
 
