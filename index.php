@@ -23,6 +23,8 @@ spl_autoload_register("__autoload");
 
 function __autoload($name) {
 	
+	$name = str_replace("\\\\", DIRECTORY_SEPARATOR, $name);
+	
 	require_once BASE . $name . php;
 }
 
