@@ -49,7 +49,7 @@ EOT;
 	 *
 	 */
 	public function Plugin() {
-	
+		
 	}
 }
 
