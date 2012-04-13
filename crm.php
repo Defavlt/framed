@@ -106,6 +106,7 @@ class crm implements IPlugin, IObservable {
 		
 		if (isset(CONFIGURATION::$PLUGINS) && is_array(CONFIGURATION::$PLUGINS)) {
 		
+			var_dump(CONFIGURATION::$PLUGINS);
 			foreach (CONFIGURATION::$PLUGINS as $plugin) {
 				try {
 					
