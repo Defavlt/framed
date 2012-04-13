@@ -169,12 +169,13 @@ EOT;
 	 */
 	function SendMessage($message, $object, $id) {
 		
+		error_log("BEFORE CHECK", 0);
 		if (array_key_exists($message, $this->observerlist)) {
-
+			error_log("BEFORE LOOP", 0);
 			foreach ($this->observerlist as $msg => $objects) {
-				
+				error_log("INSIDE LOOP", 0);
 				if ($msg == $message) {
-
+					error_log("BEFORE LISTENER CHECK", 0);
 					foreach ($objects as $instance) {
 
 						/**
