@@ -8,7 +8,7 @@ namespace interfaces;
  */
 interface IObserver {
 
-	function Callback($on, $id);
+	function Callback($on, $id, $msg);
 }
 
 ?>

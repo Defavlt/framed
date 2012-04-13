@@ -45,6 +45,9 @@ final class CONFIGURATION {
 	 * @var string
 	 */
 	static $FALLBACK = "fallback";
+	
+	static $LOGDIR = "logs";
+	static $STDOUT = "stdout";
 }
 
 ?>

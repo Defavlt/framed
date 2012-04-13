@@ -27,8 +27,6 @@ function __autoload($name) {
 	$name = str_replace(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, $name);
 	$name = BASE . $name . php;
 	
-	error_log("Class is file: " . is_file($name), 0);
-	
 	if (is_file($name)) {
 		require_once $name;
 	}

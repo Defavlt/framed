@@ -110,8 +110,6 @@ class crm implements IPlugin, IObservable {
 EOT;
 				
 					$class = CONFIGURATION::$PLUGIN_DIR . $single_slash . str_replace(php, null, $plugin);
-					
-					error_log($class, 0);
 					$instance = new $class();
 				
 					if ($this->RegisterPlugin($instance, $plugin)) {
@@ -128,6 +126,8 @@ EOT;
 					continue;
 				}
 			}
+			
+			$this->SendMessage("log", "Plugins finished loading", null);
 		}
 	}
 
@@ -170,8 +170,22 @@ EOT;
 				if ($msg == $message) {
 
 					foreach ($objects as $instance) {
-								
-						$instance->Callback($object, $id);
+
+						/**
+						 * The return type of the message handler.
+						 * @var MESSAGE_RETURN_TYPE
+						 */
+						$return = $instance->Callback($object, $id, $msg);
+						
+						switch ($return) {
+							case MESSAGE_RETURN_TYPE::NOT_PUBLIC:
+								break;
+							case MESSAGE_RETURN_TYPE::STOP_CHAIN:
+								break 3; //Stop the chain and return to calleé
+
+							default:
+								continue;
+						}
 					}
 				}
 			}
@@ -241,6 +255,28 @@ EOT;
 	}
 
 	/**
+	 * Dynamically invokes a message whenever a method that doesn't exist is invoked.
+	 * @param string $name 
+	 * @param array $args 0: MESSAGE_ARG_TYPE::ON, 1: MESSAGE_ARG_TYPE::ID
+	 */
+	function __call($name, $args) {
+		
+		$func = array();
+		
+		if (method_exists($this, $name)) {
+			
+			$func[] = $this;
+			$func[] = $name;
+			
+			call_user_func($func);
+		}
+		else {
+			
+			$this->SendMessage($name, $args[MESSAGE_ARG_TYPE::ON], $args[MESSAGE_ARG_TYPE::ID]);
+		}
+	}
+	
+	/**
 	 * Start the application.
 	 */
 	static function Start() {
@@ -249,6 +285,7 @@ EOT;
 		$_this->Plugin();
 		$_this->Initialize();
 	}
+
 }
 
 ?>
