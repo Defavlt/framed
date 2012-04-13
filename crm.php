@@ -92,24 +92,30 @@ class crm implements IPlugin, IObservable {
 	 * Recursively loads all the available plugins in the dir CONFIGURATION::PLUGIN_DIR
 	 * @see CONFIGURATION::PLUGIN_DIR
 	 */
-	private function LoadPlugins($dir = null) {
+	private function LoadPlugins() {
 		
-		try {
-			$class = str_replace(php, null, $dir);
-			$instance = new $class();
-			
-			if ($this->RegisterPlugin($instance, $dir)) {
+		if (isset(CONFIGURATION::$PLUGINS) && is_array(CONFIGURATION::$PLUGINS)) {
+		
+			foreach (CONFIGURATION::$PLUGINS as $plugin) {
+				try {
 				
-				$instance->Plugin();
-			}
-			
-			else {
+					$class = str_replace(php, null, $plugin);
+					$instance = new $class();
 				
-				unset($instance);
+					if ($this->RegisterPlugin($instance, $plugin)) {
+							
+						$instance->Plugin();
+					}
+				
+					else {
+							
+						unset($instance);
+					}
+				
+				} catch (Exception $e) {
+					continue;
+				}
 			}
-			
-		} catch (Exception $e) {
-			continue;
 		}
 	}
 
