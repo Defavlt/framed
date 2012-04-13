@@ -25,7 +25,13 @@ function __autoload($name) {
 	
 	$name = str_replace("\\\\", DIRECTORY_SEPARATOR, $name);
 	
-	require_once BASE . $name . php;
+	if (is_file($name)) {
+		require_once BASE . $name . php;
+	}
+	else {
+		
+		error_log($name, 0);
+	}
 }
 
 crm::Start();
