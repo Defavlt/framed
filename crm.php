@@ -268,6 +268,7 @@ EOT;
 	function Initialize() {
 		$this->ConfigureSettings();
 		$this->LoadPlugins();
+		var_dump($this->pluginlist);
 		$this->InitializePlugins();
 		$this->SetVariables();
 		$this->ParseVariables();
