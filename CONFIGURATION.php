@@ -13,7 +13,7 @@ final class CONFIGURATION {
 	 * The directory containing all the plugins for use.
 	 * @var string
 	 */
-	static $PLUGIN_DIR = "plugin_dir";
+	static $PLUGIN_DIR = "plugins\\\\";
 	
 	/**
 	 * The application directory.
