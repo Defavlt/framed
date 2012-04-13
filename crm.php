@@ -4,7 +4,6 @@ use interfaces\IPlugin;
 use interfaces\IObservable;
 use interfaces\IObserver;
 use settings\PLUGIN_VISIBILITY;
-use settings\PLUGIN_VISIBILITY;
 
 /**
  *
