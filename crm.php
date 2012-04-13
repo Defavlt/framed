@@ -162,11 +162,14 @@ EOT;
 		
 		if (array_key_exists($message, $this->observerlist)) {
 
-			foreach ($this->observerlist as $instance => $msg) {
+			foreach ($this->observerlist as $msg => $objects) {
 				
 				if ($msg == $message) {
-					
-					$instance->Callback($object, $id);
+
+					foreach ($objects as $instance) {
+								
+						$instance->Callback($object, $id);
+					}
 				}
 			}
 		}
@@ -180,7 +183,7 @@ EOT;
 		
 		if ($client instanceof IObserver) {
 			
-			$this->observerlist[$client] = $msg;
+			$this->observerlist[$msg][] = $client;
 			return true;
 		}
 		else {
