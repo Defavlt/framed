@@ -115,7 +115,7 @@ class crm implements IPlugin, IObservable {
 \
 EOT;
 				
-					$class = CONFIGURATION::$PLUGIN_DIR . $single_slash . str_replace(php, null, $plugin);
+					$class = BASE . CONFIGURATION::$PLUGIN_DIR . $single_slash . str_replace(php, null, $plugin);
 					$instance = new $class();
 				
 					if ($this->RegisterPlugin($instance, $plugin)) {
@@ -129,11 +129,12 @@ EOT;
 					}
 				
 				} catch (Exception $e) {
+					error_log($e, 0);
 					continue;
 				}
 			}
 			
-			$this->SendMessage("log", "Plugins finished loading", null);
+			$this->log("Plugins finished loading", null);
 		}
 	}
 
