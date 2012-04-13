@@ -195,9 +195,8 @@ EOT;
 					
 					foreach ($objects as $instance) {
 
-						if ($instance->visibility == PLUGIN_VISIBILITY::PU) {
-							
-							print_r($this->observerlist);
+						if ($instance->gVisibility() == PLUGIN_VISIBILITY::PU) {
+
 							/**
 						 	* The return type of the message handler.
 						 	* @var MESSAGE_RETURN_TYPE
@@ -217,7 +216,7 @@ EOT;
 						}
 						else {
 							
-							$this->SendMessage(MESSAGES::ERROR_404, $msg, null);
+							$this->SendMessage(MESSAGES::ERROR_404, $object, $id);
 						}
 					}
 				}
