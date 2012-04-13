@@ -23,13 +23,7 @@ spl_autoload_register("__autoload");
 
 function __autoload($name) {
 	
-	if (is_file($name . php)) {
-		
-		require_once $name . php;
-	}
-	else {
-		file_put_contents("php://stderr", $name);
-	}
+	require_once BASE . $name . php;
 }
 
 crm::Start();
