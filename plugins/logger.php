@@ -24,7 +24,7 @@ class logger implements IPlugin, IObserver {
 			$this->logfile = $handle;
 		}
 		else {
-			\crm::error(logger::FAILED_OPEN_DIR . \CONFIGURATION::$LOGDIR, null);
+			\crm::${\MESSAGES::ERROR}(logger::FAILED_OPEN_DIR . \CONFIGURATION::$LOGDIR, null);
 		}
 	}
 	
@@ -32,10 +32,10 @@ class logger implements IPlugin, IObserver {
 		
 		switch ($msg) {
 			
-			case 'log':
+			case \MESSAGES::LOG:
 				$this->log($on);
 				break;
-			case 'error':
+			case \MESSAGES::ERROR:
 				$this->error_log($on);
 				break;
 			default:
