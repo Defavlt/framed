@@ -20,7 +20,7 @@ interface IObservable {
 	 * Registers the client with this instance
 	 * @param IObserver $client
 	 */
-	function Register($client);
+	function Register($client, $msg);
 	
 	/**
 	 * Unregisters the client from this instance

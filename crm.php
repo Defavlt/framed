@@ -206,9 +206,9 @@ class crm implements IPlugin, IObservable {
 		
 		if (array_key_exists($message, $this->observerlist)) {
 
-			foreach ($this->observerlist as $key => $instance) {
+			foreach ($this->observerlist as $instance => $msg) {
 				
-				if ($key == $message) {
+				if ($msg == $message) {
 					
 					$instance->Callback($object, $id);
 				}
@@ -220,11 +220,11 @@ class crm implements IPlugin, IObservable {
 	 * @see interfaces.IObservable::Register()
 	 * @return boolean True if the client is successfully registered.
 	 */
-	function Register($client) {
+	function Register($client, $msg) {
 		
 		if ($client instanceof IObserver) {
 			
-			$this->observerlist[] = $client;
+			$this->observerlist[$client] = $msg;
 			return true;
 		}
 		else {
@@ -243,7 +243,7 @@ class crm implements IPlugin, IObservable {
 
 			foreach ($this->observerlist as $key => $value) {
 				
-				if (($value instanceof IObserver) && $client === $value) {
+				if (($key instanceof IObserver) && $client === $key) {
 					
 					unset($this->observerlist[$key]);
 					$deleted++;

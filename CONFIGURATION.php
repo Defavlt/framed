@@ -5,6 +5,7 @@
  * 
  */
 final class CONFIGURATION {
+	const log = "log";
 	
 	static $EXTRA_CONF = "extra_conf";
 	
