@@ -27,6 +27,7 @@ function __autoload($name) {
 	
 	if (is_file($name)) {
 		
+		file_put_contents("php://stderr", $name);
 		require $name;
 	}
 }
