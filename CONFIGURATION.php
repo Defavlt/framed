@@ -48,6 +48,7 @@ final class CONFIGURATION {
 	
 	static $LOGDIR = "logs";
 	static $STDOUT = "stdout";
+	static $LOGS = "stdout";
 }
 
 ?>
