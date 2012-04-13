@@ -195,7 +195,7 @@ EOT;
 					
 					foreach ($objects as $instance) {
 
-						if (isset($scope) && $instance->visibility == PLUGIN_VISIBILITY::PU) {
+						if ($scope == PLUGIN_VISIBILITY::PU || $instance->visibility == PLUGIN_VISIBILITY::PU) {
 							/**
 						 	* The return type of the message handler.
 						 	* @var MESSAGE_RETURN_TYPE
