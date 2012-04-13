@@ -49,6 +49,7 @@ class crm implements IPlugin, IObservable {
 		CONFIGURATION::$FALLBACK = $this->config[CONFIGURATION::$FALLBACK];
 		*/
 
+		var_dump($this->config);
 		foreach ($this->config as $key => $setting) {
 			
 			if (property_exists(CONFIGURATION, $key)) {
