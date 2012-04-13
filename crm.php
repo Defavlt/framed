@@ -3,6 +3,7 @@
 use interfaces\IPlugin;
 use interfaces\IObservable;
 use interfaces\IObserver;
+use plugins;
 
 /**
  *
@@ -99,7 +100,8 @@ class crm implements IPlugin, IObservable {
 			foreach (CONFIGURATION::$PLUGINS as $plugin) {
 				try {
 				
-					$class = str_replace(php, null, $plugin);
+					$class = CONFIGURATION::$PLUGIN_DIR . "\\\\" . str_replace(php, null, $plugin);
+					
 					$instance = new $class();
 				
 					if ($this->RegisterPlugin($instance, $plugin)) {
