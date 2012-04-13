@@ -24,15 +24,14 @@ spl_autoload_register("__autoload");
 function __autoload($name) {
 	
 	$name = str_replace("\\\\", DIRECTORY_SEPARATOR, $name);
-	
-	error_log(is_file(BASE . $name . php), 0);
+	$name = BASE . $name . php;
 	
 	if (is_file($name)) {
-		require_once BASE . $name . php;
+		require_once $name;
 	}
 	else {
 		
-		error_log(BASE . $name . php, 0);
+		error_log($name, 0);
 	}
 }
 
