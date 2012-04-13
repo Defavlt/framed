@@ -187,7 +187,7 @@ EOT;
 	 */
 	function SendMessage($message, $object, $id) {
 		
-		print_r($message);
+		print_r($message) . "\n";
 
 		if (array_key_exists($message, $this->observerlist)) {
 			
