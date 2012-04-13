@@ -49,9 +49,12 @@ class crm implements IPlugin, IObservable {
 			CONFIGURATION::${strtoupper($key)} = $setting;
 		}
 		
-		foreach ($this->config[CONFIGURATION::$EXTRA_CONF] as $value) {
-			
-			array_merge($this->config, $value);
+		if (!isset(CONFIGURATION::$EXTRA_CONF) && is_array(CONFIGURATION::$EXTRA_CONF)) {
+
+			foreach ($this->config[CONFIGURATION::$EXTRA_CONF] as $value) {
+				
+				array_merge($this->config, $value);
+			}
 		}
 	}
 	
