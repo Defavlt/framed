@@ -23,7 +23,8 @@ spl_autoload_register("__autoload");
 
 function __autoload($name) {
 	
-	$name = str_replace("\\\\", DIRECTORY_SEPARATOR, $name);
+	$name = str_replace("\\", DIRECTORY_SEPARATOR, $name);
+	$name = str_replace(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, $name);
 	$name = BASE . $name . php;
 	
 	if (is_file($name)) {
