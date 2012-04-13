@@ -96,7 +96,7 @@ class crm implements IPlugin, IObservable {
 		$action = $this->get[CONFIGURATION::$ACTION];
 		$identi = $this->get[CONFIGURATION::$IDENTI];
 		
-		$this->SendMessage($action, $object, $identi, $scope = PLUGIN_VISIBILITY::PU);
+		$this->SendMessage($action, $object, $identi);
 	}
 	
 	/*
@@ -185,7 +185,7 @@ EOT;
 	/**
 	 * @see interfaces.IObservable::SendMessage()
 	 */
-	function SendMessage($message, $object, $id, $scope = null) {
+	function SendMessage($message, $object, $id) {
 
 		if (array_key_exists($message, $this->observerlist)) {
 			
@@ -195,7 +195,7 @@ EOT;
 					
 					foreach ($objects as $instance) {
 
-						if (($scope == PLUGIN_VISIBILITY::PU || $instance->visibility == PLUGIN_VISIBILITY::PU) && $scope != PLUGIN_VISIBILITY::PR) {
+						if ($instance->visibility == PLUGIN_VISIBILITY::PU) {
 
 							/**
 						 	* The return type of the message handler.
