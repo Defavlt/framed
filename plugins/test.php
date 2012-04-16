@@ -35,9 +35,6 @@ echo <<<'EOT'
 EOT;
 
 		echo ob_get_clean();
-
-		\crm::index($on, $id);
-		\crm::error_404($on, $id);
 		
 	}
 
