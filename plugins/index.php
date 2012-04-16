@@ -18,7 +18,8 @@ class index implements IPlugin, IObserver {
 	 *
 	 */
 	public function Initialize() {
-	
+		\crm::gInstance()->Register($this, "index");
+		\crm::log("index", IPlugin);
 	}
 	
 	/**
@@ -27,9 +28,6 @@ class index implements IPlugin, IObserver {
 	 *
 	 */
 	public function Plugin() {
-		\crm::gInstance()->Register($this, "index");
-		\crm::log("index", IPlugin);
-		
 	}
 	
 	/**
