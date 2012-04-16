@@ -126,6 +126,8 @@ class crm implements IPlugin, IObservable {
 				array_merge ( $this->config, $value );
 			}
 		}
+		
+		var_dump($this->config);
 	}
 	
 	/**
