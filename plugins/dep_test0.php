@@ -14,7 +14,7 @@ use interfaces\IPlugin;
 class dep_test0 implements IObserver, IPlugin {
 	const header1 = "Customers:<br>";
 	const header2 = "Generated on: ";
-	const msg = "dep0";
+	const msg = "dep_test0";
 	
 	/**
 	 *

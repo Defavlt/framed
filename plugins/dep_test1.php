@@ -1,6 +1,8 @@
 <?php
 namespace plugins;
 
+use constants\PLUGIN_VISIBILITY;
+
 use interfaces\IObserver;
 use interfaces\IPlugin;
 
@@ -10,7 +12,7 @@ use interfaces\IPlugin;
  *        
  */
 class dep_test1 implements IObserver, IPlugin {
-	const msg = "dep1";
+	const msg = "dep_test1";
 	
 	/**
 	 *
@@ -60,7 +62,7 @@ class dep_test1 implements IObserver, IPlugin {
 	 *
 	 */
 	public function gVisibility() {
-	
+		return PLUGIN_VISIBILITY::PU;
 	}
 }
 
