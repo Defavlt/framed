@@ -131,6 +131,8 @@ class crm implements IPlugin, IObservable {
 		$action = $this->get[CONFIGURATION::$ACTION];
 		$identi = $this->get[CONFIGURATION::$IDENTI];
 
+		$action = !isset($action) ? "" : $action;
+
 		$this->SendMessage($action, $object, $identi, true);
 	}
 	
