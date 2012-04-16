@@ -1,7 +1,7 @@
 <?php
 namespace plugins;
 
-use settings\PLUGIN_VISIBILITY;
+use constants\PLUGIN_VISIBILITY;
 use interfaces\IObserver;
 use interfaces\IPlugin;
 
@@ -10,7 +10,7 @@ use interfaces\IPlugin;
  * @author marcus
  *        
  */
-class _404 implements IObserver, IPlugin {
+class error_404 implements IObserver, IPlugin {
 	
 	/**
 	 * @see interfaces.IPlugin::gVisibility()
