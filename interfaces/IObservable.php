@@ -14,7 +14,7 @@ interface IObservable {
 	 * @param mixed $object
 	 * @param string $id
 	 */
-	function SendMessage($message, $object, $id);
+	function SendMessage($message, $object, $id, $from_public = false);
 	
 	/**
 	 * Registers the client with this instance
