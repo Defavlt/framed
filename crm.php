@@ -221,8 +221,6 @@ EOT;
 	 * @see interfaces.IObservable::SendMessage()
 	 */
 	function SendMessage($message, $object, $id, $from_public = false) {
-		
-		print_r($message) . "\n";
 
 		if (array_key_exists($message, $this->observerlist)) {
 			
