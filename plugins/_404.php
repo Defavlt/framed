@@ -12,6 +12,9 @@ use interfaces\IPlugin;
  */
 class _404 implements IObserver, IPlugin {
 	
+	/**
+	 * @see interfaces.IPlugin::gVisibility()
+	 */
 	function gVisibility() {
 		return PLUGIN_VISIBILITY::PU;
 	}
@@ -28,7 +31,7 @@ class _404 implements IObserver, IPlugin {
 <p>404 Not Found: What you searched for was not found:</p>
 EOT;
 		
-		echo $output . $on . "/" . $id;
+		echo $output . \crm::gConfig(\CONFIGURATION::$BASE_URL) . $on . "/" . $id;
 	}
 	
 	/**

@@ -240,7 +240,6 @@ EOT;
 						 */
 						$instance = $instance; //TODO: Remove this line (it is only for ide-autocomplete/doc-support).
 
-						echo $instance->gVisibility();
 						if (($from_public && $instance->gVisibility() == PLUGIN_VISIBILITY::PU) || 
 							!$from_public) {
 
