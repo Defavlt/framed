@@ -176,7 +176,7 @@ class crm implements IPlugin, IObservable {
 					$single_slash = <<<'EOT'
 \
 EOT;
-				
+
 					$class = CONFIGURATION::$PLUGIN_DIR . $single_slash . str_replace(php, null, $plugin);
 					$instance = new $class();
 				
