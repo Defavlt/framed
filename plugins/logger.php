@@ -50,7 +50,7 @@ class logger implements IPlugin, IObserver {
 
 	function log($on) {
 
-		$message = "[D M d h:i:s Y] [log]";
+		$message = "[D M d h:i:s Y] ";
 		fwrite( $this->logfile, date($message) . $on . "\n");
 	}
 	function error_log($on) {
