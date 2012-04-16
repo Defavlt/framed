@@ -208,10 +208,16 @@ EOT;
 			foreach ($this->observerlist as $msg => $objects) {
 				
 				if ($msg == $message) {
-					
-					foreach ($objects as $instance) {
 
-						echo $instance-gVisibility();
+					foreach ($objects as $instance) {
+						
+						/**
+						 * An instance of IPlugin
+						 * @var IPlugin
+						 */
+						$instance = $instance;
+
+						echo $instance->gVisibility();
 						if ($instance->gVisibility() == PLUGIN_VISIBILITY::PU) {
 
 							/**
@@ -231,7 +237,7 @@ EOT;
 							}
 						}
 						else {
-							$this->SendMessage(MESSAGES::ERROR_404, $object, $id);
+							continue;
 						}
 					}
 				}
