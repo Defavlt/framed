@@ -3,7 +3,7 @@ namespace plugins;
 
 use interfaces\IPlugin;
 use interfaces\IObserver;
-use settings\PLUGIN_VISIBILITY;
+use constants\PLUGIN_VISIBILITY;
 
 /**
  *
@@ -27,7 +27,7 @@ class index implements IPlugin, IObserver {
 	 *
 	 */
 	public function Plugin() {
-		\crm::Register($this, \MESSAGES::INDEX);
+		\crm::gInstance()->Register($this, "index");
 		\crm::log("index", IPlugin);
 		
 	}
