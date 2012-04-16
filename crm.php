@@ -131,7 +131,8 @@ class crm implements IPlugin, IObservable {
 		$action = crm::gGlobalParam(CONFIGURATION::$ACTION);
 		$identi = crm::gGlobalParam(CONFIGURATION::$IDENTI);
 
-		$action = !isset($action) || is_null($action) || empty($action) ? MESSAGES::INDEX : $action;
+		$action = 
+			!isset($action) || is_null($action) || empty($action) ? MESSAGES::INDEX : $action;
 
 		$this->SendMessage($action, $object, $identi, true);
 	}
@@ -226,41 +227,38 @@ EOT;
 
 		if (array_key_exists($message, $this->observerlist)) {
 			
-			foreach ($this->observerlist as $msg => $objects) {
+			foreach ($this->observerlist[$message] as $msg => $objects) {
+
+				foreach ($objects as $instance) {
 				
-				if ($msg == $message) {
-
-					foreach ($objects as $instance) {
-						
-						/**
-						 * An instance of IPlugin
-						 * @var IPlugin
-						 */
-						$instance = $instance; //TODO: Remove this line (it is only for ide-autocomplete/doc-support).
-
-						if (($from_public && $instance->gVisibility() == PLUGIN_VISIBILITY::PU) || 
+					/**
+					 * An instance of IPlugin
+					 * @var IPlugin
+					 */
+					$instance = $instance; //TODO: Remove this line (it is only for ide-autocomplete/doc-support).
+				
+					if (($from_public && $instance->gVisibility() == PLUGIN_VISIBILITY::PU) ||
 							!$from_public) {
-
-							/**
-						 	* The return type of the message handler.
-						 	* @var MESSAGE_RETURN_TYPE
-						 	*/
-							$return = $instance->Callback($object, $id, $msg);
+				
+						/**
+						 * The return type of the message handler.
+						 * @var MESSAGE_RETURN_TYPE
+						 */
+						$return = $instance->Callback($object, $id, $msg);
 							
-							switch ($return) {
-								case MESSAGE_RETURN_TYPE::NOT_PUBLIC:
-									break;
-								case MESSAGE_RETURN_TYPE::STOP_CHAIN:
-									break 2; //Stop the chain and return to calleé
-	
-								default:
-									continue;
-							}
+						switch ($return) {
+							case MESSAGE_RETURN_TYPE::NOT_PUBLIC:
+								break;
+							case MESSAGE_RETURN_TYPE::STOP_CHAIN:
+								break 2; //Stop the chain and return to calleé
+				
+							default:
+								continue;
 						}
-						else {
-							crm::log("Forbidden: " . $message);
-							$this->SendMessage(MESSAGES::ERROR_404, $message, $object);
-						}
+					}
+					else {
+						crm::log("Forbidden: " . $message);
+						$this->SendMessage(MESSAGES::ERROR_404, $message, $object);
 					}
 				}
 			}
