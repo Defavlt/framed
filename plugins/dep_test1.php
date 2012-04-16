@@ -20,7 +20,7 @@ class dep_test1 implements IObserver, IPlugin {
 	 *
 	 */
 	public function Callback($on, $id, $msg) {
-		echo "In dep_test1<br>";
+
 		if (is_numeric($on) && is_int($on)) {
 			
 			echo "<table>";
