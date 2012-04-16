@@ -1,7 +1,7 @@
 <?php
 namespace plugins;
 
-use settings\PLUGIN_VISIBILITY;
+use constants\PLUGIN_VISIBILITY;
 use interfaces\IObserver;
 use interfaces\IPlugin;
 
