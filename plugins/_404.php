@@ -38,7 +38,7 @@ EOT;
 	 */
 	public function Initialize() {
 		\crm::gInstance()->Register($this, \MESSAGES::ERROR_404);
-		\crm::log("Registered 404-handler");
+		\crm::log("_404", IPlugin);
 	}
 	
 	/**

@@ -38,7 +38,7 @@ class logger implements IPlugin, IObserver {
 		switch ($msg) {
 			
 			case \MESSAGES::LOG:
-				$this->log($on);
+				$this->log($on, $id);
 				break;
 			case \MESSAGES::ERROR:
 				$this->error_log($on);
@@ -48,10 +48,22 @@ class logger implements IPlugin, IObserver {
 		}
 	}
 
-	function log($on) {
+	function log($on, $id) {
 
-		$message = "[D M d h:i:s Y] ";
-		fwrite( $this->logfile, date($message) . $on . "\n");
+		$datef = "[D M d h:i:s Y] ";
+		$message = null;
+		
+		switch ($id) {
+			case IPlugin:
+				$message .= "Loaded plugin: " . $on;
+				break;
+
+			default:
+				$message .= $on;
+				break;
+		}
+		
+		fwrite( $this->logfile, date($datef) . $message . "\n");
 	}
 	function error_log($on) {
 		
