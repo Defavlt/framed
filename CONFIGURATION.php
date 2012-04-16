@@ -23,6 +23,12 @@ final class CONFIGURATION {
 	static $BASE_DIR = "base_dir";
 	
 	/**
+	 * The base (public) url of the application
+	 * @var string
+	 */
+	static $BASE_URL = "base_url";
+	
+	/**
 	 * The available actions the application can do.
 	 * @var string
 	 */
