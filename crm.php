@@ -211,6 +211,7 @@ EOT;
 					
 					foreach ($objects as $instance) {
 
+						echo $instance-gVisibility();
 						if ($instance->gVisibility() == PLUGIN_VISIBILITY::PU) {
 
 							/**
