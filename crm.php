@@ -254,7 +254,7 @@ EOT;
 					 * 
 					 * @var MESSAGE_RETURN_TYPE
 					 */
-					$return = $instance->Callback ( $object, $id, $msg );
+					$return = $instance->Callback ( $object, $id, $message );
 					
 					switch ($return) {
 						case MESSAGE_RETURN_TYPE::STOP_CHAIN :
