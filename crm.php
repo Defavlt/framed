@@ -19,6 +19,20 @@ class crm implements IPlugin, IObservable {
 	private $get;
 	private $post;
 	
+	public static function gGlobalParam($param) {
+		
+		if (key_exists($param, crm::gInstance()->get)) {
+			
+			return crm::gInstance()->get[$param];
+		}
+		else if (key_exists($param, crm::gInstance()->post)) {
+			
+			return crm::gInstance()->post[$param];
+		}
+		
+		return null;
+	}
+	
 	/**
 	 * Gets the current instance object of crm.
 	 * @return crm
@@ -215,11 +229,10 @@ EOT;
 									continue;
 							}
 						}
-						else {
-							
-							$this->SendMessage(MESSAGES::ERROR_404, $object, $id);
-						}
 					}
+				}
+				else {
+					$this->SendMessage(MESSAGES::ERROR_404, $object, $id);
 				}
 			}
 		}
@@ -289,10 +302,10 @@ EOT;
 	 * @see interfaces.IPlugin::Initialize()
 	 */
 	function Initialize() {
+		$this->SetVariables();
 		$this->ConfigureSettings();
 		$this->LoadPlugins();
 		$this->InitializePlugins();
-		$this->SetVariables();
 		$this->ParseVariables();
 		
 	}
