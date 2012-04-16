@@ -141,7 +141,9 @@ class crm implements IPlugin, IObservable {
 
 		$action = ! isset ( $action ) || is_null ( $action ) || empty ( $action ) ? MESSAGES::INDEX : $action;
 		
+		echo "observerlist\n";
 		var_dump($this->observerlist);
+		echo "pluginlist\n";
 		var_dump($this->pluginlist);
 		
 		$this->SendMessage ( $action, $object, $identi, true );
