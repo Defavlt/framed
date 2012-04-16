@@ -350,6 +350,16 @@ EOT;
 	
 	}
 	
+	public function debug() {
+		
+		echo "Observerlist\n";
+		var_dump($this->observerlist);
+		echo "\nPluginlist\n";
+		var_dump($this->pluginlist);
+		echo "\nConfigs\n";
+		var_dump($this->config);
+	}
+	
 	/**
 	 * Dynamically invokes a message whenever a method that doesn't exist is
 	 * invoked.
