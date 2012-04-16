@@ -260,8 +260,6 @@ EOT;
 					$return = $instance->Callback ( $object, $id, $msg );
 					
 					switch ($return) {
-						case MESSAGE_RETURN_TYPE::NOT_PUBLIC :
-							break;
 						case MESSAGE_RETURN_TYPE::STOP_CHAIN :
 							break 2; // Stop the chain and return to calleé
 						
@@ -303,26 +301,25 @@ EOT;
 	/**
 	 *
 	 * @see interfaces.IObservable::Unregister()
-	 * @return boolean The number of elements unregistered, or false if no
+	 * @return boolean True if succesfull, or false if no
 	 *         elements of $client not an instance of IObserver.
 	 */
-	public function Unregister($client) {
+	public function Unregister($client, $msg) {
 		$deleted = 0;
 		
-		if ($client instanceof IObserver) {
+		if(key_exists($msg, $this->observerlist)) {
 			
-			foreach ( $this->observerlist as $key => $value ) {
+			$key = array_search($client, $this->observerlist[$msg]);
+			
+			if ($key !== false) {
 				
-				if (($key instanceof IObserver) && $client === $key) {
-					
-					unset ( $this->observerlist [$key] );
-					$deleted ++;
-				}
+				unset($this->observerlist[$msg][$key]);
+				return true;
+				
 			}
-			
-			return $deleted;
-		} else {
-			return false;
+			else {
+				return false;
+			}
 		}
 	}
 	

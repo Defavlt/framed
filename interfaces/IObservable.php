@@ -26,7 +26,7 @@ interface IObservable {
 	 * Unregisters the client from this instance
 	 * @param IObserver $client
 	 */
-	function Unregister($client);
+	function Unregister($client, $msg);
 }
 
 ?>
