@@ -211,7 +211,6 @@ EOT;
 					
 					foreach ($objects as $instance) {
 
-						echo $instance->gVisibility();
 						if ($instance->gVisibility() == PLUGIN_VISIBILITY::PU) {
 
 							/**
@@ -230,10 +229,10 @@ EOT;
 									continue;
 							}
 						}
+						else {
+							$this->SendMessage(MESSAGES::ERROR_404, $object, $id);
+						}
 					}
-				}
-				else {
-					$this->SendMessage(MESSAGES::ERROR_404, $object, $id);
 				}
 			}
 		}
