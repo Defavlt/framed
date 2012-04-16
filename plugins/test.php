@@ -35,6 +35,7 @@ echo <<<'EOT'
 EOT;
 
 		echo ob_get_clean();
+		\crm::index(null, null);
 		
 	}
 
