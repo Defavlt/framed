@@ -20,7 +20,7 @@ class dep_test1 implements IObserver, IPlugin {
 	 *
 	 */
 	public function Callback($on, $id, $msg) {
-		
+		echo "In dep_test1<br>";
 		if (is_numeric($on) && is_int($on)) {
 			
 			echo "<table>";
@@ -43,6 +43,7 @@ class dep_test1 implements IObserver, IPlugin {
 	 */
 	public function Initialize() {
 		\crm::Register($this, dep_test1::msg);
+		\crm::log(dep_test1::msg, IPlugin);
 	}
 	
 	/**
@@ -62,7 +63,7 @@ class dep_test1 implements IObserver, IPlugin {
 	 *
 	 */
 	public function gVisibility() {
-		return PLUGIN_VISIBILITY::PU;
+		return PLUGIN_VISIBILITY::PR;
 	}
 }
 
