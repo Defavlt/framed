@@ -177,7 +177,6 @@ class crm implements IPlugin, IObservable {
 EOT;
 					
 					$class = CONFIGURATION::$PLUGIN_DIR . $single_slash . str_replace ( php, null, $plugin );
-					echo $class . "\n";
 					$instance = new $class ();
 					
 					if ($this->RegisterPlugin ( $instance, $plugin )) {
@@ -191,7 +190,6 @@ EOT;
 					}
 				
 				} catch ( Exception $e ) {
-					echo $class . ": Exception\n";
 					continue;
 				}
 			}
@@ -210,7 +208,6 @@ EOT;
 	 */
 	private function RegisterPlugin($instance, $name) {
 		if ($instance instanceof IPlugin) {
-			echo $class . ": Instance of IPlugin\n";
 			$this->pluginlist [$name] = $instance;
 			return true;
 		} else {
@@ -361,7 +358,7 @@ EOT;
 			$func [] = 'crm';
 			$func [] = $name;
 			
-			call_user_func ( $func );
+			call_user_func ( $func, $args );
 		} else {
 			
 			\crm::gInstance ()->SendMessage ( $name, $args [MESSAGE_ARG_TYPE::ON], $args [MESSAGE_ARG_TYPE::ID] );

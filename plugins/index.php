@@ -29,6 +29,7 @@ class index implements IPlugin, IObserver {
 	public function Plugin() {
 		\crm::Register($this, \MESSAGES::INDEX);
 		\crm::log("index", IPlugin);
+		
 	}
 	
 	/**
