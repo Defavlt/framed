@@ -3,7 +3,8 @@
 use interfaces\IPlugin;
 use interfaces\IObservable;
 use interfaces\IObserver;
-use settings\PLUGIN_VISIBILITY;
+use constants\PLUGIN_VISIBILITY;
+use constants\REGISTER_ARG_TYPE;
 
 /**
  *
@@ -275,9 +276,14 @@ EOT;
 	 * @see interfaces.IObservable::Register()
 	 * @return boolean True if the client is successfully registered.
 	 */
-	function Register($client, $msg) {
+	function Register($client, $msg = null) {
 		
-		if ($client instanceof IObserver) {
+		if ($msg == null && is_array($client)) {
+			
+			$this->Register($client[REGISTER_ARG_TYPE::CLIENT], $client[REGISTER_ARG_TYPE::MSG]);
+		}
+		
+		else if ($client instanceof IObserver) {
 			
 			if (isset ( $this->observerlist [$msg] ) && is_array ( $this->observerlist [$msg] )) {
 				
@@ -361,7 +367,7 @@ EOT;
 			$func [] = 'crm';
 			$func [] = $name;
 			
-			call_user_func ( $func );
+			call_user_func ( $func, $args );
 		} else {
 			
 			\crm::gInstance ()->SendMessage ( $name, $args [MESSAGE_ARG_TYPE::ON], $args [MESSAGE_ARG_TYPE::ID] );
