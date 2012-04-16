@@ -215,7 +215,7 @@ EOT;
 						 * An instance of IPlugin
 						 * @var IPlugin
 						 */
-						$instance = $instance;
+						$instance = $instance; //TODO: Remove this line (it is only for ide-autocomplete/doc-support).
 
 						echo $instance->gVisibility();
 						if (!$from_public || $instance->gVisibility() == PLUGIN_VISIBILITY::PU) {
@@ -237,7 +237,7 @@ EOT;
 							}
 						}
 						else {
-							continue;
+							crm::log("Forbidden: " . $message);
 						}
 					}
 				}
