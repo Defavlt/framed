@@ -358,7 +358,7 @@ EOT;
 			$func [] = 'crm';
 			$func [] = $name;
 			
-			call_user_func ( $func, $args );
+			call_user_func ( $func );
 		} else {
 			
 			\crm::gInstance ()->SendMessage ( $name, $args [MESSAGE_ARG_TYPE::ON], $args [MESSAGE_ARG_TYPE::ID] );
