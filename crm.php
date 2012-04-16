@@ -264,8 +264,8 @@ EOT;
 					crm::log ( "404: " . $message );
 					$this->SendMessage ( MESSAGES::ERROR_404, $message, $object );
 				}
-				else {
-					$this->SendMessage(MESSAGES::ERROR_404, null, null);
+				else if (!$from_public) {
+					continue;
 				}
 			}
 		}

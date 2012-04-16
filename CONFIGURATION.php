@@ -1,6 +1,7 @@
 <?php
 
 /** 
+ * Contains application-critical configuration properties.
  * @author marcus
  * 
  */
