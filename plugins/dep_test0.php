@@ -26,7 +26,7 @@ class dep_test0 implements IObserver, IPlugin {
 		
 		\crm::dep_test1(5, "inject");
 		
-		echo dep_test0::header2 . date();
+		echo dep_test0::header2 . date('D, d M Y H:i:s');
 	}
 	
 	/**
