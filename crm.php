@@ -21,103 +21,108 @@ class crm implements IPlugin, IObservable {
 	
 	/**
 	 * Gets a config-value
-	 * @param string $param The key of the value
+	 * 
+	 * @param string $param
+	 *        	The key of the value
 	 */
 	public static function gConfig($param) {
 		
-		if (key_exists($param, crm::gInstance()->config)) {
+		if (key_exists ( $param, crm::gInstance ()->config )) {
 			
-			return crm::gInstance()->config[$param];
-		}
-		else {
+			return crm::gInstance ()->config [$param];
+		} else {
 			return null;
 		}
 	}
-
+	
 	/**
 	 * Gets a value from any of the global variables (get/post)
-	 * @param string $param The key of the value
+	 * 
+	 * @param string $param
+	 *        	The key of the value
 	 */
 	public static function gGlobalParam($param) {
 		
-		if (key_exists($param, crm::gInstance()->get)) {
+		if (key_exists ( $param, crm::gInstance ()->get )) {
 			
-			return crm::gInstance()->get[$param];
-		}
-		else if (key_exists($param, crm::gInstance()->post)) {
+			return crm::gInstance ()->get [$param];
+		} else if (key_exists ( $param, crm::gInstance ()->post )) {
 			
-			return crm::gInstance()->post[$param];
+			return crm::gInstance ()->post [$param];
 		}
 		
 		return null;
 	}
-
+	
 	/**
 	 * Gets the current instance object of crm.
+	 * 
 	 * @return crm
 	 */
 	public static function gInstance() {
 		
 		return crm::$current;
-	} 
-
+	}
+	
 	/**
 	 * Aggressively cleans the given value.
-	 * @param string $value
+	 * 
+	 * @param string $value        	
 	 * @return string
 	 */
 	public static function clean($value) {
 		
-		return htmlspecialchars(strip_tags($value));
+		return htmlspecialchars ( strip_tags ( $value ) );
 	}
 	
 	/**
 	 * Gets a value from the global GET
-	 * @param string $key
+	 * 
+	 * @param string $key        	
 	 * @return mixed
 	 */
 	public function gGet($key) {
 		
-		return $this->$get[$key];
+		return $this->$get [$key];
 	}
 	
 	/**
+	 *
 	 * @see interfaces.IPlugin::gVisibility()
 	 */
 	public function gVisibility() {
 		return PLUGIN_VISIBILITY::PR;
 	}
-
+	
 	/**
 	 * Set the appropriate (and available) settings in CONFIGURATION.
 	 */
 	public function ConfigureSettings() {
 		
 		/*
-		CONFIGURATION::$ACTION = $this->config[CONFIGURATION::$ACTION];
-		CONFIGURATION::$OBJECT = $this->config[CONFIGURATION::$OBJECT];
-		CONFIGURATION::$IDENTI = $this->config[CONFIGURATION::$IDENTI];
-		CONFIGURATION::$METHOD = $this->config[CONFIGURATION::$METHOD];
-		CONFIGURATION::$PLUGINS = $this->config[CONFIGURATION::$PLUGINS];
-		CONFIGURATION::$FALLBACK = $this->config[CONFIGURATION::$FALLBACK];
-		*/
-
-		foreach ($this->config as $key => $setting) {
-
-			if (property_exists('CONFIGURATION', strtoupper($key))) {
-
-				CONFIGURATION::${strtoupper($key)} = $setting;
-			}
-			else {
-				error_log('Failed to initalize configuration property: ' . $key, 0);
+		 * CONFIGURATION::$ACTION = $this->config[CONFIGURATION::$ACTION];
+		 * CONFIGURATION::$OBJECT = $this->config[CONFIGURATION::$OBJECT];
+		 * CONFIGURATION::$IDENTI = $this->config[CONFIGURATION::$IDENTI];
+		 * CONFIGURATION::$METHOD = $this->config[CONFIGURATION::$METHOD];
+		 * CONFIGURATION::$PLUGINS = $this->config[CONFIGURATION::$PLUGINS];
+		 * CONFIGURATION::$FALLBACK = $this->config[CONFIGURATION::$FALLBACK];
+		 */
+		
+		foreach ( $this->config as $key => $setting ) {
+			
+			if (property_exists ( 'CONFIGURATION', strtoupper ( $key ) )) {
+				
+				CONFIGURATION::${strtoupper ( $key )} = $setting;
+			} else {
+				error_log ( 'Failed to initalize configuration property: ' . $key, 0 );
 			}
 		}
 		
-		if (!isset(CONFIGURATION::$EXTRA_CONF) && is_array(CONFIGURATION::$EXTRA_CONF)) {
-
-			foreach ($this->config[CONFIGURATION::$EXTRA_CONF] as $value) {
+		if (! isset ( CONFIGURATION::$EXTRA_CONF ) && is_array ( CONFIGURATION::$EXTRA_CONF )) {
+			
+			foreach ( $this->config [CONFIGURATION::$EXTRA_CONF] as $value ) {
 				
-				array_merge($this->config, $value);
+				array_merge ( $this->config, $value );
 			}
 		}
 	}
@@ -126,152 +131,153 @@ class crm implements IPlugin, IObservable {
 	 * Parses the available variables and fetches the appropriate action.
 	 */
 	function ParseVariables() {
-	
-		$object = crm::gGlobalParam(CONFIGURATION::$OBJECT);
-		$action = crm::gGlobalParam(CONFIGURATION::$ACTION);
-		$identi = crm::gGlobalParam(CONFIGURATION::$IDENTI);
-
+		
+		$object = crm::gGlobalParam ( CONFIGURATION::$OBJECT );
+		$action = crm::gGlobalParam ( CONFIGURATION::$ACTION );
+		$identi = crm::gGlobalParam ( CONFIGURATION::$IDENTI );
+		
 		echo $action . ": BEFORE\n";
-		echo MESSAGES::INDEX . ": BEFORE\n";	
-		$action = 
-			!isset($action) || is_null($action) || empty($action) ? MESSAGES::INDEX : $action;
+		echo MESSAGES::INDEX . ": BEFORE\n";
+		$action = ! isset ( $action ) || is_null ( $action ) || empty ( $action ) ? MESSAGES::INDEX : $action;
 		echo $action . ": AFTER\n";
 		echo MESSAGES::INDEX . ": AFTER\n";
 		
-		var_dump($this->observerlist);
-
-		$this->SendMessage($action, $object, $identi, true);
+		var_dump ( $this->observerlist );
+		
+		$this->SendMessage ( $action, $object, $identi, true );
 	}
 	
 	/*
 	 * Clean and set all the required variables (POST/GET).
 	 */
 	private function SetVariables() {
-		$this->get = array();
-		$this->post = array();
+		$this->get = array ();
+		$this->post = array ();
 		
-		foreach ($_GET as $key => $value) {
+		foreach ( $_GET as $key => $value ) {
 			
-			$this->get[crm::clean($key)] = crm::clean($value);
+			$this->get [crm::clean ( $key )] = crm::clean ( $value );
 		}
 		
-		foreach ($_POST as $key => $value) {
+		foreach ( $_POST as $key => $value ) {
 			
-			$this->get[crm::clean($key)] = crm::clean($value);
+			$this->get [crm::clean ( $key )] = crm::clean ( $value );
 		}
 	}
-
+	
 	/**
-	 * Recursively loads all the available plugins in the dir CONFIGURATION::PLUGIN_DIR
+	 * Recursively loads all the available plugins in the dir
+	 * CONFIGURATION::PLUGIN_DIR
+	 * 
 	 * @see CONFIGURATION::PLUGIN_DIR
 	 */
 	private function LoadPlugins() {
 		
-		
-		if (isset(CONFIGURATION::$PLUGINS) && is_array(CONFIGURATION::$PLUGINS)) {
-		
-			foreach (CONFIGURATION::$PLUGINS as $plugin) {
+		if (isset ( CONFIGURATION::$PLUGINS ) && is_array ( CONFIGURATION::$PLUGINS )) {
+			
+			foreach ( CONFIGURATION::$PLUGINS as $plugin ) {
 				try {
 					
 					$single_slash = <<<'EOT'
 \
 EOT;
+					
+					$class = CONFIGURATION::$PLUGIN_DIR . $single_slash . str_replace ( php, null, $plugin );
+					$instance = new $class ();
+					
+					if ($this->RegisterPlugin ( $instance, $plugin )) {
+						
+						$instance->Plugin ();
+					} 
 
-					$class = CONFIGURATION::$PLUGIN_DIR . $single_slash . str_replace(php, null, $plugin);
-					$instance = new $class();
-				
-					if ($this->RegisterPlugin($instance, $plugin)) {
-							
-						$instance->Plugin();
-					}
-				
 					else {
-							
-						unset($instance);
+						
+						unset ( $instance );
 					}
 				
-				} catch (Exception $e) {
+				} catch ( Exception $e ) {
 					continue;
 				}
 			}
 			
-			$this::log("Plugins finished loading", null);
+			$this::log ( "Plugins finished loading", null );
 		}
 	}
-
+	
 	/**
 	 * Registers a plugin.
+	 * 
 	 * @see interfaces.IPlugin
-	 * @param instance
+	 * @param
+	 *        	instance
 	 * @return True if successfull, otherwise (if not instance of IPlugin) false
 	 */
 	private function RegisterPlugin($instance, $name) {
 		if ($instance instanceof IPlugin) {
 			
-			$this->pluginlist[$name] = $instance;
+			$this->pluginlist [$name] = $instance;
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
-
+	
 	/**
 	 * Initializes all the loaded plugins.
 	 */
 	private function InitializePlugins() {
 		
-		foreach ($this->pluginlist as $instance) {
-			$instance->Initialize();
+		foreach ( $this->pluginlist as $instance ) {
+			$instance->Initialize ();
 		}
 	}
 	
 	/**
+	 *
 	 * @see interfaces.IObservable::SendMessage()
 	 */
 	function SendMessage($message, $object, $id, $from_public = false) {
-
-		if (array_key_exists($message, $this->observerlist)) {
+		
+		if (array_key_exists ( $message, $this->observerlist )) {
 			
-			foreach ($this->observerlist[$message] as $msg => $objects) {
-
-				foreach ($objects as $instance) {
+			foreach ( $this->observerlist [$message] as $msg => $instance ) {
 				
+				/**
+				 * An instance of IPlugin
+				 * 
+				 * @var IPlugin
+				 */
+				$instance = $instance; // TODO: Remove this line (it is only for
+				                       // ide-autocomplete/doc-support).
+				
+				if (($from_public && $instance->gVisibility () == PLUGIN_VISIBILITY::PU) || ! $from_public) {
+					
 					/**
-					 * An instance of IPlugin
-					 * @var IPlugin
+					 * The return type of the message handler.
+					 * 
+					 * @var MESSAGE_RETURN_TYPE
 					 */
-					$instance = $instance; //TODO: Remove this line (it is only for ide-autocomplete/doc-support).
-				
-					if (($from_public && $instance->gVisibility() == PLUGIN_VISIBILITY::PU) ||
-							!$from_public) {
-				
-						/**
-						 * The return type of the message handler.
-						 * @var MESSAGE_RETURN_TYPE
-						 */
-						$return = $instance->Callback($object, $id, $msg);
-							
-						switch ($return) {
-							case MESSAGE_RETURN_TYPE::NOT_PUBLIC:
-								break;
-							case MESSAGE_RETURN_TYPE::STOP_CHAIN:
-								break 2; //Stop the chain and return to calleé
-				
-							default:
-								continue;
-						}
+					$return = $instance->Callback ( $object, $id, $msg );
+					
+					switch ($return) {
+						case MESSAGE_RETURN_TYPE::NOT_PUBLIC :
+							break;
+						case MESSAGE_RETURN_TYPE::STOP_CHAIN :
+							break 2; // Stop the chain and return to calleé
+						
+						default :
+							continue;
 					}
-					else {
-						crm::log("Forbidden: " . $message);
-						$this->SendMessage(MESSAGES::ERROR_404, $message, $object);
-					}
+				} else {
+					crm::log ( "Forbidden: " . $message );
+					$this->SendMessage ( MESSAGES::ERROR_404, $message, $object );
 				}
 			}
 		}
 	}
 	
 	/**
+	 *
 	 * @see interfaces.IObservable::Register()
 	 * @return boolean True if the client is successfully registered.
 	 */
@@ -279,89 +285,93 @@ EOT;
 		
 		if ($client instanceof IObserver) {
 			
-			if (isset($this->observerlist[$msg]) && is_array($this->observerlist[$msg])) {
+			if (isset ( $this->observerlist [$msg] ) && is_array ( $this->observerlist [$msg] )) {
 				
-				$this->observerlist[$msg][] = $client;
+				$this->observerlist [$msg] [] = $client;
+				return true;
+			} else {
+				
+				$this->observerlist [$msg] = array ();
+				$this->observerlist [$msg] [] = $client;
 				return true;
 			}
-			else {
-				
-				$this->observerlist[$msg] = array();
-				$this->observerlist[$msg][] = $client;
-				return true;
-			}
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
 	
 	/**
+	 *
 	 * @see interfaces.IObservable::Unregister()
-	 * @return boolean The number of elements unregistered, or false if no elements of $client not an instance of IObserver.
+	 * @return boolean The number of elements unregistered, or false if no
+	 *         elements of $client not an instance of IObserver.
 	 */
 	public function Unregister($client) {
-		$deleted = 0;		
+		$deleted = 0;
 		
 		if ($client instanceof IObserver) {
-
-			foreach ($this->observerlist as $key => $value) {
+			
+			foreach ( $this->observerlist as $key => $value ) {
 				
 				if (($key instanceof IObserver) && $client === $key) {
 					
-					unset($this->observerlist[$key]);
-					$deleted++;
+					unset ( $this->observerlist [$key] );
+					$deleted ++;
 				}
 			}
 			
 			return $deleted;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
-
+	
 	/**
+	 *
 	 * @see interfaces.IPlugin::Plugin()
 	 */
-	function Plugin () {
+	function Plugin() {
 		crm::$current = $this;
-		$this->config = parse_ini_file(CONFIG_FILE);
-		$this->observerlist = array();
-		$this->pluginlist = array();;
+		$this->config = parse_ini_file ( CONFIG_FILE );
+		$this->observerlist = array ();
+		$this->pluginlist = array ();
+		;
 	}
 	
 	/**
+	 *
 	 * @see interfaces.IPlugin::Initialize()
 	 */
 	function Initialize() {
-		$this->SetVariables();
-		$this->ConfigureSettings();
-		$this->LoadPlugins();
-		$this->InitializePlugins();
-		$this->ParseVariables();
-		
+		$this->SetVariables ();
+		$this->ConfigureSettings ();
+		$this->LoadPlugins ();
+		$this->InitializePlugins ();
+		$this->ParseVariables ();
+	
 	}
-
+	
 	/**
-	 * Dynamically invokes a message whenever a method that doesn't exist is invoked.
-	 * @param string $name 
-	 * @param array $args 0: MESSAGE_ARG_TYPE::ON, 1: MESSAGE_ARG_TYPE::ID
+	 * Dynamically invokes a message whenever a method that doesn't exist is
+	 * invoked.
+	 * 
+	 * @param string $name        	
+	 * @param array $args
+	 *        	0: MESSAGE_ARG_TYPE::ON, 1: MESSAGE_ARG_TYPE::ID
 	 */
 	public static function __callStatic($name, $args) {
 		
-		$func = array();
+		$func = array ();
 		
-		if (method_exists('crm', $name)) {
+		if (method_exists ( 'crm', $name )) {
 			
-			$func[] = 'crm';
-			$func[] = $name;
+			$func [] = 'crm';
+			$func [] = $name;
 			
-			call_user_func($func);
-		}
-		else {
+			call_user_func ( $func );
+		} else {
 			
-			\crm::gInstance()->SendMessage($name, $args[MESSAGE_ARG_TYPE::ON], $args[MESSAGE_ARG_TYPE::ID]);
+			\crm::gInstance ()->SendMessage ( $name, $args [MESSAGE_ARG_TYPE::ON], $args [MESSAGE_ARG_TYPE::ID] );
 		}
 	}
 	
@@ -370,9 +380,9 @@ EOT;
 	 */
 	static function Start() {
 		
-		$_this = new crm();
-		$_this->Plugin();
-		$_this->Initialize();
+		$_this = new crm ();
+		$_this->Plugin ();
+		$_this->Initialize ();
 	}
 
 }
