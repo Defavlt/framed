@@ -34,7 +34,9 @@ class dep_test0 implements IObserver, IPlugin {
 	 * @see IPlugin::Initialize()
 	 *
 	 */
-	public function Initialize() {}
+	public function Initialize() {
+		\crm::Register($this, dep_test0::msg);
+	}
 	
 	/**
 	 *
