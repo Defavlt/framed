@@ -20,7 +20,7 @@ class test implements IObserver, IPlugin {
 	function Initialize() {
 		
 		\crm::gInstance()->Register($this, "test");
-		\crm::log("Loaded plugin test", null);
+		\crm::log("test", IPlugin);
 	}
 	function Plugin() {}
 	
