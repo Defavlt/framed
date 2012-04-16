@@ -260,11 +260,17 @@ EOT;
 						default :
 							continue;
 					}
-				} else {
-					crm::log ( "Forbidden: " . $message );
+				} else if ($from_public) {
+					crm::log ( "404: " . $message );
 					$this->SendMessage ( MESSAGES::ERROR_404, $message, $object );
 				}
+				else {
+					$this->SendMessage(MESSAGES::ERROR_404, null, null);
+				}
 			}
+		}
+		else {
+			$this->SendMessage(MESSAGES::ERROR_404, message, $object);
 		}
 	}
 	
