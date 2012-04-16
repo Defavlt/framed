@@ -28,7 +28,7 @@ class _404 implements IObserver, IPlugin {
 <p>404 Not Found: What you searched for was not found:</p>
 EOT;
 		
-		echo $output . $id . "/" . $on;
+		echo $output . $on . "/" . $id;
 	}
 	
 	/**
