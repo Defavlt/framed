@@ -45,13 +45,6 @@ final class CONFIGURATION {
 	static $ACTION = "action";
 	static $IDENTI = "identi";
 	
-	/**
-	 * The fallback message type to use 
-	 * (e.g. whenever something that doesn't exist is requested (404 etc.))
-	 * @var string
-	 */
-	static $FALLBACK = "fallback";
-	
 	static $LOGDIR = "logs";
 	static $STDOUT = "stdout";
 	static $LOGS = "stdout";
