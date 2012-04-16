@@ -191,6 +191,7 @@ EOT;
 					}
 				
 				} catch ( Exception $e ) {
+					echo $class . ": Exception\n";
 					continue;
 				}
 			}
@@ -209,7 +210,7 @@ EOT;
 	 */
 	private function RegisterPlugin($instance, $name) {
 		if ($instance instanceof IPlugin) {
-			
+			echo $class . ": Instance of IPlugin\n";
 			$this->pluginlist [$name] = $instance;
 			return true;
 		} else {
