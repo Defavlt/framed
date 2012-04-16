@@ -131,7 +131,7 @@ class crm implements IPlugin, IObservable {
 		$action = crm::gGlobalParam(CONFIGURATION::$ACTION);
 		$identi = crm::gGlobalParam(CONFIGURATION::$IDENTI);
 
-		$action = !isset($action) || is_null($action) || empty($action) ? "" : $action;
+		$action = !isset($action) || is_null($action) || empty($action) ? MESSAGES::INDEX : $action;
 
 		$this->SendMessage($action, $object, $identi, true);
 	}
