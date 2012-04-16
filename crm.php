@@ -239,7 +239,7 @@ EOT;
 						}
 						else {
 							crm::log("Forbidden: " . $message);
-							$this->SendMessage(MESSAGES::ERROR_404, $object, $message);
+							$this->SendMessage(MESSAGES::ERROR_404, $message, $object);
 						}
 					}
 				}
