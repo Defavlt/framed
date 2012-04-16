@@ -50,7 +50,6 @@ class index implements IPlugin, IObserver {
 	 */
 	public function Callback($on, $id, $msg) {
 		echo "index, default page.";
-		\crm::gInstance()->SendMessage(\MESSAGES::ERROR_404, "index", null);
 	}
 }
 
