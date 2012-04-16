@@ -63,7 +63,7 @@ class dep_test1 implements IObserver, IPlugin {
 	 *
 	 */
 	public function gVisibility() {
-		return PLUGIN_VISIBILITY::PR;
+		return PLUGIN_VISIBILITY::PU;
 	}
 }
 
