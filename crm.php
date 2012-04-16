@@ -127,9 +127,9 @@ class crm implements IPlugin, IObservable {
 	 */
 	function ParseVariables() {
 	
-		$object = crm::gConfig(CONFIGURATION::$OBJECT);
-		$action = crm::gConfig(CONFIGURATION::$ACTION);
-		$identi = crm::gConfig(CONFIGURATION::$IDENTI);
+		$object = crm::gGet(CONFIGURATION::$OBJECT);
+		$action = crm::gGet(CONFIGURATION::$ACTION);
+		$identi = crm::gGet(CONFIGURATION::$IDENTI);
 
 		$action = !isset($action) || is_null($action) || empty($action) ? "" : $action;
 
