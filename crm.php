@@ -126,8 +126,6 @@ class crm implements IPlugin, IObservable {
 				array_merge ( $this->config, $value );
 			}
 		}
-		
-		var_dump($this->config);
 	}
 	
 	/**
@@ -140,11 +138,6 @@ class crm implements IPlugin, IObservable {
 		$identi = crm::gGlobalParam ( CONFIGURATION::$IDENTI );
 
 		$action = ! isset ( $action ) || is_null ( $action ) || empty ( $action ) ? MESSAGES::INDEX : $action;
-		
-		echo "observerlist\n";
-		var_dump($this->observerlist);
-		echo "pluginlist\n";
-		var_dump($this->pluginlist);
 		
 		$this->SendMessage ( $action, $object, $identi, true );
 	}
