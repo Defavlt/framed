@@ -231,7 +231,8 @@ EOT;
 	 */
 	function SendMessage($message, $object, $id, $from_public = false) {
 		
-		echo "Trying message '" . $message . "' on object '" . $object . "' with id '" . $id . "\n";
+		echo "Trying message '" . $message . "' on object '" . $object . "' with id '" . $id . ". ";
+		echo "Key does" . (array_key_exists($message, $this->observerlist) ? " exist" : "n't exist.") . "\n";
 		
 		if (array_key_exists ( $message, $this->observerlist )) {
 			
