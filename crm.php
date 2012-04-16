@@ -114,7 +114,7 @@ class crm implements IPlugin, IObservable {
 				
 				CONFIGURATION::${strtoupper ( $key )} = $setting;
 			} else {
-				error_log ( 'Failed to initalize configuration property: ' . $key, 0 );
+				error_log ( '[' . __FILE__ . '] Failed to initalize configuration property: ' . $key, 0 );
 			}
 		}
 		
@@ -135,14 +135,8 @@ class crm implements IPlugin, IObservable {
 		$object = crm::gGlobalParam ( CONFIGURATION::$OBJECT );
 		$action = crm::gGlobalParam ( CONFIGURATION::$ACTION );
 		$identi = crm::gGlobalParam ( CONFIGURATION::$IDENTI );
-		
-		echo $action . ": BEFORE\n";
-		echo MESSAGES::INDEX . ": BEFORE\n";
+
 		$action = ! isset ( $action ) || is_null ( $action ) || empty ( $action ) ? MESSAGES::INDEX : $action;
-		echo $action . ": AFTER\n";
-		echo MESSAGES::INDEX . ": AFTER\n";
-		
-		var_dump ( $this->observerlist );
 		
 		$this->SendMessage ( $action, $object, $identi, true );
 	}
@@ -183,6 +177,7 @@ class crm implements IPlugin, IObservable {
 EOT;
 					
 					$class = CONFIGURATION::$PLUGIN_DIR . $single_slash . str_replace ( php, null, $plugin );
+					echo $class . '\n';
 					$instance = new $class ();
 					
 					if ($this->RegisterPlugin ( $instance, $plugin )) {
