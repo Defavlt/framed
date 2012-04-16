@@ -19,8 +19,6 @@ class logger implements IPlugin, IObserver {
 	}
 	
 	function Initialize() {
-		\crm::gInstance()->Register($this, \MESSAGES::ERROR);
-		\crm::gInstance()->Register($this, \MESSAGES::LOG);
 	}
 	function Plugin() {
 		$handle = fopen(BASE . \CONFIGURATION::$LOGDIR . DIRECTORY_SEPARATOR . \CONFIGURATION::$STDOUT, 'w') or die("Can't open logfile");
@@ -31,6 +29,9 @@ class logger implements IPlugin, IObserver {
 		else {
 			\crm::error(logger::FAILED_OPEN_DIR . BASE . \CONFIGURATION::$LOGDIR . DIRECTORY_SEPARATOR . \CONFIGURATION::$STDOUT, null);
 		}
+		
+		\crm::gInstance()->Register($this, \MESSAGES::ERROR);
+		\crm::gInstance()->Register($this, \MESSAGES::LOG);
 	}
 	
 	function Callback($on, $id, $msg) {
