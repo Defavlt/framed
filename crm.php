@@ -19,6 +19,25 @@ class crm implements IPlugin, IObservable {
 	private $get;
 	private $post;
 	
+	/**
+	 * Gets a config-value
+	 * @param string $param The key of the value
+	 */
+	public static function gConfig($param) {
+		
+		if (key_exists($param, crm::gInstance()->config)) {
+			
+			return crm::gInstance()->config[$param];
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Gets a value from any of the global variables (get/post)
+	 * @param string $param The key of the value
+	 */
 	public static function gGlobalParam($param) {
 		
 		if (key_exists($param, crm::gInstance()->get)) {
@@ -32,7 +51,7 @@ class crm implements IPlugin, IObservable {
 		
 		return null;
 	}
-	
+
 	/**
 	 * Gets the current instance object of crm.
 	 * @return crm
@@ -41,7 +60,7 @@ class crm implements IPlugin, IObservable {
 		
 		return crm::$current;
 	} 
-	
+
 	/**
 	 * Aggressively cleans the given value.
 	 * @param string $value
@@ -52,19 +71,23 @@ class crm implements IPlugin, IObservable {
 		return htmlspecialchars(strip_tags($value));
 	}
 	
+	/**
+	 * Gets a value from the global GET
+	 * @param string $key
+	 * @return mixed
+	 */
 	public function gGet($key) {
 		
 		return $this->$get[$key];
 	}
-	public function gConfig($key) {
-		
-		return $this->config[$key];
-	}
+	
+	/**
+	 * @see interfaces.IPlugin::gVisibility()
+	 */
 	public function gVisibility() {
 		return PLUGIN_VISIBILITY::PR;
 	}
-	
-	
+
 	/**
 	 * Set the appropriate (and available) settings in CONFIGURATION.
 	 */
