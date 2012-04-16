@@ -232,14 +232,6 @@ EOT;
 	 */
 	function SendMessage($message, $object, $id, $from_public = false) {
 		
-		
-		
-		
-		if (!array_key_exists($message, $this->observerlist)) {
-			echo $message . "\n";
-			
-		}
-		
 		if (array_key_exists ( $message, $this->observerlist )) {
 			
 			foreach ( $this->observerlist [$message] as $msg => $instance ) {
