@@ -2,6 +2,7 @@
 namespace plugins;
 
 use constants\PLUGIN_VISIBILITY;
+use constants\MESSAGES;
 use interfaces\IObserver;
 use interfaces\IPlugin;
 
