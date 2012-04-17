@@ -2,6 +2,7 @@
 namespace plugins;
 
 use constants\PLUGIN_VISIBILITY;
+use constants\MESSAGES;
 use interfaces\IObserver;
 use interfaces\IPlugin;
 
@@ -42,7 +43,7 @@ EOT;
 	 *
 	 */
 	public function Initialize() {
-		\crm::gInstance()->Register($this, \MESSAGES::ERROR_404);
+		\crm::gInstance()->Register($this, MESSAGES::ERROR_404);
 		\crm::log("_404", IPlugin);
 	}
 	
