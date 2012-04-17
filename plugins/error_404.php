@@ -31,9 +31,7 @@ class error_404 implements IObserver, IPlugin {
 <h1 style="color: red">404</h1>
 <p>404 Not Found: What you searched for was not found:</p>
 EOT;
-		echo "on: " . $on . "<br>";
-		echo "id: " . $id . "<br>";
-		echo "msg: " . $msg . "<br>";
+
 		echo $output . \CONFIGURATION::$BASE_URL . $on . "/" . $id;
 	}
 	
@@ -44,7 +42,7 @@ EOT;
 	 */
 	public function Initialize() {
 		\crm::gInstance()->Register($this, MESSAGES::ERROR_404);
-		\crm::log("_404", IPlugin);
+		\crm::log(MESSAGES::ERROR_404, IPlugin);
 	}
 	
 	/**
