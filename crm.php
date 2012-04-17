@@ -3,8 +3,12 @@
 use interfaces\IPlugin;
 use interfaces\IObservable;
 use interfaces\IObserver;
+
 use constants\PLUGIN_VISIBILITY;
 use constants\REGISTER_ARG_TYPE;
+use constants\MESSAGE_ARG_TYPE;
+use constants\MESSAGE_RETURN_TYPE;
+use constants\MESSAGES;
 
 /**
  *
@@ -19,7 +23,7 @@ class crm implements IPlugin, IObservable {
 	private $config;
 	private $get;
 	private $post;
-	
+
 	/**
 	 * Gets a config-value
 	 * 

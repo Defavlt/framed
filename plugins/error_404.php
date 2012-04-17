@@ -30,8 +30,10 @@ class error_404 implements IObserver, IPlugin {
 <h1 style="color: red">404</h1>
 <p>404 Not Found: What you searched for was not found:</p>
 EOT;
-		
-		echo $output . \crm::gConfig(\CONFIGURATION::$BASE_URL) . $on . "/" . $id;
+		echo "on: " . $on . "<br>";
+		echo "id: " . $id . "<br>";
+		echo "msg: " . $msg . "<br>";
+		echo $output . \CONFIGURATION::$BASE_URL . $on . "/" . $id;
 	}
 	
 	/**
