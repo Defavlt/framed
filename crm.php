@@ -266,19 +266,14 @@ EOT;
 					}
 				} else if ($from_public) {
 					crm::log ( "404: " . $message );
-					echo "ob: " . $object . "<br>";
-					echo "id: " . $id . "<br>";
-					echo "me: " . $message . "<br>";
 					$this->SendMessage ( MESSAGES::ERROR_404, $message, $object );
 				} else if (! $from_public) {
 					continue;
 				}
 			}
 		} else {
-			echo "ob: " . $object . "<br>";
-			echo "id: " . $id . "<br>";
-			echo "me: " . $message . "<br>";
-			$this->SendMessage ( MESSAGES::ERROR_404, message, $object );
+
+			$this->SendMessage ( MESSAGES::ERROR_404, $message, $object );
 		}
 	}
 	
