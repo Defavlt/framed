@@ -31,18 +31,18 @@ class logger implements IPlugin, IObserver {
 			\crm::error(logger::FAILED_OPEN_DIR . BASE . \CONFIGURATION::$LOGDIR . DIRECTORY_SEPARATOR . \CONFIGURATION::$STDOUT, null);
 		}
 		
-		\crm::gInstance()->Register($this, \MESSAGES::ERROR);
-		\crm::gInstance()->Register($this, \MESSAGES::LOG);
+		\crm::gInstance()->Register($this, MESSAGES::ERROR);
+		\crm::gInstance()->Register($this, MESSAGES::LOG);
 	}
 	
 	function Callback($on, $id, $msg) {
 		
 		switch ($msg) {
 			
-			case \MESSAGES::LOG:
+			case MESSAGES::LOG:
 				$this->log($on, $id);
 				break;
-			case \MESSAGES::ERROR:
+			case MESSAGES::ERROR:
 				$this->error_log($on);
 				break;
 			default:
