@@ -13,6 +13,7 @@ interface IObservable {
 	 * @param string $message
 	 * @param mixed $object
 	 * @param string $id
+	 * @return boolean false if no object is listening.
 	 */
 	function SendMessage($message, $object, $id, $from_public = false);
 	

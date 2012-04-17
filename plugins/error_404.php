@@ -7,7 +7,7 @@ use interfaces\IObserver;
 use interfaces\IPlugin;
 
 /**
- *
+ * Need module for 
  * @author marcus
  *        
  */

@@ -271,9 +271,11 @@ EOT;
 					continue;
 				}
 			}
-		} else {
+		} else if ($from_public) {
 
 			$this->SendMessage ( MESSAGES::ERROR_404, $message, $object );
+		} else {
+			return false;
 		}
 	}
 	

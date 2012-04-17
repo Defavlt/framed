@@ -7,7 +7,8 @@ use interfaces\IObserver;
 use interfaces\IPlugin;
 
 /**
- *
+ * Class needed for logging operations.
+ * To remove it (without breaking dependencies), *.ini-file.
  * @author marcus
  *        
  */
