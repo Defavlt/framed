@@ -23,10 +23,10 @@ class crm implements IPlugin, IObservable {
 	private $config;
 	private $get;
 	private $post;
-
+	
 	/**
 	 * Gets a config-value
-	 * 
+	 *
 	 * @param string $param
 	 *        	The key of the value
 	 */
@@ -42,7 +42,7 @@ class crm implements IPlugin, IObservable {
 	
 	/**
 	 * Gets a value from any of the global variables (get/post)
-	 * 
+	 *
 	 * @param string $param
 	 *        	The key of the value
 	 */
@@ -61,7 +61,7 @@ class crm implements IPlugin, IObservable {
 	
 	/**
 	 * Gets the current instance object of crm.
-	 * 
+	 *
 	 * @return crm
 	 */
 	public static function gInstance() {
@@ -71,7 +71,7 @@ class crm implements IPlugin, IObservable {
 	
 	/**
 	 * Aggressively cleans the given value.
-	 * 
+	 *
 	 * @param string $value        	
 	 * @return string
 	 */
@@ -82,7 +82,7 @@ class crm implements IPlugin, IObservable {
 	
 	/**
 	 * Gets a value from the global GET
-	 * 
+	 *
 	 * @param string $key        	
 	 * @return mixed
 	 */
@@ -140,7 +140,7 @@ class crm implements IPlugin, IObservable {
 		$object = crm::gGlobalParam ( CONFIGURATION::$OBJECT );
 		$action = crm::gGlobalParam ( CONFIGURATION::$ACTION );
 		$identi = crm::gGlobalParam ( CONFIGURATION::$IDENTI );
-
+		
 		$action = ! isset ( $action ) || is_null ( $action ) || empty ( $action ) ? MESSAGES::INDEX : $action;
 		
 		$this->SendMessage ( $action, $object, $identi, true );
@@ -167,7 +167,7 @@ class crm implements IPlugin, IObservable {
 	/**
 	 * Recursively loads all the available plugins in the dir
 	 * CONFIGURATION::PLUGIN_DIR
-	 * 
+	 *
 	 * @see CONFIGURATION::PLUGIN_DIR
 	 */
 	private function LoadPlugins() {
@@ -185,9 +185,9 @@ EOT;
 					$instance = new $class ();
 					
 					if ($this->RegisterPlugin ( $instance, $plugin )) {
-
+						
 						$instance->Plugin ();
-					}
+					} 
 
 					else {
 						
@@ -205,7 +205,7 @@ EOT;
 	
 	/**
 	 * Registers a plugin.
-	 * 
+	 *
 	 * @see interfaces.IPlugin
 	 * @param
 	 *        	instance
@@ -242,7 +242,7 @@ EOT;
 				
 				/**
 				 * An instance of IPlugin
-				 * 
+				 *
 				 * @var IPlugin
 				 */
 				$instance = $instance; // TODO: Remove this line (it is only for
@@ -252,7 +252,7 @@ EOT;
 					
 					/**
 					 * The return type of the message handler.
-					 * 
+					 *
 					 * @var MESSAGE_RETURN_TYPE
 					 */
 					$return = $instance->Callback ( $object, $id, $message );
@@ -266,15 +266,19 @@ EOT;
 					}
 				} else if ($from_public) {
 					crm::log ( "404: " . $message );
+					echo "ob: " . $object . "<br>";
+					echo "id: " . $id . "<br>";
+					echo "me: " . $message . "<br>";
 					$this->SendMessage ( MESSAGES::ERROR_404, $message, $object );
-				}
-				else if (!$from_public) {
+				} else if (! $from_public) {
 					continue;
 				}
 			}
-		}
-		else {
-			$this->SendMessage(MESSAGES::ERROR_404, message, $object);
+		} else {
+			echo "ob: " . $object . "<br>";
+			echo "id: " . $id . "<br>";
+			echo "me: " . $message . "<br>";
+			$this->SendMessage ( MESSAGES::ERROR_404, message, $object );
 		}
 	}
 	
@@ -285,11 +289,11 @@ EOT;
 	 */
 	function Register($client, $msg = null) {
 		
-		if ($msg == null && is_array($client)) {
+		if ($msg == null && is_array ( $client )) {
 			
-			$this->Register($client[REGISTER_ARG_TYPE::CLIENT], $client[REGISTER_ARG_TYPE::MSG]);
-		}
-		
+			$this->Register ( $client [REGISTER_ARG_TYPE::CLIENT], $client [REGISTER_ARG_TYPE::MSG] );
+		} 
+
 		else if ($client instanceof IObserver) {
 			
 			if (isset ( $this->observerlist [$msg] ) && is_array ( $this->observerlist [$msg] )) {
@@ -316,17 +320,16 @@ EOT;
 	public function Unregister($client, $msg) {
 		$deleted = 0;
 		
-		if(key_exists($msg, $this->observerlist)) {
+		if (key_exists ( $msg, $this->observerlist )) {
 			
-			$key = array_search($client, $this->observerlist[$msg]);
+			$key = array_search ( $client, $this->observerlist [$msg] );
 			
 			if ($key !== false) {
 				
-				unset($this->observerlist[$msg][$key]);
+				unset ( $this->observerlist [$msg] [$key] );
 				return true;
-				
-			}
-			else {
+			
+			} else {
 				return false;
 			}
 		}
@@ -360,17 +363,17 @@ EOT;
 	public function debug() {
 		
 		echo "Observerlist\n";
-		var_dump($this->observerlist);
+		var_dump ( $this->observerlist );
 		echo "\nPluginlist\n";
-		var_dump($this->pluginlist);
+		var_dump ( $this->pluginlist );
 		echo "\nConfigs\n";
-		var_dump($this->config);
+		var_dump ( $this->config );
 	}
 	
 	/**
 	 * Dynamically invokes a message whenever a method that doesn't exist is
 	 * invoked.
-	 * 
+	 *
 	 * @param string $name        	
 	 * @param array $args
 	 *        	0: MESSAGE_ARG_TYPE::ON, 1: MESSAGE_ARG_TYPE::ID
