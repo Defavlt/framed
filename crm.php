@@ -16,8 +16,8 @@ use constants\MESSAGES;
  *        
  */
 class crm implements IPlugin, IObservable {
+
 	private static $current;
-	
 	private $observerlist;
 	private $pluginlist;
 	private $config;
