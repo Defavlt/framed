@@ -13,6 +13,7 @@ use db\BaseDBObject;
  *        
  */
 class sql_dbcustomer_test extends BaseDBObject implements IPlugin, IObserver {
+	const msg = "dbcall";
 	
 	/**
 	 *
@@ -22,10 +23,10 @@ class sql_dbcustomer_test extends BaseDBObject implements IPlugin, IObserver {
 	public function Initialize() {
 		\crm::log("Trying event listener: dbcall");
 		
-		if (\crm::gInstance()->Register($this, "dbcall")) {
+		if (\crm::gInstance()->Register($this, self::msg)) {
 			
 			\crm::log("Event listener succeded");
-			\crm::log("dbcall", IPlugin);
+			\crm::log(self::msg, IPlugin);
 		}
 		else {
 			
