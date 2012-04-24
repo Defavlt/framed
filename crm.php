@@ -195,7 +195,7 @@ EOT;
 					if ($this->RegisterPlugin ( $instance, $plugin )) {
 						
 						$instance->Plugin ();
-					} 
+					}
 
 					else {
 						
@@ -206,6 +206,8 @@ EOT;
 					continue;
 				}
 			}
+			
+			var_dump($this->config);
 			
 			$this::log ( "Plugins finished loading", null );
 		}
