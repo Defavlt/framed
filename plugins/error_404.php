@@ -29,7 +29,7 @@ class error_404 implements IObserver, IPlugin {
 	//old, obj, new(404)
 		$output = <<<'EOT'
 <h1 style="color: red">404</h1>
-<p>404 Not Found: What you searched for was not found:</p>
+<p>What you searched for was not found:</p>
 EOT;
 
 		echo $output . \CONFIGURATION::$BASE_URL . $on . "/" . $id;
