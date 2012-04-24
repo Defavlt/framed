@@ -19,7 +19,7 @@ final class CONFIGURATION {
 	static $OBJECT = "object";
 	static $ACTION = "action";
 	static $IDENTI = "identi";
-	static $DBClassPrefix = "DBClassPrefix";
+	static $DBCLASSPREFIX = "DBClassPrefix";
 	
 	static $DB = "DB";
 	static $DB_HOST = "DB_HOST";

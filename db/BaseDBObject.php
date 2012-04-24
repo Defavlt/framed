@@ -98,7 +98,7 @@ abstract class BaseDBObject {
 		if (!isset($this->resource)) {
 			
 			$class = str_replace(
-					\CONFIGURATION::$DBClassPrefix, 
+					\CONFIGURATION::$DBCLASSPREFIX, 
 					null, 
 					get_class($this));
 
