@@ -207,7 +207,8 @@ EOT;
 				}
 			}
 			
-			var_dump($this->config);
+			var_dump($this->pluginlist);
+			var_dump($this->observerlist);
 			
 			$this::log ( "Plugins finished loading", null );
 		}
@@ -223,7 +224,6 @@ EOT;
 	 */
 	private function RegisterPlugin($instance, $name) {
 		if ($instance instanceof IPlugin) {
-			echo "BLE";
 			$this->pluginlist [$name] = $instance;
 			return true;
 		} else {
