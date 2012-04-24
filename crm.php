@@ -119,7 +119,11 @@ class crm implements IPlugin, IObservable {
 				
 				CONFIGURATION::${strtoupper ( $key )} = $setting;
 			} else {
-				error_log ( '[' . __FILE__ . '] Failed to initalize configuration property: ' . $key, 0 );
+				error_log ( 
+					'[' . __FILE__ . '] Failed to initalize configuration property \'' . 
+						$key .
+						'\', at line: ' . __LINE__
+					, 0 );
 			}
 		}
 		

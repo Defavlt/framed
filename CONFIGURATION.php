@@ -21,6 +21,12 @@ final class CONFIGURATION {
 	static $IDENTI = "identi";
 	static $DBClassprefix = "DB";
 	
+	static $DB = "DB";
+	static $DB_HOST = "DB_HOST";
+	static $DB_USER = "DB_USER";
+	static $DB_PASS = "DB_PASS";
+	static $DB_PORT = "DB_PORT";
+	
 	static $LOGDIR = "logs";
 	static $STDOUT = "stdout";
 	static $LOGS = "stdout";
