@@ -34,7 +34,6 @@ class logger implements IPlugin, IObserver {
 		
 		\crm::gInstance()->Register($this, MESSAGES::ERROR);
 		\crm::gInstance()->Register($this, MESSAGES::LOG);
-		\crm::log("New session");
 	}
 	
 	function Callback($on, $id, $msg) {
