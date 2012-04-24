@@ -23,7 +23,7 @@ class MSSQLFactory {
 		
 		try {
 			
-			if (is_null($port) || $port == "") {
+			if (is_null($port) || $port == "" || $port == "none") {
 				
 				$link = mssql_pconnect($host, $user, $pass);
 			}
