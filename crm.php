@@ -190,6 +190,7 @@ EOT;
 					
 					echo "Loading class " . $class . "\n";
 					$instance = new $class ();
+					echo "is instance: " . ($instance instanceof IPlugin) . "\n";
 					
 					if ($this->RegisterPlugin ( $instance, $plugin )) {
 						
