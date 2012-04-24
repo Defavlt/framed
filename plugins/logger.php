@@ -23,7 +23,7 @@ class logger implements IPlugin, IObserver {
 	function Initialize() {
 	}
 	function Plugin() {
-		$handle = fopen(BASE . \CONFIGURATION::$LOGDIR . DIRECTORY_SEPARATOR . \CONFIGURATION::$STDOUT, 'w') or die("Can't open logfile");
+		$handle = fopen(BASE . \CONFIGURATION::$LOGDIR . DIRECTORY_SEPARATOR . \CONFIGURATION::$STDOUT, 'a') or die("Can't open logfile");
 		
 		if ($handle !== false) {
 			$this->logfile = $handle;
