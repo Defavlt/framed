@@ -24,7 +24,8 @@ abstract class BaseDBObject {
 	const SELECT_ORDER = 0x02;
 	const SELECT_WHERE = 0x03;
 	const SELECT_DEF_AMOUNT = 0x20;
-	const SELECT_ORDER = "DESC";
+	const SELECT_ORDER_DESC = "DESC";
+	const SELECT_ORDER_ASC  = "ASC";
 	const SELECT_TEMPLATE = 'SELECT * FROM %1$s %2$s';
 	const SELECT_TOP_TEMPLATE = 'SELECT TOP(%1$s) * FROM %2$s %3$s';
 	const SELECT_WHERE_TEMPLATE = 'WHERE %1$s';
