@@ -194,6 +194,7 @@ EOT;
 					
 					if ($this->RegisterPlugin ( $instance, $plugin )) {
 						
+						echo "CLUUU";
 						$instance->Plugin ();
 					}
 
