@@ -223,6 +223,7 @@ EOT;
 	 */
 	private function RegisterPlugin($instance, $name) {
 		if ($instance instanceof IPlugin) {
+			echo "BLE";
 			$this->pluginlist [$name] = $instance;
 			return true;
 		} else {
