@@ -89,7 +89,7 @@ abstract class BaseDBObject {
 	 *  	ehco $customer->id;
 	 * }
 	 */
-	public function select(int $amount = -1) {
+	public function select($amount = -1) {
 		
 		$props = $this->getParamArray();
 		
