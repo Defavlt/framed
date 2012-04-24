@@ -9,11 +9,11 @@ namespace factories;
 class PDOFactory {
 
 	const _ms_driver	= 'odbc:Driver=FreeTDS;';
-	const _ms_host		= 'Server=%s';
-	const _ms_db		= 'Database=%s;';
-	const _ms_port		= 'Port=%s;';
-	const _ms_user		= 'UID=%s';
-	const _ms_pass		= 'PWD=%s;';
+	const _ms_host		= 'host=%s';
+	const _ms_db		= 'dbname=%s';
+	const _ms_port		= 'port=%s;';
+	const _ms_user		= ', %s';
+	const _ms_pass		= ', %s;';
 	
 	private static $pdo;
 

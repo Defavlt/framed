@@ -1,15 +1,29 @@
 <?php
 namespace db;
 
+use interfaces\IDBExtendable;
+
 /**
  *
  * @author marcus
  *        
  */
-class DBCustomer {
+class DBCustomer extends BaseDBObject implements IDBExtendable {
 	
-	const query = "";
-	const customer = "";
+	public $id;
+	public $fname;
+	public $lname;
+	public $addr;
+	public $owner;
+	
+	private $query;
+	
+	public function getQuery() {
+		
+		return $this->query;
+	}
+	
+	
 }
 
 ?>

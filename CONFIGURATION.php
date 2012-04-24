@@ -3,44 +3,18 @@
 /** 
  * Contains application-critical configuration properties.
  * @author marcus
- * 
  */
+use exceptions\NoSuchValueException;
+
 final class CONFIGURATION {
 	const log = "log";
 	
 	static $EXTRA_CONF = "extra_conf";
-	
-	/**
-	 * The directory containing all the plugins for use.
-	 * @var string
-	 */
 	static $PLUGIN_DIR = "plugins";
-	
-	/**
-	 * The application directory.
-	 * CHANGE WITH CAUTION
-	 * @var string
-	 */
 	static $BASE_DIR = "base_dir";
-	
-	/**
-	 * The base (public) url of the application
-	 * @var string
-	 */
 	static $BASE_URL = "base_url";
-	
-	/**
-	 * The available actions the application can do.
-	 * @var string
-	 */
 	static $ACTIONS = "actions";
-	
-	/**
-	 * The plugins available for the application
-	 * @var string
-	 */
 	static $PLUGINS = "plugins";
-
 	static $METHOD = "method";
 	static $OBJECT = "object";
 	static $ACTION = "action";
@@ -49,6 +23,24 @@ final class CONFIGURATION {
 	static $LOGDIR = "logs";
 	static $STDOUT = "stdout";
 	static $LOGS = "stdout";
+	
+	//For added convenience.
+	public static function __callstatic($name, $args) {
+		$config = null;
+		
+		if (isset(self::$$name)) {
+			
+			return self::$$name;
+		}
+		else if (!is_null(($config = crm::gConfig($name)))) {
+			
+			return $config;
+		}
+		else {
+			
+			throw new NoSuchValueException();
+		}
+	}
 }
 
 ?>
