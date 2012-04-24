@@ -41,7 +41,8 @@ class sql_dbcustomer_test extends BaseDBObject implements IPlugin, IObserver {
 	 *
 	 */
 	public function Plugin() {
-		
+		echo $this instanceof IPlugin . "<br>";
+		echo $this instanceof BaseDBObject . "<br>";
 	}
 	
 	/**
