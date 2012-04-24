@@ -22,8 +22,17 @@ class sql_dbcustomer_test extends BaseDBObject implements IPlugin, IObserver {
 	 *
 	 */
 	public function Initialize() {
-		\crm::gInstance()->Register($this, "dbcall");
-		\crm::log("dbcall", IPlugin);
+		\crm::log("Trying event listener: dbcall");
+		
+		if (\crm::gInstance()->Register($this, "dbcall")) {
+			
+			\crm::log("Event listener succeded");
+			\crm::log("dbcall", IPlugin);
+		}
+		else {
+			
+			\crm::log("Event listener failed.");
+		}
 	}
 	
 	/**

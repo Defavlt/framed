@@ -249,7 +249,7 @@ EOT;
 				 *
 				 * @var IPlugin
 				 */
-				$instance = $instance; // TODO: Remove this line (it is only for
+				//$instance = $instance; // TODO: Remove this line (it is only for
 				                       // ide-autocomplete/doc-support).
 				
 				if (($from_public && $instance->gVisibility () == PLUGIN_VISIBILITY::PU) || ! $from_public) {
