@@ -193,8 +193,7 @@ EOT;
 					echo "is instance: " . ($instance instanceof IPlugin) . "\n";
 					
 					if ($this->RegisterPlugin ( $instance, $plugin )) {
-						
-						echo "CLUUU";
+
 						$instance->Plugin ();
 					}
 
@@ -204,6 +203,8 @@ EOT;
 					}
 				
 				} catch ( Exception $e ) {
+					var_dump($e);
+					die();
 					continue;
 				}
 			}
