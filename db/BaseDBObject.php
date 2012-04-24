@@ -43,21 +43,10 @@ abstract class BaseDBObject {
 	private $_lastresult;
 	
 	/**
-	 * @var \PDOStatement
-	 */
-	private $stmnt;
-	
-	/**
 	 * The mssql_query result resource
 	 * @var MS SQL Result resource
 	 */
 	private $resource;
-
-	function __set($name, $arg) {
-
-		$this->keyvaluetable[ self::PARAM_PREFIX . $name] = $arg;
-		//$this->stmnt->bindParam($prefix . $name, $arg);
-	}
 	
 	/**
 	 * Gets an array with the public params in $this.
@@ -70,79 +59,7 @@ abstract class BaseDBObject {
 		
 		return $props;
 	}
-	
-	/**
-	 * Executes the statement and prepares for fetching of resources.
-	 */
-	function execute() {
 
-		$this->stmnt->execute();
-	}
-
-	/**
-	 * Fetch the next row in the initialized statement.
-	 * @param constant int $fetch_style
-	 */
-	public function selectNext($fetch_style = NULL) {
-		
-		if (($row = $this->stmnt->fetch($fetch_style)) != null) {
-			$props = $this->getParamArray();
-			
-			foreach ($props as $key => $value) {
-				
-				$this->$$key = $row->$$key;
-			}
-			
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public function update() {
-		
-		throw new \Exception("Not implemented yet.");
-	}
-
-	public function insert() {
-		
-		$props = $this->getParamArray();
-		$name = get_class($this);
-		$params = null;
-		$pl_params = null;
-		$names = null;
-		
-		foreach ($props as $key => $value) {
-			
-			$params .= $key . ',';
-			$pl_params .= ':' . $key . ',';
-			$names .= $key;
-		}
-		
-		$params = substr($params, 0, -1) . " ";
-		$pl_params = substr($pl_params, 0, -1) . " ";
-		$query = sprintf(
-				self::INSERT_TEMPLATE,
-				$name,
-				$params,
-				$pl_params);
-		
-		$this->stmnt = PDOFactory::prepare($query);
-		
-		//No, this loop is *NOT* redundant.
-		//PDO::Prepare() must be invoked BEFORE bindParam
-		//(or, in other words: $this->stmnt must be populated) 
-		foreach ($props as $key => $value) {
-			
-			$this->stmnt->bindParam(':' . $key, $this->$$key);;
-		}
-		
-		$this->stmnt->execute();
-	}
-
-	/*-----------------------------*/
-	
 	/**
 	 * @param IDBExtandable $instance
 	 */
@@ -154,12 +71,24 @@ abstract class BaseDBObject {
 		}
 	}
 
-	public function __set($name, $arg) {
-
-		$this->keyvaluetable[$name] = $arg;
-	}
-
-	public function select(int $amount = -1, $option = null) {
+	/**
+	 * Executes a SELECT query based on the current instance of IDBExtandable.
+	 * @param int $amount The top amount of results to return.
+	 * @return boolean TRUE if the query resulted in a result 
+	 * (and subsequently the overlaying $this got populated), FALSE otherwise.
+	 * 
+	 * @example
+	 * class DBCustomer {
+	 *     public $name;
+	 *     public $id;
+	 * }
+	 * $customer = new $DBCustomer();
+	 * while($customer->select()) {
+	 * 		echo $customer->name;
+	 *  	ehco $customer->id;
+	 * }
+	 */
+	public function select(int $amount = -1) {
 		
 		$props = $this->getParamArray();
 		
@@ -168,7 +97,11 @@ abstract class BaseDBObject {
 		
 		if (!isset($this->resource)) {
 			
-			$class = get_class($this);
+			$class = str_replace(
+					\CONFIGURATION::$DBClassprefix, 
+					null, 
+					get_class($this));
+
 			$where = NULL;
 			
 			foreach ($props as $key => $value) {

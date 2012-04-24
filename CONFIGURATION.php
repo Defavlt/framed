@@ -19,6 +19,7 @@ final class CONFIGURATION {
 	static $OBJECT = "object";
 	static $ACTION = "action";
 	static $IDENTI = "identi";
+	static $DBClassprefix = "DB";
 	
 	static $LOGDIR = "logs";
 	static $STDOUT = "stdout";

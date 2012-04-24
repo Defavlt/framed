@@ -11,19 +11,8 @@ use interfaces\IDBExtendable;
 class DBCustomer extends BaseDBObject implements IDBExtendable {
 	
 	public $id;
-	public $fname;
-	public $lname;
-	public $addr;
-	public $owner;
-	
-	private $query;
-	
-	public function getQuery() {
-		
-		return $this->query;
-	}
-	
-	
+	public $name;
+
 }
 
 ?>
