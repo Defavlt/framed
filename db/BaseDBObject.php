@@ -65,8 +65,8 @@ abstract class BaseDBObject {
 	 * @param IDBExtandable $instance
 	 */
 	function __construct() {
-		var_dump($this);
-		if (!$this instanceof IDBExtendable) {
+
+		if (!($this instanceof \interfaces\IDBExtendable)) {
 	
 			throw new NotInstanceOfException(IDBExtendable);
 		}
