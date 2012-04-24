@@ -2,9 +2,7 @@
 namespace plugins;
 
 use db\DBCustomer;
-
 use constants\PLUGIN_VISIBILITY;
-
 use interfaces\IPlugin;
 use interfaces\IObserver;
 use db\BaseDBObject;
