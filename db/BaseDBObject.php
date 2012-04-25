@@ -193,13 +193,15 @@ HTML;
 							$value :
 							"'"  . $value . "'";
 						
-					$where .= sprintf(
-							self::PARAM_CMP,
-							$key,
-							$cmp,
-							$value,
-							$option[self::OPTION_GROUPING]
-					);
+					if (isset($this->{$key}) || $this->{$key} != "") {
+						$where .= sprintf(
+								self::PARAM_CMP,
+								$key,
+								$cmp,
+								$value,
+								$option[self::OPTION_GROUPING]
+						);
+					}
 					
 					$params .= sprintf(
 							self::PARAM_GROUP,
