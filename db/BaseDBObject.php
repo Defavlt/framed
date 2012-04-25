@@ -186,7 +186,7 @@ HTML;
 					echo "prop (" . $key . "): " . $prop->getValue($this) . "<br>";
 					echo "actu (" . $key . "): " . $this->{$key} . "<br>";
 					
-					$value 	= $prop->getValue($this);
+					$value 	= $this->{$key};
 					$value 	= $cmp == self::OPTION_CMP_LIKE ?
 						"'%" . $value . "%'" :
 						is_numeric($value) ?
