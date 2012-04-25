@@ -28,16 +28,11 @@ abstract class BaseDBObject {
 	const OPTION_GROUPING_AND 	= "AND";
 	
 	const OPTION_ORDER 			= 0x30;
+	const OPTION_ORDER_ITEM		= 0x31;
 	const OPTION_ORDER_DESC 	= "DESC";
 	const OPTION_ORDER_ASC 		= "ASC";
 	
 	const OPTION_MAX_RESULTS 	= 0x40;
-
-	const OPTION_ORDER 			= 0x50;
-	const OPTION_ORDER_ITEM 	= 0x51;
-	const OPTION_ORDER_DIR  	= 0x52;
-	const OPTION_ORDER_DIR_DESC = "DESC";
-	const OPTION_ORDER_DIR_ASC  = "ASC";
 
 	const SELECT_TEMPLATE = 'SELECT TOP(%1$s) %2$s FROM %3$s %4$s %5$s';
 
@@ -159,13 +154,13 @@ HTML;
 		
 		if (isset($option[self::OPTION_ORDER_ITEM])) {
 			
-			$option[self::OPTION_ORDER_DIR] = isset($option[self::OPTION_ORDER_DIR]) ?
-				$option[self::OPTION_ORDER_DIR] :
+			$option[self::OPTION_ORDER] = isset($option[self::OPTION_ORDER]) ?
+				$option[self::OPTION_ORDER] :
 				self::OPTION_ORDER_DESC;
 				
 			$order  = "ORDER BY ";
 			$order .= $option[self::OPTION_ORDER_ITEM] . " ";
-			$order .= $option[self::OPTION_ORDER_DIR];
+			$order .= $option[self::OPTION_ORDER];
 		}
 		
 		// Initialize Options
