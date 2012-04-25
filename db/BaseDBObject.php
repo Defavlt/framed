@@ -132,6 +132,7 @@ abstract class BaseDBObject {
 			
 			var_dump($props);
 			var_dump($class);
+			var_dump($table);
 			
 			foreach ($props as $value) {
 				
