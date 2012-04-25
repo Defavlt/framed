@@ -181,6 +181,8 @@ HTML;
 			$result = mssql_fetch_assoc($this->resource);
 			$this->_lastresult = $result;
 			
+			var_dump($result);
+			die();
 			foreach ($result as $key => $value) {
 				
 				$this->$key = $value;
