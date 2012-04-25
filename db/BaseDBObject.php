@@ -109,7 +109,7 @@ abstract class BaseDBObject {
 		unset($props["fields"]);
 		unset($props["rows"]);
 		
-		if (!isset($this->resource)) {
+		if (!isset($this->resource) || $this->resource == null) {
 			echo "IS NOT SET";
 			$class = str_replace(
 					\CONFIGURATION::$DBCLASSPREFIX, 
