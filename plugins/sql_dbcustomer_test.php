@@ -60,6 +60,13 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 	 */
 	public function Callback($on, $id, $msg) {
 		
+		/**
+		 * @var DBCustomer
+		 */
+		$customer = new DBCustomer();
+		$top = \crm::gGlobalParam("top");
+		$option = array();
+		
 		echo <<<HTML
 <form name="customerform" action="index.php" method="get">
 	<select name="o">
@@ -70,17 +77,11 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 	
 	<input type="hidden" name="a" value="dbcall"/>
 	<input name="i" type="text" placeholder="search" value="$id" />
-	<input type="text" name="top" placeholder="top" maxlength="3" style="width:30px;" />
+	<input type="text" name="top" placeholder="top" value="$top" maxlength="3" style="width:30px;" />
 	<input type="submit" />
 </form>
 		
 HTML;
-
-		/**
-		 * @var DBCustomer
-		 */
-		$customer = new DBCustomer();
-		$option = array();
 
 		if (property_exists($customer, $on)) {
 			
@@ -98,8 +99,7 @@ HTML;
 			
 			$option[$customer::OPTION_CMP] = $customer::OPTION_CMP_LIKE;
 		}
-		
-		$top = \crm::gGlobalParam("top");
+
 		if (!is_null($top)) {
 			
 			$option[$customer::OPTION_MAX_RESULTS] = $top;
