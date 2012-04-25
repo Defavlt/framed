@@ -206,7 +206,7 @@ HTML;
 			
 				if (isset($this->$$key) || property_exists($this, $key)) {
 
-					$this->$$key = $value;
+					$this->{$key} = $value;
 				}
 			}
 		}
