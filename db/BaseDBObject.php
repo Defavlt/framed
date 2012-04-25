@@ -39,7 +39,7 @@ abstract class BaseDBObject {
 	const INSERT_TEMPLATE = 'INSERT INTO %1$s(%2$s) VALUES(%3$s)';
 	const UPDATE_TEMPLATE = 'UPDATE %1$s SET %2$s WHERE %3$s';
 
-	const PARAM_GROUP = ' %1$s, ';
+	const PARAM_GROUP = ' %1$s,';
 	const PARAM_CMP = '%1$s %2$s %3$s %4$s ';
 	
 	const SELECT_GROUPING_TYPE_OR = "OR";
@@ -211,9 +211,19 @@ HTML;
 
 			var_dump(substr_compare($where, "WHERE", -strlen($where)));
 			
+			if ($this->endswith($where, "WHERE")) {
+				
+				$where = null;
+			}
+			else if ($this->endswith($where, $option[self::OPTION_GROUPING])) {
+				
+				$where = substr($where, 0, -strlen($option[self::OPTION_GROUPING]));
+			}
 
-			$where = substr($where, 0, -3) . " ";
-			$params = substr($params, 0, -2) . " ";
+			if ($this->endswith($params, ",")) {
+				
+				$params = substr($params, 0, -1) . " ";
+			}
 
 			$query = sprintf(
 				self::SELECT_TEMPLATE,
@@ -258,6 +268,11 @@ HTML;
 			return true;
 		}
 
+	}
+	
+	private function endswith($whole, $end)
+	{
+	    return (strpos($whole, $end, strlen($whole) - strlen($end)) !== false);
 	}
 	
 }
