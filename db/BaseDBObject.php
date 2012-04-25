@@ -58,6 +58,7 @@ HTML;
 		
 		$name = explode($single_slash, get_class($name));
 		var_dump($name);
+		var_dump(get_class($name));
 		return $name[0];
 	} 
 	
