@@ -182,6 +182,10 @@ HTML;
 					$key = $prop->name;
 
 					$cmp 	= $option[self::OPTION_CMP];
+					
+					echo "prop: " . $prop->getValue($this) . "<br>";
+					echo "actu (" . $key . "): " . $this->{$key} . "<br>";
+					
 					$value 	= $prop->getValue($this);
 					echo $key . " : " . $this->{$key};
 					$value 	= $cmp == self::OPTION_CMP_LIKE ?
