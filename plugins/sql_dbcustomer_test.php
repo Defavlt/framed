@@ -95,10 +95,7 @@ HTML;
 			
 		$option[$customer::OPTION_CMP] = $customer::OPTION_CMP_LIKE;
 
-		echo "top = " . $top . "<br>";
-		echo "top is set: " . (isset($top) && $top != "" ? "true<br><br>" : "false<br><br>");
-
-		if (isset($top)) {
+		if (isset($top) && $top != "") {
 			
 			$option[$customer::OPTION_MAX_RESULTS] = $top;
 		}
