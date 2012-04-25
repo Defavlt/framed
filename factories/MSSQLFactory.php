@@ -59,7 +59,7 @@ class MSSQLFactory {
 	/**
 	 * Prepares a new query for use by the connection.
 	 * @param string $query
-	 * @return MS SQL result resource
+	 * @return resource
 	 */
 	public static function prepare($query) {
 		
@@ -77,7 +77,8 @@ class MSSQLFactory {
 					);
 		}
 	
-		$result = mssql_query($query);
+		$result = mssql_query($query, self::$link);
+		var_dump($result);
 			
 		if ($result === FALSE) {
 				
