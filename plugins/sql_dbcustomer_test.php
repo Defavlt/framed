@@ -95,7 +95,7 @@ HTML;
 			
 		$option[$customer::OPTION_CMP] = $customer::OPTION_CMP_LIKE;
 
-		if (isset($top) && $top != "") {
+		if ($top != null && $top != "") {
 			
 			$option[$customer::OPTION_MAX_RESULTS] = $top;
 		}
