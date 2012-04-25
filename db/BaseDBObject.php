@@ -201,8 +201,6 @@ HTML;
 			return false;
 		}
 		else {
-			var_dump($result);
-			return true;
 
 			foreach ($result as $key => $value) {
 			
