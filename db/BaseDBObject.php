@@ -138,6 +138,11 @@ abstract class BaseDBObject {
 			
 			$where = substr($where, 0, (0 - strlen(self::$SELECT_GROUPING_TYPE)));
 			
+			$where = sprintf(
+					self::SELECT_WHERE_TEMPLATE,
+					$where
+					);
+			
 			if($amount > -1) {
 				
 				$query = sprintf(
