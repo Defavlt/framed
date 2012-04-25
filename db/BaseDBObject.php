@@ -50,7 +50,7 @@ abstract class BaseDBObject {
 	 */
 	private $resource;
 	
-	private static function name() {
+	private function name() {
 		
 		$name = array_slice(explode('\\', get_class($this)), -1);
 		return $name[0];
@@ -111,8 +111,10 @@ abstract class BaseDBObject {
 	 */
 	public function select($amount = -1, int $option = null) {
 		
+		var_dump($this);
+		var_dump($this->name());
 		$props = $this->getParamArray();
-		$class = self::name();
+		$class = $this->name();
 		
 		unset($props["fields"]);
 		unset($props["rows"]);
