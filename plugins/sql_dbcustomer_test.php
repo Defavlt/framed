@@ -75,7 +75,7 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 			$option[$customer::OPTION_CMP] = $customer::OPTION_CMP_EQ;
 		}
 		
-		while ($customer->select()) {
+		while ($customer->select($option)) {
 
 			echo $customer->id . " : ";
 			echo $customer->name . "<br>";
