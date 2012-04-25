@@ -113,7 +113,7 @@ abstract class BaseDBObject {
 
 		var_dump(self::name(get_class($this)));
 		$props = $this->getParamArray();
-		$class = self::name(get_class($this));
+		$class = get_class($this);
 		
 		unset($props["fields"]);
 		unset($props["rows"]);
@@ -123,7 +123,7 @@ abstract class BaseDBObject {
 			$table = strtolower(str_replace(
 					\CONFIGURATION::$DBCLASSPREFIX, 
 					null, 
-					$class));
+					self::name($class)));
 
 			$where = NULL;
 			$grouping = $option == self::SELECT_GROUPING_TYPE_AND ?
@@ -131,6 +131,7 @@ abstract class BaseDBObject {
 				self::SELECT_GROUPING_TYPE_OR;
 			
 			var_dump($props);
+			var_dump($class);
 			
 			foreach ($props as $value) {
 				
