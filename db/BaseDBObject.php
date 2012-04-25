@@ -50,9 +50,9 @@ abstract class BaseDBObject {
 	 */
 	private $resource;
 	
-	private function name() {
+	private static function name($name) {
 		
-		$name = array_slice(explode('\\', get_class($this)), -1);
+		$name = array_slice(explode('\\', get_class($name)), -1);
 		return $name[0];
 	} 
 	
@@ -110,16 +110,13 @@ abstract class BaseDBObject {
 	 * }
 	 */
 	public function select($amount = -1, int $option = null) {
-		
-		var_dump($this);
-		var_dump($this->name());
+
+		var_dump(self::name(get_class($this)));
 		$props = $this->getParamArray();
-		$class = $this->name();
+		$class = self::name(get_class($this));
 		
 		unset($props["fields"]);
 		unset($props["rows"]);
-		
-		var_dump($this->resource);
 		
 		if (!isset($this->resource) || $this->resource == null) {
 
@@ -177,6 +174,7 @@ abstract class BaseDBObject {
 			}
 			
 			var_dump($props);
+			var_dump($query);
 			$this->_query = $query;
 			$this->resource = MSSQLFactory::prepare($this->_query);
 			
