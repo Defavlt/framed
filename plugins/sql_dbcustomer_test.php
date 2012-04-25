@@ -64,7 +64,13 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 		 * @var DBCustomer
 		 */
 		$customer = new DBCustomer();
-		$customer->id = 43;
+		$option = array();
+		
+		if (property_exists(DBCustomer, $on)) {
+			
+			$customer->$$on = $id;
+			$option[$customer::OPTION_CMP] = $customer::OPTION_CMP_EQ;
+		}
 		
 		while ($customer->select()) {
 
