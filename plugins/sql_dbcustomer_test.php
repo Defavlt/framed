@@ -66,6 +66,7 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 		$customer = new DBCustomer();
 		$top = \crm::gGlobalParam("top");
 		$option = array();
+		$params = $customer->getParamArray();
 		
 		echo <<<HTML
 <form name="customerform" action="index.php" method="get">
