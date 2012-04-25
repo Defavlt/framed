@@ -174,31 +174,33 @@ HTML;
 			var_dump($query);
 			$this->_query = $query;
 			$this->resource = MSSQLFactory::prepare($this->_query);
+			$this->rows = mssql_num_rows($this->resource);
 			
-		}
-		
-		if (($this->rows = mssql_num_rows($this->resource) > 0)) {
-		
-			$this->fields = mssql_num_fields($this->resource);
-			$result = mssql_fetch_assoc($this->resource);
-			$this->_lastresult = $result;
-			
-			var_dump($result);
-			return true;
-			foreach ($result as $key => $value) {
+			if($this->rows < 1) {
 				
-				$this->$key = $value;
+				return false;
 			}
 			
-			return true;
-		
 		}
-		else {
+
+		$this->fields = mssql_num_fields($this->resource);
+		$result = mssql_fetch_assoc($this->resource);
+		$this->_lastresult = $result;
+		
+		if ($this->_lastresult === FALSE) {
 			
-			mssql_free_result($this->resource);
-			unset($this->resource);
 			return false;
 		}
+		else {
+			var_dump($result);
+			return true;
+
+			foreach ($result as $key => $value) {
+			
+				$this->$key = $value;
+			}
+		}
+
 	}
 	
 }
