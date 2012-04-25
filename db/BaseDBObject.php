@@ -249,10 +249,13 @@ HTML;
 		}
 		else {
 
+			echo "<br>BEFORE FOREACH<br>";
 			foreach ($result as $key => $value) {
 			
+				echo "INSIDE FOREACH BEFORE IF<br>";
 				if (isset($this->{$key}) || property_exists($this, $key)) {
 
+					echo "INSIDE FOREACH INSIDE IF<br>";
 					$this->{$key} = $value;
 				}
 			}
