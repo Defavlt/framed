@@ -74,6 +74,7 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 			$customer->$$on = $id;
 			echo $on . "<br>";
 			echo $id . "<br>";
+			echo $customer->$$on;
 			$option[$customer::OPTION_CMP] = $customer::OPTION_CMP_EQ;
 		}
 
