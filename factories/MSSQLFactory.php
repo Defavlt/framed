@@ -40,17 +40,17 @@ class MSSQLFactory {
 					
 				if (!$select_db) {
 				
-					die("Could not select db at " . \CONFIGURATION::$DB);
+					\crm::log("Could not select db at " . $db);
 				}
 				
 			}
 			else {
-				die("Could not connect to db at " . $db);
+				\crm::log("Could not select db at " . $db);
 			}
 			
 		} catch (\Exception $e) {
 			
-			die("Could not connect to db at " . $db);
+			\crm::log("Could not select db at " . $db);
 			
 		}
 		
@@ -92,7 +92,8 @@ class MSSQLFactory {
 			
 			if ($result === FALSE) {
 				
-				die("Error: " . $result);
+				\crm::error("Error. #1: Query: " . $query);
+				\crm::error("Error. #2: Result: " . $result);
 			}
 			
 			return $result;
