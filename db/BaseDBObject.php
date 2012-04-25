@@ -197,7 +197,7 @@ HTML;
 
 			foreach ($result as $key => $value) {
 			
-				if (property_exists($this, $$key)) {
+				if (isset($this->$$key) || property_exists($this, $key)) {
 
 					$this->$$key = $value;
 				}
