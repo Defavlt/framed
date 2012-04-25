@@ -211,7 +211,7 @@ HTML;
 
 			var_dump(substr_compare($where, "WHERE", -strlen($where)));
 			
-			if ($this->endswith($where, "WHERE")) {
+			if ($this->endswith($where, "WHERE ")) {
 				
 				$where = null;
 			}
@@ -225,7 +225,6 @@ HTML;
 				$params = substr($params, 0, -1) . " ";
 			}
 
-			echo $where;
 			$query = sprintf(
 				self::SELECT_TEMPLATE,
 				$option[self::OPTION_MAX_RESULTS],
