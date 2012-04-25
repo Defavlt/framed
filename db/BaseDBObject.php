@@ -57,7 +57,7 @@ abstract class BaseDBObject {
 HTML;
 		echo $single_slash . "\n";
 		var_dump($name);
-		$name = explode($single_slash, $name));
+		$name = explode($single_slash, $name);
 		echo "name() " . $name . "\n";
 		var_dump($name);
 		var_dump(get_class($name));
