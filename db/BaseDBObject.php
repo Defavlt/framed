@@ -127,6 +127,9 @@ abstract class BaseDBObject {
 					$class));
 
 			$where = NULL;
+			$grouping = $option == self::SELECT_GROUPING_TYPE_AND ?
+				self::SELECT_GROUPING_TYPE_AND :
+				self::SELECT_GROUPING_TYPE_OR;
 			
 			foreach ($props as $value) {
 				
@@ -137,9 +140,7 @@ abstract class BaseDBObject {
 							self::SELECT_LIKE_TEMPLATE,
 							$key,
 							isset($this->$$key) ? $value->getValue($this) : "",
-							$option == self::SELECT_GROUPING_TYPE_AND ? 
-								self::SELECT_GROUPING_TYPE_AND :
-								self::SELECT_GROUPING_TYPE_OR
+							$grouping
 					);
 				}
 				else {
@@ -148,7 +149,7 @@ abstract class BaseDBObject {
 				}
 			}
 			
-			$where = substr($where, 0, (0 - strlen(self::SELECT_GROUPING_TYPE)));
+			$where = substr($where, 0, (0 - strlen($grouping)));
 			
 			$where = sprintf(
 					self::SELECT_WHERE_TEMPLATE,
