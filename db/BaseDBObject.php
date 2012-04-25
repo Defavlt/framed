@@ -208,12 +208,17 @@ HTML;
 				}
 			}
 			
-			$pos = strrpos($where, $option[self::OPTION_GROUPING]);
-			$len = strlen($where);
-			$pos_len = ($len - strlen($option[self::OPTION_GROUPING]));
-			if ($pos !== FALSE && $pos == $len && !($pos_len < 0)) {
+			$len		= strlen("WHERE");
+			$pos 		= strrpos($where, "WHERE");
+			$bad_pos 	= strlen($where) - $len;
+
+			if ($pos == $bad_pos) {
 				
-				$where = substr($where, 0, -3) . " ";
+				$where = substr($where, 0, 0 - $len);
+			}
+			else {
+
+				$where = substr($where, 0, -3) . " ";;
 			}
 
 			$params = substr($params, 0, -2) . " ";
