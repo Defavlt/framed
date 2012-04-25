@@ -187,10 +187,7 @@ EOT;
 					
 					//$class = CONFIGURATION::$PLUGIN_DIR . $single_slash . str_replace ( php, null, $plugin );
 					$class = CONFIGURATION::$PLUGIN_DIR . $single_slash . $plugin;
-					
-					echo "Loading class " . $class . ". ";
 					$instance = new $class ();
-					echo "is instance: " . ($instance instanceof IPlugin) . "\n";
 					
 					if ($this->RegisterPlugin ( $instance, $plugin )) {
 
@@ -207,9 +204,6 @@ EOT;
 					continue;
 				}
 			}
-			
-			var_dump($this->pluginlist);
-			var_dump($this->observerlist);
 			
 			$this::log ( "Plugins finished loading", null );
 		}
