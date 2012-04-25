@@ -130,6 +130,8 @@ abstract class BaseDBObject {
 				self::SELECT_GROUPING_TYPE_AND :
 				self::SELECT_GROUPING_TYPE_OR;
 			
+			var_dump($props);
+			
 			foreach ($props as $value) {
 				
 				if ($value->class == $class) {
