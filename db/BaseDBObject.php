@@ -118,7 +118,6 @@ HTML;
 	 */
 	public function select($amount = -1, int $option = null) {
 
-		var_dump(self::name(get_class($this)));
 		$props = $this->getParamArray();
 		$class = get_class($this);
 		
@@ -135,17 +134,16 @@ HTML;
 				self::SELECT_GROUPING_TYPE_AND :
 				self::SELECT_GROUPING_TYPE_OR;
 			
-			var_dump($props);
+			/*var_dump($props);
 			var_dump($class);
 			var_dump($table);
 			var_dump($grouping);
 			var_dump(\CONFIGURATION::$DBCLASSPREFIX);
-			var_dump(str_replace(\CONFIGURATION::$DBCLASSPREFIX, null, $class));
+			var_dump(str_replace(\CONFIGURATION::$DBCLASSPREFIX, null, $class));*/
 			
 			foreach ($props as $value) {
 				
 				if ($value->class == $class) {
-					var_dump($key = $value->name);
 	
 					$where .= sprintf(
 							self::SELECT_LIKE_TEMPLATE,
@@ -184,8 +182,7 @@ HTML;
 						$where
 				);
 			}
-			
-			var_dump($props);
+
 			$this->_query = $query;
 			$this->resource = MSSQLFactory::prepare($this->_query);
 			
