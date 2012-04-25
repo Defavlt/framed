@@ -91,10 +91,14 @@ HTML;
 		else if ($on == "all") {
 			
 			$params = $customer->getParamArray();
-			var_dump($params);
+			
 			foreach ($params as $key => $value) {
-				echo $key . " : " . $value . "<br>";
-				$customer->{$key} = $value;
+				
+				$value = \crm::gGlobalParam($key);
+				if (!is_null($value)) {
+					
+					$customer->{$key} = $value;
+				}
 			}
 			
 			$option[$customer::OPTION_CMP] = $customer::OPTION_CMP_LIKE;
