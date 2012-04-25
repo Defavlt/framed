@@ -197,7 +197,7 @@ HTML;
 
 			foreach ($result as $key => $value) {
 			
-				$this->$key = $value;
+				$this->$$key = $value;
 			}
 		}
 
