@@ -210,8 +210,6 @@ HTML;
 				}
 			}
 			
-			var_dump($this);
-			
 			$where = substr($where, 0, -3) . " ";
 			$params = substr($params, 0, -2) . " ";
 
@@ -223,8 +221,6 @@ HTML;
 				$where,
 				$order
 			);
-			
-			var_dump($query);
 
 			$this->_query = $query;
 			$this->resource = MSSQLFactory::prepare($this->_query);
