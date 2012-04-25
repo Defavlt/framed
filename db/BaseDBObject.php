@@ -49,6 +49,11 @@ abstract class BaseDBObject {
 	 */
 	private $resource;
 	
+	private static function name() {
+		
+		return array_slice(explode('\\', get_class($this)), -1);
+	} 
+	
 	/**
 	 * Gets an array with the public params in $this.
 	 * @return Array
@@ -105,6 +110,7 @@ abstract class BaseDBObject {
 	public function select($amount = -1, int $option = null) {
 		
 		$props = $this->getParamArray();
+		$class = self::name();
 		
 		unset($props["fields"]);
 		unset($props["rows"]);
@@ -113,10 +119,10 @@ abstract class BaseDBObject {
 		
 		if (!isset($this->resource) || $this->resource == null) {
 
-			$class = strtolower(str_replace(
+			$table = strtolower(str_replace(
 					\CONFIGURATION::$DBCLASSPREFIX, 
 					null, 
-					get_class($this)));
+					$class));
 
 			$where = NULL;
 			
@@ -125,7 +131,7 @@ abstract class BaseDBObject {
 				$where .= sprintf(
 						self::SELECT_LIKE_TEMPLATE,
 						$key,
-						$value,
+						isset($this->$$key) ? $value : "",
 						self::$SELECT_GROUPING_TYPE
 				);
 			}
@@ -137,7 +143,7 @@ abstract class BaseDBObject {
 				$query = sprintf(
 						self::SELECT_TOP_TEMPLATE,
 						$amount,
-						$class,
+						$table,
 						$where
 				);
 			}
@@ -145,7 +151,7 @@ abstract class BaseDBObject {
 				
 				$query = sprintf(
 						self::SELECT_TEMPLATE,
-						$class,
+						$table,
 						$where
 				);
 			}
