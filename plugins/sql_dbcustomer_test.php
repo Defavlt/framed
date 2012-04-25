@@ -66,6 +66,9 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 		$customer = new DBCustomer();
 		$option = array();
 		
+		var_dump($on);
+		var_dump($id);
+		
 		if (property_exists(DBCustomer, $on)) {
 			
 			$customer->$$on = $id;
