@@ -125,6 +125,8 @@ HTML;
 		unset($props["fields"]);
 		unset($props["rows"]);
 		
+		var_dump($this->resource);
+		
 		if (!isset($this->resource) || $this->resource == null) {
 
 			$where = NULL;
