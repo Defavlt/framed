@@ -26,6 +26,7 @@ final class CONFIGURATION {
 	static $DB_USER = "DB_USER";
 	static $DB_PASS = "DB_PASS";
 	static $DB_PORT = "DB_PORT";
+	static $DB_MAX_RESULTS = "DB_MAX_RESULTS";
 	
 	static $LOGDIR = "logs";
 	static $STDOUT = "stdout";
