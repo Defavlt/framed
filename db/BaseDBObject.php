@@ -64,7 +64,7 @@ abstract class BaseDBObject {
 	/**
 	 * @param IDBExtandable $instance
 	 */
-	function __construct($params) {
+	function __construct(array $params= null) {
 
 		if (!($this instanceof \interfaces\IDBExtendable)) {
 	
@@ -73,8 +73,14 @@ abstract class BaseDBObject {
 		else {
 			
 			if (is_array($params)) {
-				
-				
+
+				foreach ($params as $key => $value) {
+					
+					if (isset($this->$$key)) {
+						
+						$this->$$key = $value;
+					}
+				}
 			}
 		}
 	}
