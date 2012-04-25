@@ -217,6 +217,8 @@ HTML;
 				$where,
 				$order
 			);
+			
+			var_dump($query);
 
 			$this->_query = $query;
 			$this->resource = MSSQLFactory::prepare($this->_query);
