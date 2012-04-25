@@ -19,31 +19,33 @@ use \PDO;
  *        
  */
 abstract class BaseDBObject {
-	const OPTION_CMP = 0x1;
-	const OPTION_CMP_EQ = "=";
-	const OPTION_CMP_LIKE = "LIKE";
+	const OPTION_CMP 			= 0x10;
+	const OPTION_CMP_EQ 		= "=";
+	const OPTION_CMP_LIKE 		= "LIKE";
 
-	const OPTION_GROUPING = 0x2;
-	const OPTION_GROUPING_OR = "OR";
-	const OPTION_GROUPING_AND = "AND";
+	const OPTION_GROUPING 		= 0x20;
+	const OPTION_GROUPING_OR 	= "OR";
+	const OPTION_GROUPING_AND 	= "AND";
 	
-	const OPTION_ORDER = 0x3;
-	const OPTION_ORDER_DESC = "DESC";
-	const OPTION_ORDER_ASC = "ASC";
+	const OPTION_ORDER 			= 0x30;
+	const OPTION_ORDER_DESC 	= "DESC";
+	const OPTION_ORDER_ASC 		= "ASC";
 	
-	const OPTION_MAX_RESULTS = 0x4;
+	const OPTION_MAX_RESULTS 	= 0x40;
 
-	const SELECT_ORDER_DESC = "DESC";
-	const SELECT_ORDER_ASC  = "ASC";
-	const SELECT_TEMPLATE = 'SELECT %3$s FROM %1$s %2$s';
-	const SELECT_TOP_TEMPLATE = 'SELECT TOP(%1$s) %4$s FROM %2$s %3$s';
-	const SELECT_WHERE_TEMPLATE = ' WHERE %1$s';
-	const SELECT_ORDER_TEMPLATE = ' ORDER BY %1$s %2$s';
-	const SELECT_LIKE_TEMPLATE = '%1$s LIKE %2$s %3$s ';
-	const SELECT_EQ_TEMPLATE = '%1$s = %2$s %3$s ';
+	const OPTION_ORDER 			= 0x50;
+	const OPTION_ORDER_ITEM 	= 0x51;
+	const OPTION_ORDER_DIR  	= 0x52;
+	const OPTION_ORDER_DIR_DESC = "DESC";
+	const OPTION_ORDER_DIR_ASC  = "ASC";
+
+	const SELECT_TEMPLATE = 'SELECT TOP(%1$s) %2$s FROM %3$s %4$s %5$s';
+
 	const INSERT_TEMPLATE = 'INSERT INTO %1$s(%2$s) VALUES(%3$s)';
 	const UPDATE_TEMPLATE = 'UPDATE %1$s SET %2$s WHERE %3$s';
+
 	const PARAM_GROUP = ' %1$s, ';
+	const PARAM_CMP = '%1$s %2$s %3$s';
 	
 	const SELECT_GROUPING_TYPE_OR = "OR";
 	const SELECT_GROUPING_TYPE_AND = "AND";
@@ -129,10 +131,11 @@ HTML;
 	 *  	ehco $customer->id;
 	 * }
 	 */
-	public function select(array $option = null, $amount = -1) {
+	public function select(array $option = null) {
 
 		$props = $this->getParamArray();
 		$class = get_class($this);
+		$order = null;
 		
 		$option = is_array($option) ?
 			$option :
@@ -154,6 +157,17 @@ HTML;
 					\CONFIGURATION::$DB_MAX_RESULTS :
 					self::OPTION_MAX_RESULTS;
 		
+		if (isset($option[self::OPTION_ORDER_ITEM])) {
+			
+			$option[self::OPTION_ORDER_DIR] = isset($option[self::OPTION_ORDER_DIR]) ?
+				$option[self::OPTION_ORDER_DIR] :
+				self::OPTION_ORDER_DESC;
+				
+			$order  = "ORDER BY ";
+			$order .= $option[self::OPTION_ORDER_ITEM] . " ";
+			$order .= $option[self::OPTION_ORDER_DIR];
+		}
+		
 		// Initialize Options
 		//
 		
@@ -162,38 +176,34 @@ HTML;
 		
 		if (!isset($this->resource) || $this->resource == null) {
 
-			$where 	= NULL;
+			$where 	= "WHERE ";
 			$params = NULL;
 			$table 	= str_replace(\CONFIGURATION::$DBCLASSPREFIX, null, self::name($class));
 			$table 	= strtolower($table);
 			
-			foreach ($props as $value) {
+			foreach ($props as $prop) {
 				
-				if ($value->class == $class) {
-					$key = $value->name;
-	
-					if (isset($this->$$key)) {
+				if ($prop->class == $class) {
+					$key = $prop->name;
+
+					$cmp = $option[self::OPTION_CMP];
+					$value = isset($this->$$key) ? $prop->getValue($this) : "";
+					$value = $cmp == self::OPTION_CMP_LIKE ?
+						"'%" . $value . "%'" :
+						"'"  . $value . "'";
 						
-						$where .= sprintf(
-								self::SELECT_EQ_TEMPLATE,
-								$key,
-								(isset($this->$$key) ? $value->getValue($this) : ""),
-								$option[self::OPTION_GROUPING]
-								);
-					}
-					else {
-						$where .= sprintf(
-							self::SELECT_LIKE_TEMPLATE,
+					$where .= sprintf(
+							self::PARAM_CMP,
 							$key,
-							"'%" . (isset($this->$$key) ? $value->getValue($this) : "") . "%'",
+							$cmp,
+							$value,
 							$option[self::OPTION_GROUPING]
-						);
-					}
+					);
 					
 					$params .= sprintf(
 							self::PARAM_GROUP,
 							$key
-							);
+					);
 				}
 				else {
 					
@@ -201,22 +211,16 @@ HTML;
 				}
 			}
 			
-			$where = substr($where, 0, -3);
+			$where = substr($where, 0, -3) . " ";
 			$params = substr($params, 0, -2) . " ";
-			
-			$where = sprintf(
-					self::SELECT_WHERE_TEMPLATE,
-					$where
-			);
 
 			$query = sprintf(
-				self::SELECT_TOP_TEMPLATE,
-				$amount == -1 ? 
-					\CONFIGURATION::$DB_MAX_RESULTS : 
-					$amount,
+				self::SELECT_TEMPLATE,
+				$option[self::OPTION_MAX_RESULTS],
+				$params,
 				$table,
 				$where,
-				$params
+				$order
 			);
 
 			$this->_query = $query;
