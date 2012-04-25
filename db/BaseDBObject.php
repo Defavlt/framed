@@ -158,27 +158,18 @@ HTML;
 			$where = sprintf(
 					self::SELECT_WHERE_TEMPLATE,
 					$where
-					);
-			
-			if($amount > -1) {
-				
-				$query = sprintf(
-						self::SELECT_TOP_TEMPLATE,
-						$amount == -1 ? 
-							\CONFIGURATION::$DB_MAX_RESULTS : $amount,
-						$table,
-						$where
-				);
-			}
-			else {
-				
-				$query = sprintf(
-						self::SELECT_TEMPLATE,
-						$table,
-						$where
-				);
-			}
+			);
 
+			$query = sprintf(
+				self::SELECT_TOP_TEMPLATE,
+				$amount == -1 ? 
+					\CONFIGURATION::$DB_MAX_RESULTS : 
+					$amount,
+				$table,
+				$where
+			);
+
+			var_dump($query);
 			$this->_query = $query;
 			$this->resource = MSSQLFactory::prepare($this->_query);
 			
