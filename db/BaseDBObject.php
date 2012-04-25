@@ -137,7 +137,7 @@ abstract class BaseDBObject {
 							self::SELECT_LIKE_TEMPLATE,
 							$key,
 							isset($this->$$key) ? $value->getValue($this) : "",
-							self::$SELECT_GROUPING_TYPE
+							self::SELECT_GROUPING_TYPE
 					);
 				}
 				else {
@@ -146,7 +146,7 @@ abstract class BaseDBObject {
 				}
 			}
 			
-			$where = substr($where, 0, (0 - strlen(self::$SELECT_GROUPING_TYPE)));
+			$where = substr($where, 0, (0 - strlen(self::SELECT_GROUPING_TYPE)));
 			
 			$where = sprintf(
 					self::SELECT_WHERE_TEMPLATE,
