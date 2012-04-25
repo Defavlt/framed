@@ -39,10 +39,7 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 	 * @see IPlugin::Plugin()
 	 *
 	 */
-	public function Plugin() {
-		echo $this instanceof IPlugin . "<br>";
-		echo $this instanceof BaseDBObject . "<br>";
-	}
+	public function Plugin() {}
 	
 	/**
 	 *
