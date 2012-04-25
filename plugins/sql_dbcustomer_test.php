@@ -93,7 +93,7 @@ HTML;
 		}
 			
 		$option[$customer::OPTION_CMP] = $customer::OPTION_CMP_LIKE;
-		echo "<br>top = " . $top . "<br>";
+		echo "top = " . $top . "<br>";
 
 		if (!is_null($top)) {
 			
