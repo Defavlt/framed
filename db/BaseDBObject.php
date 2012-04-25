@@ -137,7 +137,9 @@ abstract class BaseDBObject {
 							self::SELECT_LIKE_TEMPLATE,
 							$key,
 							isset($this->$$key) ? $value->getValue($this) : "",
-							self::SELECT_GROUPING_TYPE
+							$option == self::SELECT_GROUPING_TYPE_AND ? 
+								self::SELECT_GROUPING_TYPE_AND :
+								self::SELECT_GROUPING_TYPE_OR
 					);
 				}
 				else {
