@@ -189,7 +189,7 @@ HTML;
 					$value 	= $prop->getValue($this);
 					$value 	= $cmp == self::OPTION_CMP_LIKE ?
 						"'%" . $value . "%'" :
-						gettype($value) == "integer" ?
+						is_numeric($value) ?
 							$value :
 							"'"  . $value . "'";
 						
