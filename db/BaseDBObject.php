@@ -183,7 +183,7 @@ HTML;
 
 					$cmp 	= $option[self::OPTION_CMP];
 					
-					echo "prop: " . $prop->getValue($this) . "<br>";
+					echo "prop (" . $key . "): " . $prop->getValue($this) . "<br>";
 					echo "actu (" . $key . "): " . $this->{$key} . "<br>";
 					
 					$value 	= $prop->getValue($this);
