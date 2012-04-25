@@ -175,13 +175,13 @@ HTML;
 			$params = NULL;
 			$table 	= str_replace(\CONFIGURATION::$DBCLASSPREFIX, null, self::name($class));
 			$table 	= strtolower($table);
+			$cmp 	= $option[self::OPTION_CMP];
 			
 			foreach ($props as $prop) {
 				
 				if ($prop->class == $class) {
 					$key = $prop->name;
 
-					$cmp 	= $option[self::OPTION_CMP];
 					$value 	= $this->{$key};
 					$value 	= $cmp == self::OPTION_CMP_EQ ?
 						"'"  . $value . "'" :

@@ -93,7 +93,7 @@ HTML;
 			$params = $customer->getParamArray();
 			
 			foreach ($params as $key => $value) {
-				
+				echo $key . " : " . $value . "<br>";
 				$customer->{$key} = $value;
 			}
 			
