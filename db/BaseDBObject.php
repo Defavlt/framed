@@ -225,6 +225,7 @@ HTML;
 				$params = substr($params, 0, -1) . " ";
 			}
 
+			echo $where;
 			$query = sprintf(
 				self::SELECT_TEMPLATE,
 				$option[self::OPTION_MAX_RESULTS],
