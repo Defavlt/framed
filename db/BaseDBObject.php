@@ -130,14 +130,20 @@ abstract class BaseDBObject {
 			
 			foreach ($props as $value) {
 				
-				$key = $value->name;
-
-				$where .= sprintf(
-						self::SELECT_LIKE_TEMPLATE,
-						$key,
-						isset($this->$$key) ? $value->getValue($this) : "",
-						self::$SELECT_GROUPING_TYPE
-				);
+				if ($value->class == $class) {
+					$key = $value->name;
+	
+					$where .= sprintf(
+							self::SELECT_LIKE_TEMPLATE,
+							$key,
+							isset($this->$$key) ? $value->getValue($this) : "",
+							self::$SELECT_GROUPING_TYPE
+					);
+				}
+				else {
+					
+					continue;
+				}
 			}
 			
 			$where = substr($where, 0, (0 - strlen(self::$SELECT_GROUPING_TYPE)));
