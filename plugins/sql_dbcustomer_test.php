@@ -100,6 +100,7 @@ HTML;
 			$option[$customer::OPTION_MAX_RESULTS] = $top;
 		}
 
+		echo $option[$customer::OPTION_MAX_RESULTS];
 		while ($customer->select($option)) {
 
 			echo $customer->id . " : ";

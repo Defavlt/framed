@@ -2,16 +2,12 @@
 namespace db;
 
 use factories\MSSQLFactory;
-
 use interfaces\IDBExtendable;
-
-use factories\PDOFactory;
 use interfaces\IManagedDBObject;
 use exceptions\NoSuchValueException;
 use exceptions\CannotBindComplexTypes;
 use exceptions\ParamBindFailException;
 use exceptions\NotInstanceOfException;
-use \PDO;
 
 /**
  * The base of every managed DB-object.
@@ -132,40 +128,6 @@ HTML;
 		$class = get_class($this);
 		$order = null;
 		
-		$option = is_array($option) ?
-			$option :
-			array();
-		
-		//
-		// Initialize Options
-		$option[self::OPTION_CMP] = isset($option[self::OPTION_CMP]) ?
-			$option[self::OPTION_CMP] :
-			self::OPTION_CMP_LIKE;
-		
-		$option[self::OPTION_GROUPING] = isset($option[self::OPTION_GROUPING]) ?
-			$option[self::OPTION_GROUPING] :
-			self::OPTION_GROUPING_OR;
-		
-		$option[self::OPTION_MAX_RESULTS] = isset($option[self::OPTION_MAX_RESULTS]) ?
-			$option[self::OPTION_MAX_RESULTS] :
-				isset(\CONFIGURATION::$DB_MAX_RESULTS) ?
-					\CONFIGURATION::$DB_MAX_RESULTS :
-					self::OPTION_MAX_RESULTS;
-		
-		if (isset($option[self::OPTION_ORDER_ITEM])) {
-			
-			$option[self::OPTION_ORDER] = isset($option[self::OPTION_ORDER]) ?
-				$option[self::OPTION_ORDER] :
-				self::OPTION_ORDER_DESC;
-				
-			$order  = "ORDER BY ";
-			$order .= $option[self::OPTION_ORDER_ITEM] . " ";
-			$order .= $option[self::OPTION_ORDER];
-		}
-		
-		// Initialize Options
-		//
-		
 		unset($props["fields"]);
 		unset($props["rows"]);
 		
@@ -176,6 +138,40 @@ HTML;
 			$table 	= str_replace(\CONFIGURATION::$DBCLASSPREFIX, null, self::name($class));
 			$table 	= strtolower($table);
 			$cmp 	= $option[self::OPTION_CMP];
+			
+			$option = is_array($option) ?
+				$option :
+				array();
+			
+			//
+			// Initialize Options
+			$option[self::OPTION_CMP] = isset($option[self::OPTION_CMP]) ?
+				$option[self::OPTION_CMP] :
+				self::OPTION_CMP_LIKE;
+			
+			$option[self::OPTION_GROUPING] = isset($option[self::OPTION_GROUPING]) ?
+				$option[self::OPTION_GROUPING] :
+				self::OPTION_GROUPING_OR;
+			
+			$option[self::OPTION_MAX_RESULTS] = isset($option[self::OPTION_MAX_RESULTS]) ?
+				$option[self::OPTION_MAX_RESULTS] :
+				isset(\CONFIGURATION::$DB_MAX_RESULTS) ?
+					\CONFIGURATION::$DB_MAX_RESULTS :
+					self::OPTION_MAX_RESULTS;
+			
+			if (isset($option[self::OPTION_ORDER_ITEM])) {
+					
+				$option[self::OPTION_ORDER] = isset($option[self::OPTION_ORDER]) ?
+					$option[self::OPTION_ORDER] :
+					self::OPTION_ORDER_DESC;
+			
+				$order  = "ORDER BY ";
+				$order .= $option[self::OPTION_ORDER_ITEM] . " ";
+				$order .= $option[self::OPTION_ORDER];
+			}
+			
+			// Initialize Options
+			//
 			
 			foreach ($props as $prop) {
 				
