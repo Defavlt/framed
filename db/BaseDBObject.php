@@ -19,11 +19,20 @@ use \PDO;
  *        
  */
 abstract class BaseDBObject {
-	const PARAM_PREFIX = '?';
-	const SELECT_ALL = 0x01;
-	const SELECT_ORDER = 0x02;
-	const SELECT_WHERE = 0x03;
-	const SELECT_DEF_AMOUNT = 0x20;
+	const OPTION_CMP = 0x1;
+	const OPTION_CMP_EQ = "=";
+	const OPTION_CMP_LIKE = "LIKE";
+
+	const OPTION_GROUPING = 0x2;
+	const OPTION_GROUPING_OR = "OR";
+	const OPTION_GROUPING_AND = "AND";
+	
+	const OPTION_ORDER = 0x3;
+	const OPTION_ORDER_DESC = "DESC";
+	const OPTION_ORDER_ASC = "ASC";
+	
+	const OPTION_MAX_RESULTS = 0x4;
+
 	const SELECT_ORDER_DESC = "DESC";
 	const SELECT_ORDER_ASC  = "ASC";
 	const SELECT_TEMPLATE = 'SELECT %3$s FROM %1$s %2$s';
@@ -31,6 +40,7 @@ abstract class BaseDBObject {
 	const SELECT_WHERE_TEMPLATE = ' WHERE %1$s';
 	const SELECT_ORDER_TEMPLATE = ' ORDER BY %1$s %2$s';
 	const SELECT_LIKE_TEMPLATE = '%1$s LIKE %2$s %3$s ';
+	const SELECT_EQ_TEMPLATE = '%1$s = %2$s %3$s ';
 	const INSERT_TEMPLATE = 'INSERT INTO %1$s(%2$s) VALUES(%3$s)';
 	const UPDATE_TEMPLATE = 'UPDATE %1$s SET %2$s WHERE %3$s';
 	const PARAM_GROUP = ' %1$s, ';
@@ -118,10 +128,30 @@ HTML;
 	 *  	ehco $customer->id;
 	 * }
 	 */
-	public function select($amount = -1, int $option = null) {
+	public function select($amount = -1, array $option = null) {
 
 		$props = $this->getParamArray();
 		$class = get_class($this);
+		
+		//
+		// Initialize Options
+		$option[self::OPTION_CMP] = isset($option[self::OPTION_CMP]) ?
+			$option[self::OPTION_CMP] :
+			self::OPTION_CMP_LIKE;
+		
+		$option[self::OPTION_GROUPING] = isset($option[self::OPTION_GROUPING]) ?
+			$option[self::OPTION_GROUPING] :
+			self::OPTION_GROUPING_OR;
+		
+		$option[self::OPTION_MAX_RESULTS] = isset($option[self::OPTION_MAX_RESULTS]) ?
+			$option[self::OPTION_MAX_RESULTS] :
+				isset(\CONFIGURATION::$DB_MAX_RESULTS) ?
+					\CONFIGURATION::$DB_MAX_RESULTS :
+					self::OPTION_MAX_RESULTS;
+
+		
+		// Initialize Options
+		//
 		
 		unset($props["fields"]);
 		unset($props["rows"]);
@@ -132,22 +162,29 @@ HTML;
 			$params = NULL;
 			$table 	= str_replace(\CONFIGURATION::$DBCLASSPREFIX, null, self::name($class));
 			$table 	= strtolower($table);
-
-			$grouping = $option == self::SELECT_GROUPING_TYPE_AND ?
-				self::SELECT_GROUPING_TYPE_AND :
-				self::SELECT_GROUPING_TYPE_OR;
 			
 			foreach ($props as $value) {
 				
 				if ($value->class == $class) {
 					$key = $value->name;
 	
-					$where .= sprintf(
+					if (isset($this->$$key)) {
+						
+						$where .= sprintf(
+								self::SELECT_EQ_TEMPLATE,
+								$key,
+								(isset($this->$$key) ? $value->getValue($this) : ""),
+								$option[self::OPTION_GROUPING]
+								);
+					}
+					else {
+						$where .= sprintf(
 							self::SELECT_LIKE_TEMPLATE,
 							$key,
 							"'%" . (isset($this->$$key) ? $value->getValue($this) : "") . "%'",
-							$grouping
-					);
+							$option[self::OPTION_GROUPING]
+						);
+					}
 					
 					$params .= sprintf(
 							self::PARAM_GROUP,
