@@ -208,20 +208,11 @@ HTML;
 				}
 			}
 			
-			$len		= strlen("WHERE");
-			$pos 		= strrpos($where, "WHERE");
-			$bad_pos 	= strlen($where) - $len;
-			echo "??" . $bad_pos . "??" . $pos . "??" . $len . "??";
 
-			if ($bad_pos < 0) {
-				
-				$where = substr($where, 0, 0 - $len);
-			}
-			else {
+			var_dump(substr_compare($where, "WHERE", -strlen($where)));
+			
 
-				$where = substr($where, 0, -3) . " ";;
-			}
-
+			$where = substr($where, 0, -3) . " ";
 			$params = substr($params, 0, -2) . " ";
 
 			$query = sprintf(
