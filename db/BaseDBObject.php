@@ -132,6 +132,7 @@ abstract class BaseDBObject {
 			var_dump($class);
 			var_dump($table);
 			var_dump($grouping);
+			var_dump(\CONFIGURATION::$DBCLASSPREFIX);
 			
 			foreach ($props as $value) {
 				
