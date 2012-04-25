@@ -153,11 +153,15 @@ HTML;
 				$option[self::OPTION_GROUPING] :
 				self::OPTION_GROUPING_OR;
 			
+			echo $option[self::OPTION_MAX_RESULTS];
+			
 			$option[self::OPTION_MAX_RESULTS] = isset($option[self::OPTION_MAX_RESULTS]) ?
 				$option[self::OPTION_MAX_RESULTS] :
 				isset(\CONFIGURATION::$DB_MAX_RESULTS) ?
 					\CONFIGURATION::$DB_MAX_RESULTS :
 					self::OPTION_MAX_RESULTS;
+			
+			echo $option[self::OPTION_MAX_RESULTS];
 			
 			if (isset($option[self::OPTION_ORDER_ITEM])) {
 					
