@@ -189,7 +189,9 @@ HTML;
 					$value 	= $prop->getValue($this);
 					$value 	= $cmp == self::OPTION_CMP_LIKE ?
 						"'%" . $value . "%'" :
-						"'"  . $value . "'";
+						gettype($value) == "integer" ?
+							$value :
+							"'"  . $value . "'";
 						
 					$where .= sprintf(
 							self::PARAM_CMP,
