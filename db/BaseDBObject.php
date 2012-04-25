@@ -112,7 +112,7 @@ abstract class BaseDBObject {
 		var_dump($this->resource);
 		
 		if (!isset($this->resource) || $this->resource == null) {
-			echo "IS NOT SET";
+
 			$class = strtolower(str_replace(
 					\CONFIGURATION::$DBCLASSPREFIX, 
 					null, 

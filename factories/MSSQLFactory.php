@@ -77,8 +77,8 @@ class MSSQLFactory {
 					);
 		}
 	
+		echo $query;
 		$result = mssql_query($query, self::$link);
-		var_dump($result);
 			
 		if ($result === FALSE) {
 				
