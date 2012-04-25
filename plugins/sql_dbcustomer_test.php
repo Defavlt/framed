@@ -69,7 +69,7 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 		if (property_exists($customer, $on)) {
 			
 			$customer->{$on} = $id;
-			$option[$customer::OPTION_CMP] = $customer::OPTION_CMP_EQ;
+			//$option[$customer::OPTION_CMP] = $customer::OPTION_CMP_EQ;
 		}
 
 		while ($customer->select($option)) {
