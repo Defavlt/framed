@@ -208,7 +208,14 @@ HTML;
 				}
 			}
 			
-			$where = substr($where, 0, -3) . " ";
+			$pos = strrpos($where, $option[self::OPTION_GROUPING]);
+			$len = strlen($where);
+			$pos_len = ($len - strlen($option[self::OPTION_GROUPING]));
+			if ($pos !== FALSE && $pos == $len && !($pos_len < 0)) {
+				
+				$where = substr($where, 0, -3) . " ";
+			}
+
 			$params = substr($params, 0, -2) . " ";
 
 			$query = sprintf(
