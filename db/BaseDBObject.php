@@ -133,7 +133,7 @@ abstract class BaseDBObject {
 			foreach ($props as $value) {
 				
 				if ($value->class == $class) {
-					$key = $value->name;
+					var_dump($key = $value->name);
 	
 					$where .= sprintf(
 							self::SELECT_LIKE_TEMPLATE,
@@ -174,7 +174,6 @@ abstract class BaseDBObject {
 			}
 			
 			var_dump($props);
-			var_dump($query);
 			$this->_query = $query;
 			$this->resource = MSSQLFactory::prepare($this->_query);
 			
