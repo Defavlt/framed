@@ -226,12 +226,12 @@ HTML;
 			$this->resource = MSSQLFactory::prepare($this->_query);
 			$this->rows = mssql_num_rows($this->resource);
 			
+			echo $query . "<br>";
+			
 			if($this->rows < 1) {
 				
 				return false;
 			}
-			
-			echo $query . "<br>";
 			
 		}
 
