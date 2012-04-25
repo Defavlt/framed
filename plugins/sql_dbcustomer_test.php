@@ -64,6 +64,7 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 		 * @var DBCustomer
 		 */
 		$customer = new DBCustomer();
+		$customer->id = 43;
 		
 		while ($customer->select()) {
 
@@ -73,6 +74,8 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 
 		echo "fields: " . $customer->fields . "<br>";
 		echo "rows: " . $customer->rows . "<br>";
+		
+		
 	}
 }
 
