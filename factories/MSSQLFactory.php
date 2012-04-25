@@ -76,8 +76,7 @@ class MSSQLFactory {
 					\CONFIGURATION::$DB_PORT
 					);
 		}
-	
-		echo $query;
+
 		$result = mssql_query($query, self::$link);
 			
 		if ($result === FALSE) {
