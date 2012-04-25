@@ -231,6 +231,8 @@ HTML;
 				return false;
 			}
 			
+			echo $query . "<br>";
+			
 		}
 
 		$this->fields = mssql_num_fields($this->resource);
