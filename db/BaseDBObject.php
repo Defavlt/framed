@@ -213,7 +213,7 @@ HTML;
 			$bad_pos 	= strlen($where) - $len;
 			echo "??" . $bad_pos . "??" . $pos . "??" . $len . "??";
 
-			if ($pos == $bad_pos) {
+			if ($bad_pos < 0) {
 				
 				$where = substr($where, 0, 0 - $len);
 			}
