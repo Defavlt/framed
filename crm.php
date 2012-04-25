@@ -203,8 +203,7 @@ EOT;
 					}
 				
 				} catch ( Exception $e ) {
-					var_dump($e);
-					die();
+
 					continue;
 				}
 			}

@@ -12,7 +12,7 @@ use db\BaseDBObject;
  * @author marcus
  *        
  */
-class sql_dbcustomer_test extends BaseDBObject implements IPlugin, IObserver {
+class sql_dbcustomer_test implements IPlugin, IObserver {
 	const msg = "dbcall";
 	
 	/**
