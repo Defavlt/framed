@@ -52,7 +52,8 @@ abstract class BaseDBObject {
 	
 	private static function name() {
 		
-		return array_slice(explode('\\', get_class($this)), -1);
+		$name = array_slice(explode('\\', get_class($this)), -1);
+		return $name[0];
 	} 
 	
 	/**
