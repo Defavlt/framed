@@ -94,6 +94,8 @@ HTML;
 				
 				$customer->{$key} = $value;
 			}
+			
+			$option[$customer::OPTION_CMP] = $customer::OPTION_CMP_LIKE;
 		}
 
 		while ($customer->select($option)) {
