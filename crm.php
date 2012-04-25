@@ -188,7 +188,7 @@ EOT;
 					//$class = CONFIGURATION::$PLUGIN_DIR . $single_slash . str_replace ( php, null, $plugin );
 					$class = CONFIGURATION::$PLUGIN_DIR . $single_slash . $plugin;
 					
-					echo "Loading class " . $class . "\n";
+					echo "Loading class " . $class . ". ";
 					$instance = new $class ();
 					echo "is instance: " . ($instance instanceof IPlugin) . "\n";
 					

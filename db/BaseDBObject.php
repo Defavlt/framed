@@ -64,11 +64,18 @@ abstract class BaseDBObject {
 	/**
 	 * @param IDBExtandable $instance
 	 */
-	function __construct() {
+	function __construct($params) {
 
 		if (!($this instanceof \interfaces\IDBExtendable)) {
 	
 			throw new NotInstanceOfException(IDBExtendable);
+		}
+		else {
+			
+			if (is_array($params)) {
+				
+				
+			}
 		}
 	}
 
