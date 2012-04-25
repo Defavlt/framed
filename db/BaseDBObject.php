@@ -182,10 +182,6 @@ HTML;
 					$key = $prop->name;
 
 					$cmp 	= $option[self::OPTION_CMP];
-					
-					echo "prop (" . $key . "): " . $prop->getValue($this) . "<br>";
-					echo "actu (" . $key . "): " . $this->{$key} . "<br>";
-					
 					$value 	= $this->{$key};
 					$value 	= $cmp == self::OPTION_CMP_LIKE ?
 						"'%" . $value . "%'" :
@@ -251,13 +247,10 @@ HTML;
 		}
 		else {
 
-			echo "<br>BEFORE FOREACH<br>";
 			foreach ($result as $key => $value) {
-			
-				echo "INSIDE FOREACH BEFORE IF<br>";
+
 				if (isset($this->{$key}) || property_exists($this, $key)) {
 
-					echo "INSIDE FOREACH INSIDE IF WHERE \$key:" . $key . " and \$value:" . $value . "<br>";
 					$this->{$key} = $value;
 				}
 			}
