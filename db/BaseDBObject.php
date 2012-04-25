@@ -34,7 +34,8 @@ abstract class BaseDBObject {
 	const INSERT_TEMPLATE = 'INSERT INTO %1$s(%2$s) VALUES(%3$s)';
 	const UPDATE_TEMPLATE = 'UPDATE %1$s SET %2$s WHERE %3$s';
 	
-	static $SELECT_GROUPING_TYPE = "OR";
+	const SELECT_GROUPING_TYPE_OR = "OR";
+	const SELECT_GROUPING_TYPE_AND = "AND";
 	
 	public $fields;
 	public $rows;
@@ -126,12 +127,14 @@ abstract class BaseDBObject {
 
 			$where = NULL;
 			
-			foreach ($props as $key => $value) {
+			foreach ($props as $value) {
+				
+				$key = $value->name;
 
 				$where .= sprintf(
 						self::SELECT_LIKE_TEMPLATE,
 						$key,
-						isset($this->$$key) ? $value : "",
+						isset($this->$$key) ? $value->getValue($this) : "",
 						self::$SELECT_GROUPING_TYPE
 				);
 			}
