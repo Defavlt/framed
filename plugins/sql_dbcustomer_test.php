@@ -70,7 +70,7 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 	
 	<input type="hidden" name="a" value="dbcall"/>
 	<input name="i" type="text" value="$id" />
-	<input type="text" name="top" placeholder="top" />
+	<input type="text" name="top" placeholder="top" maxlength="3" />
 	<input type="submit" />
 </form>
 		
