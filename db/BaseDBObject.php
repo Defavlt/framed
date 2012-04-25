@@ -210,6 +210,8 @@ HTML;
 				}
 			}
 			
+			var_dump($this);
+			
 			$where = substr($where, 0, -3) . " ";
 			$params = substr($params, 0, -2) . " ";
 
