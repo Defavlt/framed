@@ -68,12 +68,12 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 		while ($customer->select()) {
 
 			echo $customer->id . " : ";
-			echo $customer->name . "\n";
+			echo $customer->name . "<br>";
 		}
 
 		var_dump($customer);
-		echo $customer->fields . "\n";
-		echo $customer->rows . "\n";
+		echo "fields: " . $customer->fields . "<br>";
+		echo "rows: " . $customer->rows . "<br>";
 	}
 }
 

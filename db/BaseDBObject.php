@@ -126,8 +126,6 @@ HTML;
 		unset($props["fields"]);
 		unset($props["rows"]);
 		
-		var_dump($this->resource);
-		
 		if (!isset($this->resource) || $this->resource == null) {
 
 			$where 	= NULL;
@@ -180,7 +178,6 @@ HTML;
 				$params
 			);
 
-			var_dump($query);
 			$this->_query = $query;
 			$this->resource = MSSQLFactory::prepare($this->_query);
 			$this->rows = mssql_num_rows($this->resource);
@@ -207,7 +204,6 @@ HTML;
 				if (isset($this->$$key) || property_exists($this, $key)) {
 
 					$this->{$key} = $value;
-					var_dump($this->{$key});
 				}
 			}
 		}
