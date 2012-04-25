@@ -71,7 +71,6 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 			echo $customer->name . "<br>";
 		}
 
-		var_dump($customer);
 		echo "fields: " . $customer->fields . "<br>";
 		echo "rows: " . $customer->rows . "<br>";
 	}
