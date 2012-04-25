@@ -183,6 +183,7 @@ HTML;
 
 					$cmp 	= $option[self::OPTION_CMP];
 					$value 	= $prop->getValue($this);
+					echo $prop->getValue($this) . "<br>";
 					$value 	= $cmp == self::OPTION_CMP_LIKE ?
 						"'%" . $value . "%'" :
 						"'"  . $value . "'";
