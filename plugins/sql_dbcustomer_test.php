@@ -91,7 +91,7 @@ HTML;
 		else if ($on == "all") {
 			
 			$params = $customer->getParamArray();
-			
+			var_dump($params);
 			foreach ($params as $key => $value) {
 				echo $key . " : " . $value . "<br>";
 				$customer->{$key} = $value;
