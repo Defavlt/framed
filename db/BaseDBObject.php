@@ -52,7 +52,11 @@ abstract class BaseDBObject {
 	
 	private static function name($name) {
 		
-		$name = array_slice(explode('\\', get_class($name)), -1);
+		$single_slash = <<<'HTML'
+\
+HTML;
+		
+		$name = array_slice(explode($single_slash, get_class($name)), -1);
 		return $name[0];
 	} 
 	
