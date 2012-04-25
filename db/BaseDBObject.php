@@ -129,7 +129,7 @@ HTML;
 	 *  	ehco $customer->id;
 	 * }
 	 */
-	public function select($amount = -1, array $option = null) {
+	public function select(array $option = null, $amount = -1) {
 
 		$props = $this->getParamArray();
 		$class = get_class($this);
