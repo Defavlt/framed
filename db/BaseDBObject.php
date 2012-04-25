@@ -40,7 +40,7 @@ abstract class BaseDBObject {
 	const UPDATE_TEMPLATE = 'UPDATE %1$s SET %2$s WHERE %3$s';
 
 	const PARAM_GROUP = ' %1$s, ';
-	const PARAM_CMP = '%1$s %2$s %3$s %4$s';
+	const PARAM_CMP = '%1$s %2$s %3$s %4$s ';
 	
 	const SELECT_GROUPING_TYPE_OR = "OR";
 	const SELECT_GROUPING_TYPE_AND = "AND";
