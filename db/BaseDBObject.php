@@ -206,6 +206,8 @@ HTML;
 					$this->{$key} = $value;
 				}
 			}
+			
+			return true;
 		}
 
 	}
