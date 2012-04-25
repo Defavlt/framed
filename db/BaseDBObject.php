@@ -183,11 +183,9 @@ HTML;
 
 					$cmp 	= $option[self::OPTION_CMP];
 					$value 	= $this->{$key};
-					$value 	= $cmp != self::OPTION_CMP_EQ ?
-						"'%" . $value . "%'" :
-						is_numeric($value) ?
-							$value :
-							"'"  . $value . "'";
+					$value 	= $cmp == self::OPTION_CMP_EQ ?
+						"'"  . $value . "'" :
+						"'%" . $value . "%'";
 						
 					if (isset($this->{$key}) || $this->{$key} != "") {
 						$where .= sprintf(
