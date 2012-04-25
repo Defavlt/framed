@@ -26,13 +26,14 @@ abstract class BaseDBObject {
 	const SELECT_DEF_AMOUNT = 0x20;
 	const SELECT_ORDER_DESC = "DESC";
 	const SELECT_ORDER_ASC  = "ASC";
-	const SELECT_TEMPLATE = 'SELECT * FROM %1$s %2$s';
-	const SELECT_TOP_TEMPLATE = 'SELECT TOP(%1$s) * FROM %2$s %3$s';
+	const SELECT_TEMPLATE = 'SELECT %3$s FROM %1$s %2$s';
+	const SELECT_TOP_TEMPLATE = 'SELECT TOP(%1$s) %4$s FROM %2$s %3$s';
 	const SELECT_WHERE_TEMPLATE = ' WHERE %1$s';
 	const SELECT_ORDER_TEMPLATE = ' ORDER BY %1$s %2$s';
 	const SELECT_LIKE_TEMPLATE = '%1$s LIKE %2$s %3$s ';
 	const INSERT_TEMPLATE = 'INSERT INTO %1$s(%2$s) VALUES(%3$s)';
 	const UPDATE_TEMPLATE = 'UPDATE %1$s SET %2$s WHERE %3$s';
+	const PARAM_GROUP = ' %1$s, ';
 	
 	const SELECT_GROUPING_TYPE_OR = "OR";
 	const SELECT_GROUPING_TYPE_AND = "AND";
@@ -129,9 +130,10 @@ HTML;
 		
 		if (!isset($this->resource) || $this->resource == null) {
 
-			$where = NULL;
-			$table = str_replace(\CONFIGURATION::$DBCLASSPREFIX, null, self::name($class));
-			$table = strtolower($table);
+			$where 	= NULL;
+			$params = NULL;
+			$table 	= str_replace(\CONFIGURATION::$DBCLASSPREFIX, null, self::name($class));
+			$table 	= strtolower($table);
 
 			$grouping = $option == self::SELECT_GROUPING_TYPE_AND ?
 				self::SELECT_GROUPING_TYPE_AND :
@@ -148,6 +150,11 @@ HTML;
 							"'%" . (isset($this->$$key) ? $value->getValue($this) : "") . "%'",
 							$grouping
 					);
+					
+					$params .= sprintf(
+							self::PARAM_GROUP,
+							$key
+							);
 				}
 				else {
 					
@@ -156,6 +163,7 @@ HTML;
 			}
 			
 			$where = substr($where, 0, -3);
+			$params = substr($params, 0, -2) . " ";
 			
 			$where = sprintf(
 					self::SELECT_WHERE_TEMPLATE,
@@ -168,7 +176,8 @@ HTML;
 					\CONFIGURATION::$DB_MAX_RESULTS : 
 					$amount,
 				$table,
-				$where
+				$where,
+				$params
 			);
 
 			var_dump($query);
