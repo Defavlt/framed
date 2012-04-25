@@ -114,6 +114,7 @@ HTML;
 	/**
 	 * Executes a SELECT query based on the current instance of IDBExtandable.
 	 * @param int $amount The top amount of results to return.
+	 * @param array $option An array containing 
 	 * @return boolean TRUE if the query resulted in a result 
 	 * (and subsequently the overlaying $this got populated), FALSE otherwise.
 	 * 
@@ -133,6 +134,10 @@ HTML;
 		$props = $this->getParamArray();
 		$class = get_class($this);
 		
+		$option = is_array($option) ?
+			$option :
+			array();
+		
 		//
 		// Initialize Options
 		$option[self::OPTION_CMP] = isset($option[self::OPTION_CMP]) ?
@@ -148,7 +153,6 @@ HTML;
 				isset(\CONFIGURATION::$DB_MAX_RESULTS) ?
 					\CONFIGURATION::$DB_MAX_RESULTS :
 					self::OPTION_MAX_RESULTS;
-
 		
 		// Initialize Options
 		//
