@@ -45,7 +45,7 @@ abstract class BaseDBObject {
 	
 	/**
 	 * The mssql_query result resource
-	 * @var MS SQL Result resource
+	 * @var resource
 	 */
 	private $resource;
 	
@@ -108,6 +108,8 @@ abstract class BaseDBObject {
 		
 		unset($props["fields"]);
 		unset($props["rows"]);
+		
+		var_dump($this->resource);
 		
 		if (!isset($this->resource) || $this->resource == null) {
 			echo "IS NOT SET";
