@@ -99,9 +99,9 @@ HTML;
 
 				foreach ($params as $key => $value) {
 					
-					if (isset($this->$$key)) {
+					if (isset($this->{$key})) {
 						
-						$this->$$key = $value;
+						$this->{$key} = $value;
 					}
 				}
 			}
@@ -251,7 +251,7 @@ HTML;
 
 			foreach ($result as $key => $value) {
 			
-				if (isset($this->$$key) || property_exists($this, $key)) {
+				if (isset($this->{$key}) || property_exists($this, $key)) {
 
 					$this->{$key} = $value;
 				}
