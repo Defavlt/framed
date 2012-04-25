@@ -83,26 +83,17 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 		
 HTML;
 
-		if (property_exists($customer, $on)) {
-			
-			$customer->{$on} = $id;
-			//$option[$customer::OPTION_CMP] = $customer::OPTION_CMP_EQ;
-		}
-		else if ($on == "all") {
-			
-			$params = $customer->getParamArray();
-			
-			foreach ($params as $key => $value) {
+		foreach ($params as $key => $value) {
 				
-				$value = \crm::gGlobalParam($key);
-				if (!is_null($value)) {
-					
-					$customer->{$key} = $value;
-				}
+			$value = \crm::gGlobalParam($key);
+			if (!is_null($value)) {
+				
+				$customer->{$key} = $value;
 			}
-			
-			$option[$customer::OPTION_CMP] = $customer::OPTION_CMP_LIKE;
 		}
+			
+		$option[$customer::OPTION_CMP] = $customer::OPTION_CMP_LIKE;
+		echo "<br>top = " . $top . "<br>";
 
 		if (!is_null($top)) {
 			
