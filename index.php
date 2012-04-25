@@ -1,4 +1,11 @@
-<?php 
+<?php
+
+/**
+ * Comment this line (or set the value to '0') if you don't want debug capabilities
+ * Defining this constant enables error-reporting during configuration loadout.
+ * @var int
+ */
+define("DEBUG", 1);
 
 /**
  * The config-file for the application.

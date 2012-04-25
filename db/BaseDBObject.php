@@ -50,6 +50,10 @@ abstract class BaseDBObject {
 	 */
 	private $resource;
 	
+	/**
+	 * Fetch the 'Name'-part of any class-name.
+	 * @param string $name
+	 */
 	private static function name($name) {
 		
 		$single_slash = <<<'HTML'
@@ -160,7 +164,8 @@ HTML;
 				
 				$query = sprintf(
 						self::SELECT_TOP_TEMPLATE,
-						$amount,
+						$amount == -1 ? 
+							\CONFIGURATION::$DB_MAX_RESULTS : $amount,
 						$table,
 						$where
 				);
