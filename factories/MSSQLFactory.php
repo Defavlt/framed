@@ -68,15 +68,6 @@ class MSSQLFactory {
 		
 		if (!isset(self::$link)) {
 			
-			try {
-				
-				$port = \CONFIGURATION::$DB_PORT;
-				
-			} catch (\Exception $e) {
-				
-				
-			}
-			
 			self::get(
 					\CONFIGURATION::$DB_HOST,
 					\CONFIGURATION::$DB,
@@ -85,19 +76,16 @@ class MSSQLFactory {
 					\CONFIGURATION::$DB_PORT
 					);
 		}
-		
-		else {
-						
-			$result = mssql_query($query);
+	
+		$result = mssql_query($query);
 			
-			if ($result === FALSE) {
+		if ($result === FALSE) {
 				
-				\crm::error("Error. #1: Query: " . $query);
-				\crm::error("Error. #2: Result: " . $result);
-			}
-			
-			return $result;
+			\crm::error("Error. #1: Query: " . $query);
+			\crm::error("Error. #2: Result: " . $result);
 		}
+			
+		return $result;
 	}
 
 }
