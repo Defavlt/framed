@@ -120,12 +120,10 @@ abstract class BaseDBObject {
 		
 		if (!isset($this->resource) || $this->resource == null) {
 
-			$table = strtolower(str_replace(
-					\CONFIGURATION::$DBCLASSPREFIX, 
-					null, 
-					self::name($class)));
-
 			$where = NULL;
+			$table = str_replace(\CONFIGURATION::$DBCLASSPREFIX, null, self::name($class));
+			$table = strtolower($table);
+
 			$grouping = $option == self::SELECT_GROUPING_TYPE_AND ?
 				self::SELECT_GROUPING_TYPE_AND :
 				self::SELECT_GROUPING_TYPE_OR;
