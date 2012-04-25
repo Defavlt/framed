@@ -30,7 +30,7 @@ abstract class BaseDBObject {
 	const SELECT_TOP_TEMPLATE = 'SELECT TOP(%1$s) * FROM %2$s %3$s';
 	const SELECT_WHERE_TEMPLATE = ' WHERE %1$s';
 	const SELECT_ORDER_TEMPLATE = ' ORDER BY %1$s %2$s';
-	const SELECT_LIKE_TEMPLATE = '%1$s LIKE \'\%%2$s\%\' %3$s ';
+	const SELECT_LIKE_TEMPLATE = '%1$s LIKE %2$s %3$s ';
 	const INSERT_TEMPLATE = 'INSERT INTO %1$s(%2$s) VALUES(%3$s)';
 	const UPDATE_TEMPLATE = 'UPDATE %1$s SET %2$s WHERE %3$s';
 	
@@ -139,7 +139,7 @@ abstract class BaseDBObject {
 					$where .= sprintf(
 							self::SELECT_LIKE_TEMPLATE,
 							$key,
-							isset($this->$$key) ? $value->getValue($this) : "",
+							"'%" . (isset($this->$$key) ? $value->getValue($this) : "") . "%'",
 							$grouping
 					);
 				}
