@@ -66,6 +66,7 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 	<select name="o">
 		<option>name</option>
 		<option>id</option>
+		<option>all</option>
 	</select>
 	
 	<input type="hidden" name="a" value="dbcall"/>
@@ -85,6 +86,14 @@ HTML;
 			
 			$customer->{$on} = $id;
 			//$option[$customer::OPTION_CMP] = $customer::OPTION_CMP_EQ;
+		}
+		else if ($on == "all") {
+			
+			$params = $customer->getParamArray();
+			foreach ($params as $key => $value) {
+				
+				$customer->{$key} = $value;
+			}
 		}
 
 		while ($customer->select($option)) {
