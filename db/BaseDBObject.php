@@ -211,6 +211,7 @@ HTML;
 			$len		= strlen("WHERE");
 			$pos 		= strrpos($where, "WHERE");
 			$bad_pos 	= strlen($where) - $len;
+			echo "??" . $bad_pos . "??" . $pos . "??" . $len . "??";
 
 			if ($pos == $bad_pos) {
 				
