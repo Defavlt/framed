@@ -255,7 +255,7 @@ HTML;
 				echo "INSIDE FOREACH BEFORE IF<br>";
 				if (isset($this->{$key}) || property_exists($this, $key)) {
 
-					echo "INSIDE FOREACH INSIDE IF<br>";
+					echo "INSIDE FOREACH INSIDE IF WHERE $key:" . $key . " and $value:" . $value . "<br>";
 					$this->{$key} = $value;
 				}
 			}
