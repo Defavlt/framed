@@ -58,10 +58,9 @@ HTML;
 		echo $single_slash . "\n";
 		var_dump($name);
 		$name = explode($single_slash, $name);
-		echo "name() " . $name . "\n";
+		$name = array_pop($name);
 		var_dump($name);
-		var_dump(get_class($name));
-		return $name[0];
+		return $name;
 	} 
 	
 	/**
