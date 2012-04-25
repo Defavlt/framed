@@ -55,12 +55,9 @@ abstract class BaseDBObject {
 		$single_slash = <<<'HTML'
 \
 HTML;
-		echo $single_slash . "\n";
-		var_dump($name);
+
 		$name = explode($single_slash, $name);
-		$name = array_pop($name);
-		var_dump($name);
-		return $name;
+		return array_pop($name);
 	} 
 	
 	/**
@@ -134,16 +131,10 @@ HTML;
 				self::SELECT_GROUPING_TYPE_AND :
 				self::SELECT_GROUPING_TYPE_OR;
 			
-			/*var_dump($props);
-			var_dump($class);
-			var_dump($table);
-			var_dump($grouping);
-			var_dump(\CONFIGURATION::$DBCLASSPREFIX);
-			var_dump(str_replace(\CONFIGURATION::$DBCLASSPREFIX, null, $class));*/
-			
 			foreach ($props as $value) {
 				
 				if ($value->class == $class) {
+					$key = $value->name;
 	
 					$where .= sprintf(
 							self::SELECT_LIKE_TEMPLATE,
