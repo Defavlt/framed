@@ -94,7 +94,7 @@ HTML;
 			
 		$option[$customer::OPTION_CMP] = $customer::OPTION_CMP_LIKE;
 		echo "top = " . $top . "<br>";
-		echo "top is null: " . is_null($top) ? "true" : "false";
+		echo "top is null: " . is_null($top) ? "true<br>" : "false<br>";
 
 		if (isset($top)) {
 			
