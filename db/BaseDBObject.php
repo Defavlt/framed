@@ -131,6 +131,7 @@ abstract class BaseDBObject {
 			var_dump($props);
 			var_dump($class);
 			var_dump($table);
+			var_dump($grouping);
 			
 			foreach ($props as $value) {
 				
@@ -150,7 +151,7 @@ abstract class BaseDBObject {
 				}
 			}
 			
-			$where = substr($where, 0, (0 - strlen($grouping)));
+			$where = substr($where, 0, -3);
 			
 			$where = sprintf(
 					self::SELECT_WHERE_TEMPLATE,
