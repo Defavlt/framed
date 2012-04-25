@@ -59,15 +59,21 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 	 *
 	 */
 	public function Callback($on, $id, $msg) {
-		
+
+		/**
+		 * @var DBCustomer
+		 */
 		$customer = new DBCustomer();
 		
 		while ($customer->select()) {
 
 			var_dump($customer);
 			echo $customer->id . "\n";
-			echo $customer->fname . "\n";
+			echo $customer->name . "\n";
 		}
+		
+		echo $customer->fields . "\n";
+		echo $customer->rows . "\n";
 	}
 }
 
