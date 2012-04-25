@@ -60,7 +60,7 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 	 */
 	public function Callback($on, $id, $msg) {
 		
-		echo <<<'HTML'
+		echo <<<HTML
 <form name="customerform" action="index.php" method="get">
 	<label for="o">Type</label>
 	<select name="o">
@@ -69,7 +69,7 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 	</select>
 	
 	<input type="hidden" name="a" value="dbcall"/>
-	<input name="i" type="text" />
+	<input name="i" type="text" value="$id" />
 	<input type="submit" />
 </form>
 		
