@@ -182,7 +182,7 @@ HTML;
 			$this->_lastresult = $result;
 			
 			var_dump($result);
-			die();
+			return true;
 			foreach ($result as $key => $value) {
 				
 				$this->$key = $value;
