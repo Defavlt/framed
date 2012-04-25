@@ -187,7 +187,6 @@ HTML;
 					echo "actu (" . $key . "): " . $this->{$key} . "<br>";
 					
 					$value 	= $prop->getValue($this);
-					echo $key . " : " . $this->{$key};
 					$value 	= $cmp == self::OPTION_CMP_LIKE ?
 						"'%" . $value . "%'" :
 						"'"  . $value . "'";
