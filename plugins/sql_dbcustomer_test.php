@@ -59,6 +59,20 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 	 *
 	 */
 	public function Callback($on, $id, $msg) {
+		
+		echo <<<'HTML'
+<form name="customerform" action="index.php" method="get">
+	<label for="o">Type</label>
+	<select name="o">
+		<option>name</option>
+		<option>id</option>
+	</select>
+	
+	<input name="i" type="text" />
+	<input type="submit" />
+</form>
+		
+HTML;
 
 		/**
 		 * @var DBCustomer
