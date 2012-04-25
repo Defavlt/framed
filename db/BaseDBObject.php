@@ -28,9 +28,9 @@ abstract class BaseDBObject {
 	const SELECT_ORDER_ASC  = "ASC";
 	const SELECT_TEMPLATE = 'SELECT * FROM %1$s %2$s';
 	const SELECT_TOP_TEMPLATE = 'SELECT TOP(%1$s) * FROM %2$s %3$s';
-	const SELECT_WHERE_TEMPLATE = 'WHERE %1$s';
+	const SELECT_WHERE_TEMPLATE = ' WHERE %1$s';
 	const SELECT_ORDER_TEMPLATE = ' ORDER BY %1$s %2$s';
-	const SELECT_LIKE_TEMPLATE = '%1$s LIKE \'%2$s\' %3$s ';
+	const SELECT_LIKE_TEMPLATE = '%1$s LIKE \'%%2$s%\' %3$s ';
 	const INSERT_TEMPLATE = 'INSERT INTO %1$s(%2$s) VALUES(%3$s)';
 	const UPDATE_TEMPLATE = 'UPDATE %1$s SET %2$s WHERE %3$s';
 	
@@ -102,7 +102,7 @@ abstract class BaseDBObject {
 	 *  	ehco $customer->id;
 	 * }
 	 */
-	public function select($amount = -1) {
+	public function select($amount = -1, int $option = null) {
 		
 		$props = $this->getParamArray();
 		
@@ -113,31 +113,44 @@ abstract class BaseDBObject {
 		
 		if (!isset($this->resource) || $this->resource == null) {
 			echo "IS NOT SET";
-			$class = str_replace(
+			$class = strtolower(str_replace(
 					\CONFIGURATION::$DBCLASSPREFIX, 
 					null, 
-					get_class($this));
+					get_class($this)));
 
 			$where = NULL;
 			
 			foreach ($props as $key => $value) {
-					
-				if (isset($this->$$key) && !is_null($this->$$key)) {
-			
-					$where .= sprintf(
-							self::SELECT_LIKE_TEMPLATE,
-							$key,
-							$value,
-							self::$SELECT_GROUPING_TYPE
-					);
-				}
-				else {
-					
-					unset($props[$key]);
-				}
+
+				$where .= sprintf(
+						self::SELECT_LIKE_TEMPLATE,
+						$key,
+						$value,
+						self::$SELECT_GROUPING_TYPE
+				);
 			}
 			
-			substr($where, 0, (0 - strlen(self::$SELECT_GROUPING_TYPE)));
+			$where = substr($where, 0, (0 - strlen(self::$SELECT_GROUPING_TYPE)));
+			
+			if($amount > -1) {
+				
+				$query = sprintf(
+						self::SELECT_TOP_TEMPLATE,
+						$amount,
+						$class,
+						$where
+				);
+			}
+			else {
+				
+				$query = sprintf(
+						self::SELECT_TEMPLATE,
+						$class,
+						$where
+				);
+			}
+			
+			$this->_query = $query;
 			$this->resource = MSSQLFactory::prepare($this->_query);
 			
 		}
