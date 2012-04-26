@@ -1,6 +1,8 @@
 <?php
 namespace db;
 
+use interfaces\IDBExtendable;
+
 use db\BaseDBObject;
 
 /**
@@ -8,7 +10,7 @@ use db\BaseDBObject;
  * @author marcus
  *        
  */
-class DBCaseinfo extends BaseDBObject {
+class DBCaseinfo extends BaseDBObject implements IDBExtendable {
 	
 	public $title;
 	public $category;
