@@ -21,16 +21,15 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 	 *
 	 */
 	public function Initialize() {
-		\crm::log("Trying event listener: dbcall");
+		\crm::log ( "Trying event listener: dbcall" );
 		
-		if (\crm::gInstance()->Register($this, self::msg)) {
+		if (\crm::gInstance ()->Register ( $this, self::msg )) {
 			
-			\crm::log("Event listener succeded");
-			\crm::log(self::msg, IPlugin);
-		}
-		else {
+			\crm::log ( "Event listener succeded" );
+			\crm::log ( self::msg, IPlugin );
+		} else {
 			
-			\crm::log("Event listener failed.");
+			\crm::log ( "Event listener failed." );
 		}
 	}
 	
@@ -39,7 +38,8 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 	 * @see IPlugin::Plugin()
 	 *
 	 */
-	public function Plugin() {}
+	public function Plugin() {
+	}
 	
 	/**
 	 *
@@ -61,12 +61,13 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 	public function Callback($on, $id, $msg) {
 		
 		/**
+		 *
 		 * @var DBCustomer
 		 */
-		$customer = new DBCustomer();
-		$top = \crm::gGlobalParam("top");
-		$option = array();
-		$params = $customer->getParamArray();
+		$customer = new DBCustomer ();
+		$top = \crm::gGlobalParam ( "top" );
+		$option = array ();
+		$params = $customer->getParamArray ();
 		
 		echo <<<HTML
 <form name="customerform" action="index.php" method="get">
@@ -84,59 +85,62 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 </form>
 		
 HTML;
-
-		foreach ($params as $property) {
-			$key = $property->name;				
-			$value = \crm::gGlobalParam($key);
+		
+		foreach ( $params as $property ) {
+			$key = $property->name;
+			$value = \crm::gGlobalParam ( $key );
 			
 			echo $key . " : " . $value . "<br>";
-
-			if (!is_null($value)) {
+			
+			if (! is_null ( $value )) {
 				
-				$customer->{$key} = $customer::clean($value);
+				$customer->{$key} = $customer::clean ( $value );
 			}
 		}
-			
+		
 		if ($top != null && $top != "") {
-				
-			$option[$customer::OPTION_MAX_RESULTS] = $top;
+			
+			$option [$customer::OPTION_MAX_RESULTS] = $top;
 		}
-
-		$option[$customer::OPTION_CMP] = $customer::OPTION_CMP_LIKE;
+		
+		$option [$customer::OPTION_CMP] = $customer::OPTION_CMP_LIKE;
 		
 		echo "<br>Name not cleaned: " . $customer->name . "<br>";
-		echo "<br>Name cleaned: <code>" . BaseDBObject::clean($customer->name) . "</code><br>";
-
-		while ($customer->select($option)) {
-			
-			$count = 0;
-			
-			foreach ($params as $property) {
+		echo "<br>Name cleaned: <code>" . BaseDBObject::clean ( $customer->name ) . "</code><br>";
+		
+		if ($customer->select ( $option )) {
+			do {
 				
-				if ($count == 10) {
+				$count = 0;
+				
+				foreach ( $params as $property ) {
 					
-					$count = 0;
+					if ($count >= 10) {
+						
+						$count = 0;
+					}
+					
+					$key = $property->name;
+					$colour = $count . $count . $count;
+					
+					if (isset ( $customer->{$key} ) && ! empty ( $customer->{$key} ) && $customer->{$key} != " ") {
+						
+						echo '<span style="background: #' . $colour . ';color:#FFF;margin: 0 5px;">' . $customer->{$key} . "</span>";
+						$count += 8;
+					}
 				}
 				
-				$key = $property->name;
-				$colour = $count . $count . $count;
-				
-				if (isset($customer->{$key}) && !empty($customer->{$key}) && $customer->{$key} != " ") {
+				if ($count > 0) {
 					
-					echo '<span style="background: #' . $colour . ';color:#FFF;margin: 0 5px;">' . $customer->{$key} . "</span>";
-					$count += 5;
+					echo "<br>";
 				}
-			}
 
-			if ($count > 0) {
-				
-				echo "<br>";
-			}
+			} while ( $customer->select ( $option ) );		
 		}
-
+		
 		echo "fields: " . $customer->fields . "<br>";
 		echo "rows: " . $customer->rows . "<br>";
-		
+	
 	}
 }
 
