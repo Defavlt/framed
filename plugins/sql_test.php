@@ -98,7 +98,7 @@ class sql_test implements IPlugin, IObserver {
 		$ident = \CONFIGURATION::$IDENTI;
 		
 		echo <<<HTML
-<form name="$class" action="index.php" method="$type">
+<form name="$class" action="index.php" method="$id">
 HTML;
 		
 		foreach ($params as $property) {
