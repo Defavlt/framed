@@ -99,7 +99,6 @@ class sql_test implements IPlugin, IObserver {
 <form name="$class" action="index.php" method="get">
 	<input name="get" 	type="text" placeholder="get" style="display:block;" />
 	<input name="post" 	type="text" placeholder="post" style="display:block;" />
-	<input name="top"   type="text" placeholder="top" value="$top" maxlength="6" style="width:60px;" style="display:block;"/>
 HTML;
 		
 		foreach ($params as $property) {
@@ -112,6 +111,7 @@ HTML;
 		}
 		
 		echo <<<HTML
+	<input name="top"   type="text" placeholder="top" value="$top" maxlength="6" style="width:60px;" style="display:block;"/>
 	<input name="a"     type="hidden" value="dbcall"/>
 	<input type="submit" />
 </form>
