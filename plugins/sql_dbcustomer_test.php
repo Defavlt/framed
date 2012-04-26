@@ -88,25 +88,18 @@ HTML;
 		
 		foreach ( $params as $property ) {
 			$key = $property->name;
-			$value = \crm::gGlobalParam ( $key );
-			
-			echo $key . " : " . $value . "<br>";
+			$value = BaseDBObject::clean(\crm::gGlobalParam ( $key ));
 			
 			if (! is_null ( $value )) {
 				
-				$customer->{$key} = $customer::clean ( $value );
+				$customer->{$key} = $value;
 			}
-		}
-		
-		if ($top != null && $top != "") {
 			
-			$option [$customer::OPTION_MAX_RESULTS] = $top;
+			echo $key . " : " . $value . "<br>";
 		}
 		
 		$option [$customer::OPTION_CMP] = $customer::OPTION_CMP_LIKE;
-		
-		echo "<br>Name not cleaned: " . $customer->name . "<br>";
-		echo "<br>Name cleaned: <code>" . BaseDBObject::clean ( $customer->name ) . "</code><br>";
+		$option [$customer::OPTION_MAX_RESULTS] = is_numeric($top) ? $top : $customer::OPTION_MAX_RESULTS;
 		
 		if ($customer->select ( $option )) {
 			do {
