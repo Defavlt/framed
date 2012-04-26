@@ -99,6 +99,7 @@ HTML;
 		}
 
 		$option[$customer::OPTION_CMP] = $customer::OPTION_CMP_LIKE;
+		var_dump($params);
 
 		while ($customer->select($option)) {
 			
