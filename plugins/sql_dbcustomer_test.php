@@ -65,25 +65,29 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 		 * @var DBCustomer
 		 */
 		$customer = new DBCustomer ();
+		$class = get_class($customer);
 		$top = \crm::gGlobalParam ( "top" );
 		$option = array ();
 		$params = $customer->getParamArray ();
 		
 		echo <<<HTML
-<form name="customerform" action="index.php" method="get">
-	<select name="o">
-		<option>name</option>
-		<option>id</option>
-		<option>all</option>
-	</select>
-	
-	<input name="a"     type="hidden" value="dbcall"/>
-	<input name="name"    type="text" placeholder="search" value="$id" />
-	<input name="email" type="text" placeholder="email" />
+<form name="$class" action="index.php" method="get">
 	<input name="top"   type="text" placeholder="top" value="$top" maxlength="6" style="width:60px;" />
+HTML;
+		
+		foreach ($params as $property) {
+			
+			$key = $property->name;
+			
+			echo <<<HTML
+	<input name="$key" type="text" placeholder="$key" />
+HTML;
+		}
+		
+		echo <<<HTML
+	<input name="a"     type="hidden" value="dbcall"/>
 	<input type="submit" />
 </form>
-		
 HTML;
 		
 		foreach ( $params as $property ) {
