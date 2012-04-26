@@ -120,7 +120,7 @@ HTML;
 				
 				if (isset($customer->{$key}) && !empty($customer->{$key}) && $customer->{$key} != " ") {
 					
-					echo '<span style="background: #' . $colour . ';color:#FFF;margin: 0 5px;">' . $customer::unclean($customer->{$key}) . "</span>";
+					echo '<span style="background: #' . $colour . ';color:#FFF;margin: 0 5px;">' . $customer->{$key} . "</span>";
 					$count += 5;
 				}
 			}
