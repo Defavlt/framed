@@ -103,7 +103,6 @@ HTML;
 		while ($customer->select($option)) {
 			
 			$count = 0;
-			$ckey = 0;
 			
 			foreach ($params as $property) {
 				
@@ -118,8 +117,7 @@ HTML;
 				if (isset($customer->{$key}) && !empty($customer->{$key}) && $customer->{$key} != " ") {
 					
 					echo '<span style="background: #' . $colour . ';color:#FFF;margin: 0 5px;">' . $customer->{$key} . "</span>";
-					$count++;
-					$ckey += 111;
+					$count += 5;
 				}
 			}
 
