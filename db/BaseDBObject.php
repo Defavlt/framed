@@ -183,7 +183,7 @@ HTML;
 						"'"  . $value . "'" :
 						"'%" . $value . "%'";
 						
-					if (isset($this->{$key}) || $this->{$key} != "") {
+					if (isset($this->{$key}) || $this->{$key} != "" || $this->{$key} != " ") {
 						$where .= sprintf(
 								self::PARAM_CMP,
 								$key,
