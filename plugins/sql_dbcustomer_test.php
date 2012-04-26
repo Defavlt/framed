@@ -77,7 +77,7 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 	</select>
 	
 	<input name="a"     type="hidden" value="dbcall"/>
-	<input name="id"    type="text" placeholder="search" value="$id" />
+	<input name="name"    type="text" placeholder="search" value="$id" />
 	<input name="email" type="text" placeholder="email" />
 	<input name="top"   type="text" placeholder="top" value="$top" maxlength="6" style="width:60px;" />
 	<input type="submit" />
