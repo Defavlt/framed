@@ -111,9 +111,11 @@ HTML;
 		}
 		
 		echo <<<HTML
-	<input name="top"   type="text" placeholder="top" value="$top" maxlength="6" style="width:60px;" style="display:block;"/>
-	<input name="a"     type="hidden" value="dbcall"/>
-	<input type="submit" />
+	<div>
+		<input name="top"   type="text" placeholder="top" value="$top" maxlength="6" style="width:60px;" style="display:block;"/>
+		<input name="a"     type="hidden" value="dbcall"/>
+		<input type="submit" />
+	</div>
 </form>
 HTML;
 		
