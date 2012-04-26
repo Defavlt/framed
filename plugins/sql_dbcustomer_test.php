@@ -93,18 +93,22 @@ HTML;
 			}
 		}
 			
-		$option[$customer::OPTION_CMP] = $customer::OPTION_CMP_LIKE;
-
 		if ($top != null && $top != "") {
-			
+				
 			$option[$customer::OPTION_MAX_RESULTS] = $top;
 		}
 
-		echo $option[$customer::OPTION_MAX_RESULTS];
+		$option[$customer::OPTION_CMP] = $customer::OPTION_CMP_LIKE;
+		
+		$len = count($params);
 		while ($customer->select($option)) {
-
-			echo $customer->id . " : ";
-			echo $customer->name . "<br>";
+			
+			foreach ($params as $param) {
+				
+				echo $customer->{$param} . " : ";
+			}
+			
+			echo "<br>";
 		}
 
 		echo "fields: " . $customer->fields . "<br>";
