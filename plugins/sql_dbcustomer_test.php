@@ -87,6 +87,8 @@ HTML;
 		foreach ($params as $property) {
 			$key = $property->name;				
 			$value = \crm::gGlobalParam($key);
+			
+			echo $key . " : " . $value . "<br>";
 
 			if (!is_null($value)) {
 				
