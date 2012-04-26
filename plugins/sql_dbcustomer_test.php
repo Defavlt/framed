@@ -109,7 +109,7 @@ HTML;
 				$key = $property->name;
 				if (isset($customer->{$key}) && !empty($customer->{$key})) {
 					
-					echo '<span style="background: #ddd;color:#888;margin: 0 2px;">' . $customer->{$key} . "</span>, ";
+					echo '<span style="background: #ddd;color:#222;margin: 0 2px;">' . $customer->{$key} . "</span>, ";
 					$count++;
 				}
 			}
