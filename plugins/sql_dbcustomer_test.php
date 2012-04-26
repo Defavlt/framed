@@ -77,7 +77,7 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 	</select>
 	
 	<input type="hidden" name="a" value="dbcall"/>
-	<input name="i" type="text" placeholder="search" value="$id" />
+	<input name="id" type="text" placeholder="search" value="$id" />
 	<input name="email" type="text" placeholder="email" />
 	<input type="text" name="top" placeholder="top" value="$top" maxlength="6" style="width:60px;" />
 	<input type="submit" />
@@ -85,8 +85,6 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 		
 HTML;
 
-		echo $id . " :uncleaned<br>";
-		echo BaseDBObject::clean($id) . " :cleaned<br>";
 		foreach ($params as $property) {
 			$key = $property->name;				
 			$value = \crm::gGlobalParam($key);
@@ -95,7 +93,7 @@ HTML;
 
 			if (!is_null($value)) {
 				
-				$customer->{$key} = $customer::clean($value);
+				$customer->{$key} = $value;
 			}
 		}
 			
@@ -135,7 +133,6 @@ HTML;
 
 		echo "fields: " . $customer->fields . "<br>";
 		echo "rows: " . $customer->rows . "<br>";
-		
 		
 	}
 }
