@@ -270,11 +270,98 @@ HTML;
 
 	}
 	
+	function __set($name, $value) {
+		
+		$this->{self::clean($name)} = self::clean($value);
+	}
+	
+	function __get($name) {
+		
+		if (get_called_class() == $this) {
+			
+			return $this->{$name};
+		}
+		else {
+			
+			return self::unclean($this->{$name});
+		}
+	}
+	
+	/**
+	 * Determines whether the whole string ends with the end string.
+	 * @param string $whole
+	 * @param string $end
+	 * @return boolean True if it ends with $end, false otherwise.
+	 */
 	private function endswith($whole, $end)
 	{
 	    return (strpos($whole, $end, strlen($whole) - strlen($end)) !== false);
 	}
 	
+	/**
+	 * Sanitizes db input
+	 * @param mixed $param
+	 */
+	public static function clean($param) {
+		
+		if (is_array($param)) {
+			$return = array();
+
+			foreach ($param as $key => $value) {
+				
+				$return[self::clean($key)] = self::clean($value);
+			}
+			
+			return $return;
+		}
+		else {
+			
+			$single_slash = <<<'HTML'
+\
+HTML;
+
+			$pattern = 
+				"(['|%|$|&|`|´|-|@|$single_slash])";
+			
+			$replacement = 
+				"'$0";
+			
+			$return = preg_filter($pattern, $replacement, $param);
+			return $return;
+		}
+	}
+
+	/**
+	 * Unsanitizes db input
+	 * @param mixed $param
+	 */
+	public static function unclean($param) {
+		
+		if (is_array($param)) {
+			$return = array();
+			
+			foreach ($param as $key => $value) {
+				
+				$return[self::unclean($key)] = self::unclean($value);
+			}
+			
+			return $return;
+		}
+		else {
+			
+			$single_slash = <<<'HTML'
+\
+HTML;
+			
+			$pattern =
+				"'(['|%|$|&|`|´|-|@|$single_slash])";
+			
+			$replacement = 
+				"$0";
+			
+			$return = preg_filter($pattern, $replacement, $param);
+		}
+	}
 }
 
 ?>
