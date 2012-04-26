@@ -109,7 +109,7 @@ HTML;
 				$key = $property->name;
 				$ckey = substr($count, 1);
 				$colour = $ckey . $ckey . $ckey;
-				echo "colour = " . $colour;
+				echo "colour = " . $colour . " ckey = " . $ckey;
 				if (isset($customer->{$key}) && !empty($customer->{$key}) && $customer->{$key} != " ") {
 					
 					echo '<span style="background: #' . $colour . ';color:#222;margin: 0 5px;">' . $customer->{$key} . "</span>";
