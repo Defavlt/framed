@@ -109,11 +109,12 @@ HTML;
 				$key = $property->name;
 				if (isset($customer->{$key}) && $customer->{$key} != "") {
 					
-					echo $customer->{$key} . " : ";
+					echo $customer->{$key} . ", ";
 					$count++;
 				}
 			}
 			
+			var_dump($customer);
 			if ($count > 0) {
 				
 				echo "<br>";
