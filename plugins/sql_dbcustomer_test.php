@@ -103,6 +103,8 @@ HTML;
 		}
 
 		$option[$customer::OPTION_CMP] = $customer::OPTION_CMP_LIKE;
+		
+		echo "<br>Name cleaned: " . BaseDBObject::clean($customer->name) . "<br>";
 
 		while ($customer->select($option)) {
 			
