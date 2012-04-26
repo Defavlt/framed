@@ -107,10 +107,17 @@ HTML;
 			foreach ($params as $property) {
 				
 				$key = $property->name;
-				echo '"' . $customer->{$key} . '"' . "\t\t";
+				if (isset($customer->{$key}) && !empty($customer->{$key}) && $customer->{$key} != " ") {
+					
+					echo '<span style="background: #ddd;color:#222;margin: 0 5px;">' . $customer->{$key} . "</span>, ";
+					$count++;
+				}
 			}
 
-			echo "\n";
+			if ($count > 0) {
+				
+				echo "<br>";
+			}
 		}
 
 		echo "fields: " . $customer->fields . "<br>";
