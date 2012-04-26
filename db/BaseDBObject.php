@@ -301,20 +301,9 @@ HTML;
 		else {
 			
 			$param = htmlentities($param, ENT_QUOTES|ENT_SUBSTITUTE	);
-			$single_slash = <<<'HTML'
-\
-HTML;
-
-			$pattern = <<<'HTML'
-([-])
-HTML;
-			
-			$replacement = 
-				"'$0";
-			
 			//$return = preg_replace($pattern, $replacement, $param);
 			
-			return $return;
+			return $param;
 		}
 	}
 
