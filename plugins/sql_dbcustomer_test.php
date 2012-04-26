@@ -109,7 +109,7 @@ HTML;
 				$key = $property->name;
 				if (isset($customer->{$key})) {
 					
-					echo $customer->{$key};
+					echo $customer->{$key} . " : ";
 					$count++;
 				}
 			}
