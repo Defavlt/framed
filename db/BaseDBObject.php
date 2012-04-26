@@ -300,12 +300,13 @@ HTML;
 		}
 		else {
 			
+			$param = htmlentities($param, ENT_QUOTES);
 			$single_slash = <<<'HTML'
 \
 HTML;
 
 			$pattern = <<<'HTML'
-([\'\%\$\&\`\´\-\@\\ \)\(\=\/\&\%\¤\#\"\!])
+([\-])
 HTML;
 			
 			$replacement = 
@@ -313,14 +314,7 @@ HTML;
 			
 			$return = preg_replace($pattern, $replacement, $param);
 			
-			if ($return == null) {
-				return $param . "UNCHANGED";
-			}
-			else {
-				
-//				return $return;
-				return htmlentities($param, ENT_QOUTES);
-			}
+			return $return;
 		}
 	}
 
