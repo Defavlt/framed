@@ -107,7 +107,7 @@ HTML;
 			foreach ($params as $property) {
 				
 				$key = $property->name;
-				echo '"' . $customer->{$key} . '"' . "\t";
+				echo '"' . $customer->{$key} . '"' . "\t\t";
 			}
 
 			echo "\n";
