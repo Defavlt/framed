@@ -272,6 +272,7 @@ HTML;
 	
 	function __set($name, $value) {
 		
+		echo "CALLLED FFS";
 		$this->{self::clean($name)} = self::clean($value);
 	}
 	
