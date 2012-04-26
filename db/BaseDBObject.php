@@ -204,9 +204,6 @@ HTML;
 				}
 			}
 			
-
-			var_dump(substr_compare($where, "WHERE", -strlen($where)));
-			
 			if ($this->endswith($where, "WHERE ")) {
 				
 				$where = null;
