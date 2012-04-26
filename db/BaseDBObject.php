@@ -305,7 +305,7 @@ HTML;
 HTML;
 
 			$pattern = <<<'HTML'
-(['%$&`´-@\])
+([\'\%\$\&\`\´\-\@\\])
 HTML;
 			
 			$replacement = 
