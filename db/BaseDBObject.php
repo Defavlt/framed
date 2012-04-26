@@ -327,7 +327,7 @@ HTML;
 			$replacement = 
 				"'$0";
 			
-			$return = preg_filter($pattern, $replacement, $param);
+			$return = preg_replace($pattern, $replacement, $param);
 			return $return;
 		}
 	}
