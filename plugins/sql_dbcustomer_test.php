@@ -100,18 +100,25 @@ HTML;
 
 		$option[$customer::OPTION_CMP] = $customer::OPTION_CMP_LIKE;
 		var_dump($params);
-
+		
 		while ($customer->select($option)) {
 			
-			foreach ($params as $param) {
+			$count = 0;
+			
+			foreach ($params as $property) {
 				
-				if (isset($tcustomer->{$param}) && $customer->{$param} != "") {
+				$key = $property->name;
+				if (isset($customer->{$key})) {
 					
-					echo $customer->{$param} . " : ";
+					echo $customer->{$key};
+					$count++;
 				}
 			}
 			
-			echo "<br>";
+			if ($count > 0) {
+				
+				echo "<br>";
+			}
 		}
 
 		echo "fields: " . $customer->fields . "<br>";
