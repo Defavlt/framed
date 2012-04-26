@@ -305,7 +305,7 @@ HTML;
 HTML;
 
 			$pattern = <<<'HTML'
-([\'\%\$\&\`\´\-\@\\])
+([\'\%\$\&\`\´\-\@\\ \)\(\=\/\&\%\¤\#\"\!])
 HTML;
 			
 			$replacement = 
@@ -318,7 +318,8 @@ HTML;
 			}
 			else {
 				
-				return $return;
+//				return $return;
+				return htmlentities($param);
 			}
 		}
 	}
