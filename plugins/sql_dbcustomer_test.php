@@ -93,7 +93,7 @@ HTML;
 
 			if (!is_null($value)) {
 				
-				$customer->{$key} = $value;
+				$customer->{$key} = $customer::clean($value);
 			}
 		}
 			
