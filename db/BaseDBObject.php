@@ -300,7 +300,7 @@ HTML;
 		}
 		else {
 			
-			$param = htmlentities($param, ENT_QUOTES);
+			$param = htmlentities($param, ENT_QUOTES|ENT_SUBSTITUTE);
 			$single_slash = <<<'HTML'
 \
 HTML;
