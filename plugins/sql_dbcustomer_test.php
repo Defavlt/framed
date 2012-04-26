@@ -85,6 +85,8 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 		
 HTML;
 
+		echo $id . " :uncleaned<br>";
+		echo $customer->clean($id) . " :cleaned<br>";
 		foreach ($params as $property) {
 			$key = $property->name;				
 			$value = \crm::gGlobalParam($key);
