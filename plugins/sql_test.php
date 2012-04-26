@@ -63,6 +63,11 @@ class sql_test implements IPlugin, IObserver {
 	public function Callback($on, $id, $msg) {
 		
 		$customer = null;
+		$class = get_class($customer);
+		$top = \crm::gGlobalParam ( "top" );
+		$option = array ();
+		$params = $customer->getParamArray ();
+		$type = \crm::gGlobalParam(\CONFIGURATION::$IDENTI);
 		
 		if ($on == "customer") {
 
@@ -90,16 +95,8 @@ class sql_test implements IPlugin, IObserver {
 			$customer = new DBCustomer();
 		}
 		
-		$class = get_class($customer);
-		$top = \crm::gGlobalParam ( "top" );
-		$option = array ();
-		$params = $customer->getParamArray ();
-		
 		echo <<<HTML
-<form name="$class" action="index.php" method="get">
-	<input name="get" 	type="text" placeholder="get" style="display:block;" />
-	<input name="post" 	type="text" placeholder="post" style="display:block;" />
-		<br>
+<form name="$class" action="index.php" method="$type">
 HTML;
 		
 		foreach ($params as $property) {
@@ -116,6 +113,10 @@ HTML;
 	<select name="o" style="display:block;">
 		<option>case</option>
 		<option>customer</option>
+	</select>
+	<select name="type" style="display:block;">
+		<option>post</option>
+		<option>get</option>
 	</select>
 	<div style="display:block">
 		<input name="top"   type="text" placeholder="top" value="$top" maxlength="6" style="width:60px;" style="display:block;"/>
