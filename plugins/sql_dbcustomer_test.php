@@ -103,17 +103,23 @@ HTML;
 		while ($customer->select($option)) {
 			
 			$count = 0;
+			$ckey = 0;
 			
 			foreach ($params as $property) {
 				
+				if ($count == 10) {
+					
+					$count = 0;
+				}
+				
 				$key = $property->name;
-				$ckey = substr($count, 1);
-				$colour = $ckey . $ckey . $ckey;
-				echo "colour = " . $colour . " ckey = " . $ckey;
+				$colour = $count . $count . $count;
+				
 				if (isset($customer->{$key}) && !empty($customer->{$key}) && $customer->{$key} != " ") {
 					
 					echo '<span style="background: #' . $colour . ';color:#222;margin: 0 5px;">' . $customer->{$key} . "</span>";
 					$count++;
+					$ckey += 111;
 				}
 			}
 
