@@ -230,7 +230,7 @@ HTML;
 			$this->_query = $query;
 			$this->resource = MSSQLFactory::prepare($this->_query);
 			
-			echo $this->_query;
+			echo $this->_query . "<br>";
 			
 			if ($this->resource !== FALSE && $this->resource !== null) { 
 				$this->rows = mssql_num_rows($this->resource);
