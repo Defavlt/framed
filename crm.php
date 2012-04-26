@@ -186,16 +186,23 @@ EOT;
 					
 					//$class = CONFIGURATION::$PLUGIN_DIR . $single_slash . str_replace ( php, null, $plugin );
 					$class = CONFIGURATION::$PLUGIN_DIR . $single_slash . $plugin;
-					$instance = new $class ();
 					
-					if ($this->RegisterPlugin ( $instance, $plugin )) {
-
-						$instance->Plugin ();
+					if (class_exists($class)) {
+						$instance = new $class ();
+						
+						if ($this->RegisterPlugin ( $instance, $plugin )) {
+	
+							$instance->Plugin ();
+						}
+	
+						else {
+							
+							unset ( $instance );
+						}
 					}
-
 					else {
 						
-						unset ( $instance );
+						throw new Exception();
 					}
 				
 				} catch ( Exception $e ) {
