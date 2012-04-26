@@ -105,7 +105,10 @@ HTML;
 			
 			foreach ($params as $param) {
 				
-				echo $customer->{$param} . " : ";
+				if (isset($this->{$param})) {
+					
+					echo $customer->{$param} . " : ";
+				}
 			}
 			
 			echo "<br>";
