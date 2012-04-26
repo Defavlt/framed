@@ -319,7 +319,7 @@ HTML;
 			else {
 				
 //				return $return;
-				return htmlentities($param);
+				return htmlentities($param, ENT_QOUTES);
 			}
 		}
 	}
