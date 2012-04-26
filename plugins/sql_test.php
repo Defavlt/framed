@@ -63,11 +63,6 @@ class sql_test implements IPlugin, IObserver {
 	public function Callback($on, $id, $msg) {
 		
 		$customer = null;
-		$class = get_class($customer);
-		$top = \crm::gGlobalParam ( "top" );
-		$option = array ();
-		$params = $customer->getParamArray ();
-		$type = \crm::gGlobalParam(\CONFIGURATION::$IDENTI);
 		
 		if ($on == "customer") {
 
@@ -94,6 +89,12 @@ class sql_test implements IPlugin, IObserver {
 			 */
 			$customer = new DBCustomer();
 		}
+		
+		$class = get_class($customer);
+		$top = \crm::gGlobalParam ( "top" );
+		$option = array ();
+		$params = $customer->getParamArray ();
+		$type = \crm::gGlobalParam(\CONFIGURATION::$IDENTI);
 		
 		echo <<<HTML
 <form name="$class" action="index.php" method="$type">
