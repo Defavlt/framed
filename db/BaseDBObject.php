@@ -270,14 +270,14 @@ HTML;
 
 	}
 	
-	function __set($name, $value) {
-		
-		echo "CALLLED FFS";
+	public function __set($name, $value) {
+
+		echo "CALLING SET";
 		$this->{self::clean($name)} = self::clean($value);
 	}
 	
-	function __get($name) {
-		
+	public function __get($name) {
+		echo "CALLING GET";
 		if (get_called_class() == $this) {
 			
 			return $this->{$name};
