@@ -300,13 +300,13 @@ HTML;
 		}
 		else {
 			
-			$param = htmlentities($param, ENT_QUOTES|ENT_SUBSTITUTE);
+			$param = htmlentities($param, ENT_QUOTES|ENT_SUBSTITUTE	);
 			$single_slash = <<<'HTML'
 \
 HTML;
 
 			$pattern = <<<'HTML'
-([\-])
+([-])
 HTML;
 			
 			$replacement = 
