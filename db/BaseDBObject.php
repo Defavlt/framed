@@ -208,7 +208,7 @@ HTML;
 				
 				$where = null;
 			}
-			else if ($this->endswith($where, $option[self::OPTION_GROUPING])) {
+			else if ($this->endswith($where, $option[self::OPTION_GROUPING] . " ")) {
 				
 				$where = substr($where, 0, -strlen($option[self::OPTION_GROUPING] . " "));
 			}
