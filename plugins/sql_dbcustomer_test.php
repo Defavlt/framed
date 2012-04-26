@@ -112,6 +112,7 @@ HTML;
 			}
 			
 			echo "<br>";
+			var_dump($customer);
 		}
 
 		echo "fields: " . $customer->fields . "<br>";
