@@ -113,7 +113,7 @@ HTML;
 		
 		echo <<<HTML
 	<br>
-	<select name="on" style="display:block;">
+	<select name="o" style="display:block;">
 		<option>case</option>
 		<option>customer</option>
 	</select>
