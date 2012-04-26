@@ -76,10 +76,10 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 		<option>all</option>
 	</select>
 	
-	<input type="hidden" name="a" value="dbcall"/>
-	<input name="id" type="text" placeholder="search" value="$id" />
+	<input name="a"     type="hidden" value="dbcall"/>
+	<input name="id"    type="text" placeholder="search" value="$id" />
 	<input name="email" type="text" placeholder="email" />
-	<input type="text" name="top" placeholder="top" value="$top" maxlength="6" style="width:60px;" />
+	<input name="top"   type="text" placeholder="top" value="$top" maxlength="6" style="width:60px;" />
 	<input type="submit" />
 </form>
 		
@@ -104,6 +104,7 @@ HTML;
 
 		$option[$customer::OPTION_CMP] = $customer::OPTION_CMP_LIKE;
 		
+		echo "<br>Name not cleaned: " . $customer->name . "<br>";
 		echo "<br>Name cleaned: " . BaseDBObject::clean($customer->name) . "<br>";
 
 		while ($customer->select($option)) {

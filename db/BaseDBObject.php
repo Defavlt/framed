@@ -312,7 +312,14 @@ HTML;
 				"'$0";
 			
 			$return = preg_replace($pattern, $replacement, $param);
-			return $return;
+			
+			if ($return == null) {
+				return $param . "UNCHANGED";
+			}
+			else {
+				
+				return $return;
+			}
 		}
 	}
 
@@ -343,8 +350,10 @@ HTML;
 			
 			$replacement = 
 				"$0";
-			
+
 			$return = preg_filter($pattern, $replacement, $param);
+			
+			return $return;
 		}
 	}
 }
