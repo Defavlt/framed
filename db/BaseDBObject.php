@@ -304,8 +304,9 @@ HTML;
 \
 HTML;
 
-			$pattern = 
-				"(['|%|$|&|`|´|-|@|$single_slash])";
+			$pattern = <<<'HTML'
+(['%$&`´-@\])
+HTML;
 			
 			$replacement = 
 				"'$0";
