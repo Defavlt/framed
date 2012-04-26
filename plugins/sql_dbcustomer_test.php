@@ -107,7 +107,7 @@ HTML;
 			foreach ($params as $property) {
 				
 				$key = $property->name;
-				if (isset($customer->{$key})) {
+				if (isset($customer->{$key}) && $customer->{$key} != "") {
 					
 					echo $customer->{$key} . " : ";
 					$count++;
