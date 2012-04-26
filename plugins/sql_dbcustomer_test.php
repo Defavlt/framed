@@ -84,9 +84,10 @@ class sql_dbcustomer_test implements IPlugin, IObserver {
 		
 HTML;
 
-		foreach ($params as $key => $value) {
-				
+		foreach ($params as $property) {
+			$key = $property->name;				
 			$value = \crm::gGlobalParam($key);
+
 			if (!is_null($value)) {
 				
 				$customer->{$key} = $value;
