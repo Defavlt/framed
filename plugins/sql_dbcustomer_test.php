@@ -107,9 +107,11 @@ HTML;
 			foreach ($params as $property) {
 				
 				$key = $property->name;
+				$ckey = substr($count, 1);
+				$colour = $ckey . $ckey . $ckey;
 				if (isset($customer->{$key}) && !empty($customer->{$key}) && $customer->{$key} != " ") {
 					
-					echo '<span style="background: #ddd;color:#222;margin: 0 5px;">' . $customer->{$key} . "</span>";
+					echo '<span style="background: #' . $colour . ';color:#222;margin: 0 5px;">' . $customer->{$key} . "</span>";
 					$count++;
 				}
 			}
