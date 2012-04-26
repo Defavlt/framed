@@ -93,7 +93,7 @@ HTML;
 
 			if (!is_null($value)) {
 				
-				$customer->{$key} = $value;
+				$customer->{$key} = $customer::clean($value);
 			}
 		}
 			
@@ -120,7 +120,7 @@ HTML;
 				
 				if (isset($customer->{$key}) && !empty($customer->{$key}) && $customer->{$key} != " ") {
 					
-					echo '<span style="background: #' . $colour . ';color:#FFF;margin: 0 5px;">' . $customer->{$key} . "</span>";
+					echo '<span style="background: #' . $colour . ';color:#FFF;margin: 0 5px;">' . $customer::unclean($customer->{$key}) . "</span>";
 					$count += 5;
 				}
 			}
