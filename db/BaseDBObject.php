@@ -232,11 +232,12 @@ HTML;
 			
 			echo $this->_query . "<br>";
 			
-			if ($this->resource !== FALSE && $this->resource !== null) { 
+			if ($this->resource !== FALSE && $this->resource !== null) {
+
 				$this->rows = mssql_num_rows($this->resource);
-					
+
 				if($this->rows < 1) {
-					
+
 					return false;
 				}
 			}
@@ -244,7 +245,7 @@ HTML;
 
 				return false;
 			}
-			
+
 		}
 
 		$this->fields = mssql_num_fields($this->resource);
@@ -337,7 +338,7 @@ HTML;
 HTML;
 			
 			$pattern =
-				"'(['|%|$|&|`|´|-|@|$single_slash])";
+				"'(['%$&`´-@$single_slash])";
 			
 			$replacement = 
 				"$0";
