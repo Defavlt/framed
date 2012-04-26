@@ -94,7 +94,8 @@ class sql_test implements IPlugin, IObserver {
 		$top = \crm::gGlobalParam ( "top" );
 		$option = array ();
 		$params = $customer->getParamArray ();
-		$type = \crm::gGlobalParam(\CONFIGURATION::$IDENTI);
+		$object = \CONFIGURATION::$OBJECT;
+		$ident = \CONFIGURATION::$IDENTI;
 		
 		echo <<<HTML
 <form name="$class" action="index.php" method="$type">
@@ -111,11 +112,11 @@ HTML;
 		
 		echo <<<HTML
 	<br>
-	<select name="o" style="display:block;">
+	<select name="$object" style="display:block;">
 		<option>case</option>
 		<option>customer</option>
 	</select>
-	<select name="type" style="display:block;">
+	<select name="$ident" style="display:block;">
 		<option>post</option>
 		<option>get</option>
 	</select>
