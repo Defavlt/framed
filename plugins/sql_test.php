@@ -112,6 +112,11 @@ HTML;
 		}
 		
 		echo <<<HTML
+	<br>
+	<select name="on" style="display:block;">
+		<option>case</option>
+		<option>customer</option>
+	</select>
 	<div style="display:block">
 		<input name="top"   type="text" placeholder="top" value="$top" maxlength="6" style="width:60px;" style="display:block;"/>
 		<input name="a"     type="hidden" value="dbcall"/>
