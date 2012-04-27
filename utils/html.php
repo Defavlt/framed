@@ -50,8 +50,6 @@ class html {
 			$type = null;
 			$return = null;
 			
-			var_dump($args);
-			
 			switch (count($args)) {
 				default:
 				case 0:
@@ -63,13 +61,12 @@ class html {
 					break;
 				case 2:
 					$data = array_shift($args);
-					$attr = array_shift($args);
-					$type = html::tag_self;
+					$type = array_shift($args);
 					break;
 				case 3:
 					$data = array_shift($args);
-					$attr = array_shift($args);
 					$type = array_shift($args);
+					$attr = array_shift($args);
 					break;
 			}
 
