@@ -61,12 +61,12 @@ class html {
 					break;
 				case 2:
 					$data = array_shift($args);
-					$type = array_shift($args);
+					$attr = array_shift($args);
 					break;
 				case 3:
 					$data = array_shift($args);
-					$type = array_shift($args);
 					$attr = array_shift($args);
+					$type = array_shift($args);
 					break;
 			}
 
