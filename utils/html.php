@@ -35,7 +35,7 @@ class html {
 	 * $paragraph:
 	 * <p >$data
 	 */
-	public static function __callStatic(string $name, array $args) {
+	public static function __callStatic($name, $args) {
 		
 		$func_array = array(html::classname, $name);
 		
