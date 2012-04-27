@@ -69,6 +69,31 @@ HTML;
 	} 
 	
 	/**
+	 * Fetch the tablename of this instance of this.
+	 * @return string The name of this instance
+	 */
+	public static function gTableName() {
+		
+		$name = self::name(self);
+		$name = str_replace(\CONFIGURATION::$DBCLASSPREFIX, null, $name);
+		return $name;
+	}
+	
+	/**
+	 * @see self::name($name)
+	 */
+	public static function gName() {
+		
+		return self::name(self);
+	}
+	
+	public static function gFullName($param) {
+		
+		$param = "db\\" . \CONFIGURATION::$DBCLASSPREFIX . $param;
+		return $param;
+	}
+	
+	/**
 	 * Gets an array with the public params in $this.
 	 * @return Array
 	 */

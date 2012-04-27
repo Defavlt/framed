@@ -15,9 +15,9 @@ class html {
 	 */
 	const classname = "html";
 	
-	const start = "start";
-	const end = "end";
-	const self = "self";
+	const tag_start = "start";
+	const tag_end = "end";
+	const tag_self = "self";
 	
 	/**
 	 * Singleton pattern:
@@ -30,6 +30,10 @@ class html {
 	 * @param string $name The name of the method/function invoked.
 	 * @param array $args An array containing the parameters used when invoking the method/function.
 	 * @return string The built tag
+	 * @example
+	 * $paragraph = html::p($data, $attribute, $tag_type);
+	 * $paragraph:
+	 * <p >$data
 	 */
 	public static function __callStatic(string $name, array $args) {
 		
@@ -51,17 +55,16 @@ class html {
 			switch (count($args)) {
 				default:
 				case 0:
-					$type = html::start;
+					$type = html::tag_start;
 					break;
 				
 				case 1:
-					$type = html::self;
 					$data = array_shift($args);
 					break;
 				case 2:
 					$data = array_shift($args);
 					$attr = array_shift($args);
-					$type = html::self;
+					$type = html::tag_self;
 					break;
 				case 3:
 					$data = array_shift($args);
@@ -82,13 +85,13 @@ class html {
 
 			switch ($type) {
 				
-				case html::start:
+				case html::tag_start:
 					return html::builder($name);
 					break;
-				case html::end:
+				case html::tag_end:
 					return html::builder($name, false, true);
 					break;
-				case html::self:
+				case html::tag_self:
 					return html::builder($name, true, false, $attr);
 					break;
 				
@@ -109,13 +112,13 @@ class html {
 	 * @param boolean $is_enclosed Indicates whether the tag should be self-enclosing or not
 	 * @param boolean $is_end Indicates whether the tag should be the closing end.
 	 * @param string $attr The attribute of the opening and/or self-enclosing tag.
-	 * @return string
+	 * @return string A string 
 	 */
 	private static function builder($name, $is_enclosed = false, $is_end = false, $attr = null) {
 		
 		if ($is_enclosed) {
 			
-			return '<' . $name . ' ' . $attr . '/>';
+			return '<' . $name . ' ' . self::gAttr($attr) . '/>';
 		}
 		elseif($is_end) {
 			
@@ -123,7 +126,31 @@ class html {
 		}
 		else {
 			
-			return '<' . $name . ' ' . $attr . '>';
+			return '<' . $name . ' ' . self::gAttr($attr) . '>';
+		}
+	}
+	
+	/**
+	 * Creates a tag attribute from the given array.
+	 * @param array $attr Key represents the attribute name, and the Value the attribute data.
+	 * @return string The attribute string if $attr is an array, null otherwise.
+	 */
+	private static function gAttr($attr) {
+		
+		if (is_array($attr)) {
+			$return = null;
+			
+			foreach ($attr as $name => $data) {
+				
+				$return .= $name . '="' . $data . '" ';
+			}
+			
+			return $return;
+		
+		}
+		else {
+			
+			return null;
 		}
 	}
 }
