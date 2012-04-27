@@ -47,6 +47,31 @@ class index implements IPlugin, IObserver {
 	 *
 	 */
 	public function Callback($on, $id, $msg) {
+		
+		$msgs = \crm::gInstance()->observerlist;
+		$a = \CONFIGURATION::$ACTION;
+		$o = \CONFIGURATION::$OBJECT;
+		$i = \CONFIGURATION::$IDENTI;
+		
+		echo <<<HTML
+<form name="index" action="index.php" method="get">
+	<select name="$a">		
+HTML;
+		
+		foreach ($msgs as $key => $value) {
+			
+			echo <<<HTML
+		<option>$key</option>
+HTML;
+
+		}
+		
+		echo <<<HTML
+	</select>
+	<input name="$o" type="text" placeholder="Data: $o" style="display:block;"/>
+	<input name="$i" type="text" placeholder="Data: $i" style="display:block;"/>
+</form>
+HTML;
 		echo "index, default page.";
 	}
 }
