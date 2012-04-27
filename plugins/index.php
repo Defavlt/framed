@@ -55,6 +55,7 @@ class index implements IPlugin, IObserver {
 		
 		echo <<<HTML
 <form name="index" action="index.php" method="get">
+	<label for="$a">Msg: </label>
 	<select name="$a">		
 HTML;
 		
