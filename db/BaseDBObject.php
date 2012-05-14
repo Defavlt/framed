@@ -27,6 +27,7 @@ abstract class BaseDBObject {
 	const OPTION_ORDER_ITEM		= 0x31;
 	const OPTION_ORDER_DESC 	= "DESC";
 	const OPTION_ORDER_ASC 		= "ASC";
+	const CONFIG_ORDER_ITEM		= "order";
 	
 	const OPTION_MAX_RESULTS 	= 0x40;
 
@@ -105,6 +106,31 @@ HTML;
 		return $props;
 	}
 
+	function gQueryOptions() {
+		
+		$params = $this->getParamArray();
+		$return = array();
+		$count = 0;
+		
+		foreach ($params as $param) {
+			
+			$key = $param->name;
+			$value = \crm::gGlobalParam($key);
+			$this->{$key} = self::clean($value);
+			
+			if (isset($this->{$key}) && !empty($this->{$key})) {
+				
+				$count++;
+			}
+			
+			$return[self::OPTION_CMP] = ($count == 1 ?
+					self::OPTION_CMP_EQ :
+					self::OPTION_CMP_LIKE);
+
+			return $return;
+		}
+	}
+	
 	/**
 	 * @param IDBExtandable $instance
 	 */
