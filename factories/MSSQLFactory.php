@@ -36,21 +36,21 @@ class MSSQLFactory {
 				
 				self::$link = $link;
 
-				$select_db = mssql_select_db(\CONFIGURATION::$DB);
+				$select_db = mssql_select_db(config("DB"));
 					
 				if (!$select_db) {
 				
-					\crm::log("Could not select db at " . $db);
+					log("Could not select db at " . $db);
 				}
 				
 			}
 			else {
-				\crm::log("Could not select db at " . $db);
+				log("Could not select db at " . $db);
 			}
 			
 		} catch (\Exception $e) {
 			
-			\crm::log("Could not select db at " . $db);
+			log("Could not select db at " . $db);
 			
 		}
 		
@@ -69,11 +69,11 @@ class MSSQLFactory {
 		if (!isset(self::$link)) {
 			
 			self::get(
-					\CONFIGURATION::$DB_HOST,
-					\CONFIGURATION::$DB,
-					\CONFIGURATION::$DB_USER, 
-					\CONFIGURATION::$DB_PASS,
-					\CONFIGURATION::$DB_PORT
+					config("DB_HOST"),
+					config("DB"),
+					config("DB_USER"), 
+					config("DB_PASS"),
+					config("DB_PORT")
 					);
 		}
 
@@ -81,8 +81,8 @@ class MSSQLFactory {
 			
 		if ($result === FALSE) {
 				
-			\crm::error("Error. #1: Query: " . $query);
-			\crm::error("Error. #2: Result: " . $result);
+			error("Error. #1: Query: " . $query);
+			error("Error. #2: Result: " . $result);
 		}
 			
 		return $result;
