@@ -25,3 +25,5 @@ FEATURES:
 
 TODO:
 * Finish this readme..?
+* Refactor class CONFIGURATION (why use it when you've got crm::param?)
+
