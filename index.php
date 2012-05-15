@@ -24,13 +24,14 @@ define("BASE", __DIR__ . DIRECTORY_SEPARATOR);
  * @var string
  */
 define("php", ".php");
+define("NEWLINE", "\n");
+define("NEWBLOCK", "\0");
 
 spl_autoload_extensions(php);
 spl_autoload_register("__autoload");
 
 function __autoload($name) {
-	
-	$name = str_replace("\\", DIRECTORY_SEPARATOR, $name);
+
 	$name = str_replace(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, $name);
 	$name = BASE . $name . php;
 	
@@ -39,7 +40,7 @@ function __autoload($name) {
 	}
 	else {
 		
-		error_log($name, 0);
+		error_log("Failed to log required file: " . $name, 0);
 	}
 }
 

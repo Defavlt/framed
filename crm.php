@@ -246,7 +246,7 @@ EOT;
 	 *
 	 * @see interfaces.IObservable::SendMessage()
 	 */
-	function SendMessage($message, $object, $id, $from_public = false) {
+	function __SendMessage($message, $object, $id, $from_public = false) {
 		
 		if (array_key_exists ( $message, $this->observerlist )) {
 			
@@ -380,8 +380,23 @@ EOT;
 	}
 	
 	/**
+	 * Send a message
+	 * 
+	 * @param mixed $message
+	 * @param mixed $object
+	 * @param mixed $id
+	 * @param bool $from_public
+	 */
+	public static function SendMessage($message, $object, $id, $from_public = false) {
+		
+		self::gInstance()->__SendMessage($message, $object, $id, $from_public);
+	}
+	
+	/**
 	 * Dynamically invokes a message whenever a method that doesn't exist is
 	 * invoked.
+	 * 
+	 * DEPRECATED: Use self::SendMessage instead.
 	 *
 	 * @param string $name        	
 	 * @param array $args
