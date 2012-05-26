@@ -1,0 +1,26 @@
+
+######## ########     ###    ##     ## ######## ########  ##
+##       ##     ##   ## ##   ###   ### ##       ##     ## ##
+##       ##     ##  ##   ##  #### #### ##       ##     ## ##
+######   ########  ##     ## ## ### ## ######   ##     ## ##
+##       ##   ##   ######### ##     ## ##       ##     ## 
+##       ##    ##  ##     ## ##     ## ##       ##     ## ##
+##       ##     ## ##     ## ##     ## ######## ########  ##
+
+DESCRIPTION:
+
+A simple messaging framework enabling loosely coupled 
+modules ("plugins") to interact.
+
+FEATURES:
+
+* Plugins
+* Messaging
+* automatic mssql connection and query manager.
+* Configuration manager
+..
+
+TODO:
+* Finish this readme..?
+* Refactor class CONFIGURATION (why use it when you've got crm::param?)
+
