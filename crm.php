@@ -278,14 +278,31 @@ EOT;
 					}
 				} else if ($from_public) {
 					crm::log ( "404: " . $message );
-					$this->SendMessage ( MESSAGES::ERROR_404, $message, $object );
+
+					if ( $message == "index" ) {
+
+						$this->SendMessage ( MESSAGES::ERROR_404, null, $object );
+					}
+					else {
+						
+						$this->SendMessage ( MESSAGES::ERROR_404, $message, $object );
+					}
+						
 				} else if (! $from_public) {
 					continue;
 				}
 			}
 		} else if ($from_public) {
 
-			$this->SendMessage ( MESSAGES::ERROR_404, $message, $object );
+
+			if ( $message == "index" ) {
+
+				$this->SendMessage ( MESSAGES::ERROR_404, null, $object );
+			}
+			else {
+				
+				$this->SendMessage ( MESSAGES::ERROR_404, $message, $object );
+			}
 		} else {
 			return false;
 		}
